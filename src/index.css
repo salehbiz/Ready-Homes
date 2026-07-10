@@ -274,3 +274,24 @@ h1, h2, h3, h4, h5, h6 {
   will-change: transform, opacity;
   transform: translateZ(0);
 }
+
+
+
+/* GPU-promote sticky service cards for smooth stacking animation */
+.service-card {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+/* Mobile Scroll Snapping */
+@media (max-width: 767px) {
+  html, body {
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+  }
+  
+  .hero-track, #horizontal-scrub, #transformation {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+}

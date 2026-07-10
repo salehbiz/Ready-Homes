@@ -32,19 +32,19 @@ export const ContactSection: React.FC = () => {
   };
 
   return (
-    <section id="contact-form-section" className="w-full bg-[#f8f8fa] py-20 md:py-28 select-none">
-      <div className="max-w-7xl mx-auto px-6 select-none">
+    <section id="contact-form-section" className="w-full bg-[#f8f8fa] py-12 md:py-28 select-none">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 select-none">
         
         {/* Contact Container Card */}
-        <div className="bg-white border border-neutral-200 rounded-[36px] md:rounded-[48px] overflow-hidden p-6 md:p-12 lg:p-16 shadow-sm select-none">
+        <div className="bg-white border border-neutral-200 rounded-[24px] md:rounded-[48px] overflow-hidden p-4 md:p-12 lg:p-16 shadow-sm select-none">
           
-          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_2fr] gap-12 lg:gap-16 items-stretch">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_2fr] gap-8 lg:gap-16 items-stretch">
             
             {/* Left Column: Heading, Info, Image */}
             <div className="flex flex-col justify-between gap-10">
               
               <div className="flex flex-col gap-6 text-left">
-                <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 leading-[1.15] hero-text-font">
+                <h3 className="text-2xl md:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 leading-[1.15] hero-text-font">
                   Ready to see 1159 Diamond in person?
                 </h3>
                 <p className="text-neutral-500 text-sm md:text-base leading-relaxed max-w-sm">
@@ -53,11 +53,11 @@ export const ContactSection: React.FC = () => {
               </div>
 
               {/* Graphic/Image cover wrapper */}
-              <div className="w-full h-[220px] lg:h-[300px] rounded-[24px] overflow-hidden border border-neutral-100 shadow-inner">
+              <div className="w-full h-[180px] lg:h-[300px] rounded-[16px] md:rounded-[24px] overflow-hidden border border-neutral-100 shadow-inner">
                 <img 
                   loading="lazy" 
                   src="/videos/neighborhood.webp" 
-                  alt="Ready Homes Neighborhood" 
+                  alt="Luxury kitchen design" 
                   className="w-full h-full object-cover"
                 />
               </div>
