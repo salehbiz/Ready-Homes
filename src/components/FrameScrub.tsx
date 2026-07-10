@@ -69,8 +69,7 @@ export default function FrameScrub({
           setVisible(true);
           observer.disconnect();
         }
-      },
-      { rootMargin: '800px 0px' } // Load earlier
+      { rootMargin: '400px 0px' } // Reduced margin to defer loading slightly
     );
     observer.observe(track);
     return () => observer.disconnect();
@@ -120,14 +119,22 @@ export default function FrameScrub({
         img.onerror = onLoadFinish;
         
         // Eagerly trigger decode if available to avoid main-thread jank during render
-        if (img.decode) {
+        if ('decode' in img) {
             img.decode().catch(() => {});
         }
       }
     };
     
-    pump();
-    return () => { cancelled = true; };
+    // Delay the initial pump to ensure it doesn't block the critical rendering path
+    // and layout/paint of the hero section on initial page load.
+    const delayTimer = setTimeout(() => {
+        pump();
+    }, 1200);
+
+    return () => { 
+        cancelled = true; 
+        clearTimeout(delayTimer);
+    };
   }, [visible, frameCount, isMobile]);
 
   // GSAP ScrollTrigger pin — this is the key: pin the section and

@@ -66,7 +66,7 @@ export const VideoSection: React.FC = () => {
             autoPlay
             muted
             playsInline
-            preload="auto"
+            preload="none"
           />
 
           {/* Dark Overlay on Hover */}
