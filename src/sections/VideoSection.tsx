@@ -1,52 +1,82 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
 
 export const VideoSection: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [shouldLoad, setShouldLoad] = useState(false);
 
-  // Force autoplay on mobile viewports (especially iOS/Safari)
+  // Use IntersectionObserver to start loading video well before it's visible
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.defaultMuted = true;
-      videoRef.current.muted = true;
-      videoRef.current.play()
-        .then(() => {
-          setIsPlaying(true);
-        })
-        .catch(err => {
-          console.log("Autoplay prevented on mobile. Waiting for user interaction:", err);
-          setIsPlaying(false);
-        });
-    }
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoad(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '1500px 0px' } // Start loading 1500px before visible
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
   }, []);
 
-  const handlePlayPause = () => {
+  // Once shouldLoad is true, set the video src and begin loading
+  useEffect(() => {
+    if (!shouldLoad || !videoRef.current) return;
+    const video = videoRef.current;
+
+    video.preload = 'auto';
+    video.src = '/videos/house_tour.mp4';
+    video.load();
+
+    const handleCanPlay = () => {
+      setIsLoaded(true);
+      video.muted = true;
+      video.play()
+        .then(() => setIsPlaying(true))
+        .catch(() => setIsPlaying(false));
+    };
+
+    video.addEventListener('canplaythrough', handleCanPlay);
+    // Also handle canplay as a fallback for faster start
+    video.addEventListener('canplay', handleCanPlay);
+    
+    return () => {
+      video.removeEventListener('canplaythrough', handleCanPlay);
+      video.removeEventListener('canplay', handleCanPlay);
+    };
+  }, [shouldLoad]);
+
+  const handlePlayPause = useCallback(() => {
     if (videoRef.current) {
       if (isPlaying) {
         videoRef.current.pause();
         setIsPlaying(false);
       } else {
         videoRef.current.play()
-          .then(() => {
-            setIsPlaying(true);
-          })
+          .then(() => setIsPlaying(true))
           .catch(err => console.log("Video play interrupted:", err));
       }
     }
-  };
+  }, [isPlaying]);
 
-  const handleMuteToggle = () => {
+  const handleMuteToggle = useCallback(() => {
     if (videoRef.current) {
       const nextMute = !isMuted;
       videoRef.current.muted = nextMute;
       setIsMuted(nextMute);
     }
-  };
+  }, [isMuted]);
 
   return (
-    <section className="w-full bg-[#f8f8fa] py-16 md:py-24 select-none">
+    <section ref={sectionRef} className="w-full bg-[#f8f8fa] py-16 md:py-24 select-none">
       <div className="max-w-7xl mx-auto px-6 select-none flex flex-col items-center gap-8 md:gap-12">
         
         {/* Centered Heading */}
@@ -57,16 +87,18 @@ export const VideoSection: React.FC = () => {
         {/* Video Card Container */}
         <div className="relative w-full aspect-video rounded-[36px] md:rounded-[48px] overflow-hidden shadow-lg border border-neutral-200 bg-neutral-900 group select-none">
           
-          {/* HTML5 Video Element */}
+          {/* Loading shimmer while video buffers */}
+          {!isLoaded && (
+            <div className="absolute inset-0 bg-gradient-to-r from-neutral-800 via-neutral-700 to-neutral-800 animate-pulse" />
+          )}
+
+          {/* HTML5 Video Element — src set dynamically */}
           <video
             ref={videoRef}
-            src="/videos/house_tour.mp4"
-            className="w-full h-full object-cover"
+            className={`w-full h-full object-cover transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
             loop
-            autoPlay
             muted
             playsInline
-            preload="none"
           />
 
           {/* Dark Overlay on Hover */}

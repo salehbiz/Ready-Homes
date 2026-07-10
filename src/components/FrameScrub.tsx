@@ -9,13 +9,14 @@ type Props = {
   scrollLengthVh?: number;                  // scroll track length, default 300
   children?: React.ReactNode;
   onProgress?: (progress: number, frame: number) => void;
+  eager?: boolean;                           // if true, skip IO and start loading immediately
 };
 
 const LERP = 0.18;        // Snappy interpolation
 const CONCURRENCY = 12;   // Max parallel loads — images are tiny now
 
 export default function FrameScrub({
-  frameCount, framePath, poster, className, scrollLengthVh = 400, children, onProgress
+  frameCount, framePath, poster, className, scrollLengthVh = 400, children, onProgress, eager = false
 }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -59,8 +60,12 @@ export default function FrameScrub({
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // IntersectionObserver — start loading when near viewport
+  // IntersectionObserver — start loading when near viewport (or immediately if eager)
   useEffect(() => {
+    if (eager) {
+      setVisible(true);
+      return;
+    }
     const track = trackRef.current;
     if (!track) return;
     const observer = new IntersectionObserver(
@@ -70,11 +75,11 @@ export default function FrameScrub({
           observer.disconnect();
         }
       },
-      { rootMargin: '400px 0px' } // Reduced margin to defer loading slightly
+      { rootMargin: '2000px 0px' } // Start loading very early
     );
     observer.observe(track);
     return () => observer.disconnect();
-  }, []);
+  }, [eager]);
 
   // Highly optimized HTTP/2 Image Preloader
   useEffect(() => {

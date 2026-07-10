@@ -152,6 +152,7 @@ export const Hero: React.FC = () => {
           poster="/frames/hero/0001.webp"
           scrollLengthVh={200}
           className="w-full hero-sticky"
+          eager
         >
           {/* Main Overlay contents */}
           <div className="w-full h-full flex flex-col justify-center items-center py-16 px-6 md:px-12 relative z-20 pointer-events-none hero-content">

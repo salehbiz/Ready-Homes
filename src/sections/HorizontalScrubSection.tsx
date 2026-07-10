@@ -46,6 +46,7 @@ export const HorizontalScrubSection: React.FC = () => {
         scrollLengthVh={500}
         className="w-full"
         onProgress={handleProgress}
+        eager
       >
         {/* Dark gradient overlays for text readability */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30 pointer-events-none" />
