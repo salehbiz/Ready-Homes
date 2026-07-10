@@ -69,6 +69,7 @@ export default function FrameScrub({
           setVisible(true);
           observer.disconnect();
         }
+      },
       { rootMargin: '400px 0px' } // Reduced margin to defer loading slightly
     );
     observer.observe(track);
