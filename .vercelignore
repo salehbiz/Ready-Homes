@@ -1,0 +1,10 @@
+/node_modules
+/dist
+/Hero
+/Section 2
+/Section 3
+.git
+.DS_Store
+.vercel
+.agent
+.agents

@@ -1,0 +1,276 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+@import "tailwindcss";
+
+:root {
+  --font-family-body: "Inter Tight", sans-serif;
+  --neutral-900: #141316;
+  --text-secondary: #646464;
+  --border-primary: #e7e7e7;
+  --neutral-100: #f7f7f7;
+  --neutral-0: #ffffff;
+  --accent-soft-blue: #f8f8f8;
+  --accent-soft-purple: #f3f3f3;
+  --accent-soft-green: #eaeaea;
+  --accent-soft-yellow: #f0f0f0;
+}
+
+/* Lenis smooth scroll adjustments */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+body {
+  font-family: var(--font-family-body);
+  color: var(--neutral-900);
+  background-color: var(--neutral-0);
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Custom visual hierarchy & animations classes */
+.logo-font {
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  font-size: clamp(2rem, 8vw, 9.5rem);
+  line-height: 0.9;
+}
+
+.skew-card {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.skew-card:hover {
+  transform: scale(1.02) rotate(-1deg);
+}
+
+/* Hide default scrollbar but allow scrolling */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Accordion transition utility */
+.accordion-transition {
+  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+
+/* Slide marquee animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 20s linear infinite;
+}
+
+/* Rolling Text menu links */
+.navbar_link {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  height: 1.15em;
+  line-height: 1;
+}
+
+.navbar_link-text {
+  display: block;
+}
+
+.navbar_link-text._2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Cursor style custom elements */
+.custom-drag-cursor {
+  pointer-events: none;
+  mix-blend-mode: difference;
+}
+
+/* Glassmorphic Navigation Pill styles */
+.glass-nav-pill {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+  padding: 4px;
+}
+
+.glass-nav-link {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 9999px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+}
+
+.glass-nav-link:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.glass-nav-link.active {
+  background: #ffffff;
+  color: #141316;
+}
+
+/* White Pill Button with blue icon */
+.btn-pill-white {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: #ffffff;
+  color: #141316;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 6px 6px 6px 20px;
+  border-radius: 9999px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  text-decoration: none;
+}
+
+.btn-pill-white:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.arrow-circle-blue {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 9999px;
+  background: #141316;
+  color: #ffffff;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-pill-white:hover .arrow-circle-blue {
+  transform: scale(1.05);
+}
+
+.hero-text-font {
+  font-family: "Inter Tight", sans-serif !important;
+}
+
+/* Our Service hover accordion section styles */
+.accordion-expandable {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.accordion-expandable.expanded {
+  grid-template-rows: 1fr;
+}
+
+.accordion-content {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.service-image-reveal {
+  max-width: 0;
+  opacity: 0;
+  transform: scale(0.95);
+  margin-right: 0;
+  transition: max-width 0.45s cubic-bezier(0.16, 1, 0.3, 1), 
+              opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              margin-right 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.service-image-reveal.expanded {
+  max-width: 320px;
+  opacity: 1;
+  transform: scale(1);
+  margin-right: 24px;
+}
+
+.service-arrow-rotate {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease, color 0.3s ease;
+}
+
+.service-arrow-rotate.expanded {
+  transform: rotate(-45deg);
+}
+
+/* Slide-up text animation */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ========================================================
+   Antigravity Crisp Quality Core Layout overrides
+   ======================================================== */
+html, body, :root {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: -0.02em; /* Tight letterspacing for premium visual density */
+  line-height: 1.15;
+}
+
+/* GPU Hardware Acceleration */
+.hero-sticky, .video-card, .cq-glass-card, .animated-card, .parallax-bg {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
