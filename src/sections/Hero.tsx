@@ -15,11 +15,11 @@ export const Hero: React.FC = () => {
 
   const [activeFrame, setActiveFrame] = useState(0);
 
-  // 1. Run Preloader gradient frame loop sequence
+  // 1. Run Preloader image time-lapse loop sequence
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveFrame((prev) => (prev + 1) % 4);
-    }, 200);
+      setActiveFrame((prev) => (prev + 1) % 9);
+    }, 150);
 
     return () => clearInterval(interval);
   }, []);
@@ -115,21 +115,18 @@ export const Hero: React.FC = () => {
             />
           </div>
 
-          {/* Animated gradient squares — no network requests */}
+          {/* Animated image sequence — using ultra-compressed 2KB thumbnails */}
           <div
             ref={preloaderImgsRef}
             className="relative w-16 h-16 md:w-20 md:h-20 select-none"
           >
-            {[
-              'linear-gradient(135deg, #2a2a3e 0%, #3d3556 100%)',
-              'linear-gradient(135deg, #1e3a3a 0%, #2d5a4e 100%)',
-              'linear-gradient(135deg, #3a2a1e 0%, #5a4e2d 100%)',
-              'linear-gradient(135deg, #1e2a3a 0%, #2d4e5a 100%)',
-            ].map((grad, idx) => (
-              <div
+            {Array.from({ length: 9 }).map((_, idx) => (
+              <img
                 key={idx}
-                className="absolute inset-0 w-full h-full rounded-[12px] shadow-lg transition-opacity duration-150 ease-out border border-white/10"
-                style={{ background: grad, opacity: activeFrame % 4 === idx ? 1 : 0 }}
+                src={`/preloader/${idx + 1}.webp`}
+                alt=""
+                className="absolute inset-0 w-full h-full object-cover rounded-[12px] shadow-lg transition-opacity duration-150 ease-out border border-white/10"
+                style={{ opacity: activeFrame === idx ? 1 : 0 }}
               />
             ))}
           </div>
