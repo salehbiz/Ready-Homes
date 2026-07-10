@@ -1,36 +1,40 @@
 import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { lenis } from '../lib/scroll';
-import logo from '../assets/logo-white.png';
+import { Logo } from '../components/Logo';
 
 export const Footer: React.FC = () => {
   const handleScrollTo = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      lenis.scrollTo(element, { offset: -80 });
+      if (window.innerWidth < 768) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        lenis.scrollTo(element, { offset: -80 });
+      }
     }
   };
 
   return (
-    <footer id="contact" className="bg-[#141316] text-white pt-24 pb-12 select-none border-t border-white/5">
-      <div className="max-w-7xl mx-auto px-6 flex flex-col gap-20">
+    <footer id="contact" className="bg-[#141316] text-white pt-16 md:pt-24 pb-8 md:pb-12 select-none border-t border-white/5">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 flex flex-col gap-12 md:gap-20">
         
         {/* Footer Top Row: Brand Info vs Navigation Lists */}
-        <div className="flex flex-col lg:flex-row justify-between items-start gap-16 select-none">
+        <div className="flex flex-col lg:flex-row justify-between items-start gap-10 lg:gap-16 select-none">
           
           {/* Left Column: Brand, Description, Email */}
           <div className="w-full lg:w-[48%] flex flex-col gap-8 select-none text-left">
-            <img src={logo} alt="Ready Homes Logo" className="h-10 md:h-12 w-auto object-contain select-none" />
+            <Logo className="h-10 md:h-12 w-auto select-none" color="white" />
             
-            <div className="text-xl md:text-2xl font-bold tracking-tight text-neutral-100 leading-normal max-w-md hero-text-font">
+            <div className="text-lg md:text-2xl font-bold tracking-tight text-neutral-100 leading-normal max-w-md hero-text-font">
               Your dream home at 1159 Diamond St is waiting. Let's make it yours.
             </div>
             
             <a
-              href="mailto:INFO@READY-HOMES.IO"
-              className="text-lg md:text-xl font-semibold tracking-wider text-white hover:text-neutral-300 transition-colors uppercase border-b border-white/10 pb-1 self-start"
+              href="mailto:INFO@FLOORING-STUDIO.COM"
+              className="text-sm md:text-xl font-semibold tracking-wider text-white hover:text-neutral-300 transition-colors uppercase border-b border-white/10 pb-1 self-start"
             >
-              INFO@READY-HOMES.IO
+              INFO@FLOORING-STUDIO.COM
             </a>
           </div>
 
@@ -86,15 +90,15 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Footer Bottom Row: Huge Text Brand + Copyright */}
-        <div className="flex flex-col gap-8 border-t border-white/5 pt-12 select-none">
+        <div className="flex flex-col gap-6 md:gap-8 border-t border-white/5 pt-8 md:pt-12 select-none">
           {/* Large Graphic Footer SVG/text banner representing original logo frame */}
           <div className="w-full flex justify-center items-center select-none py-8 bg-white/5 rounded-[24px]">
-            <img src={logo} alt="Ready Homes Logo" className="h-8 md:h-10 w-auto object-contain opacity-25 select-none" />
+            <Logo className="h-8 md:h-10 w-auto select-none opacity-25" color="white" />
           </div>
           
           <div className="flex flex-col md:flex-row justify-between items-center text-xs font-semibold tracking-wider text-neutral-500 gap-4">
-            <div>© 2026 Ready Homes. All Rights Reserved.</div>
-            <div>1159 Diamond St · Designed by Ready Homes</div>
+            <div>© 2026 Flooring Studio. All Rights Reserved.</div>
+            <div>1159 Diamond St · Designed by Flooring Studio</div>
           </div>
         </div>
       </div>

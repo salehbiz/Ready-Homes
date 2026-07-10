@@ -3,7 +3,6 @@ import { Header } from './sections/Header';
 import { Hero } from './sections/Hero';
 import { InfoBlocks } from './sections/InfoBlocks';
 import { Transformation } from './sections/Transformation';
-import { VideoSection } from './sections/VideoSection';
 import { ContactSection } from './sections/ContactSection';
 import { Footer } from './sections/Footer';
 import { lenis, ScrollTrigger } from './lib/scroll';
@@ -16,6 +15,11 @@ const App: React.FC = () => {
 
     // Initialize custom cursor and crisp quality interactions
     initCrispQualityEffects();
+
+    // On mobile, destroy Lenis to allow native scroll snapping to work perfectly
+    if (typeof window !== 'undefined' && window.innerWidth < 768) {
+      lenis.destroy();
+    }
 
     return () => {
       // Clean up Lenis instance
@@ -36,11 +40,8 @@ const App: React.FC = () => {
       {/* 4. Core Content Sections (About reveal, stats counters, portfolio cards grid, what we do grid, testimonials) */}
       <InfoBlocks />
 
-      {/* 5. Sticky Parallax DESIGN AGENCY Scroll-Reveal block */}
+      {/* 5. Sticky Parallax Scroll-Reveal block */}
       <Transformation />
-
-      {/* 5.4 Tour Presentation Video Section */}
-      <VideoSection />
 
       {/* 5.5 Contact Form Section */}
       <ContactSection />

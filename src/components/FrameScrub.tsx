@@ -13,13 +13,14 @@ type Props = {
   tierResolved?: boolean;                    // true if resolution-tier is ready to load
   fallbackFramePath?: (i: number) => string; // fallback path if the main path fails (e.g. for HQ tier)
   pathKey?: string;                          // stable key representing the path/tier (to prevent inline function re-runs)
+  containOnMobile?: boolean;                 // if true, use contain mode on mobile to avoid cropping landscape frames
 };
 
 const LERP = 0.18;        // Snappy interpolation
 const CONCURRENCY = 6;    // Max parallel loads — restored to 6 as specced
 
 export default function FrameScrub({
-  frameCount, framePath, poster, className, scrollLengthVh = 400, children, onProgress, eager = false, tierResolved = true, fallbackFramePath, pathKey = ''
+  frameCount, framePath, poster, className, scrollLengthVh = 400, children, onProgress, eager = false, tierResolved = true, fallbackFramePath, pathKey = '', containOnMobile = false
 }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -135,7 +136,7 @@ export default function FrameScrub({
           observer.disconnect();
         }
       },
-      { rootMargin: '2000px 0px' } // Start loading very early
+      { rootMargin: eager ? '3000px 0px' : '800px 0px' } // Preload eager ones very early, lazy ones only when closer
     );
     observer.observe(track);
     return () => observer.disconnect();
@@ -275,7 +276,10 @@ export default function FrameScrub({
     const track = trackRef.current;
     if (!track) return;
 
-    const ctx = gsap.context(() => {
+    const mm = gsap.matchMedia();
+
+    // Desktop layout stays exactly as-is
+    mm.add('(min-width: 768px)', () => {
       ScrollTrigger.create({
         trigger: track,
         start: 'top top',
@@ -292,10 +296,33 @@ export default function FrameScrub({
           }
         },
       });
-    }, track);
+    });
+
+    // Mobile layout: no pinning, just scrub as the section scrolls through viewport
+    mm.add('(max-width: 767px)', () => {
+      const rect = track.getBoundingClientRect();
+      const isAtTop = (rect.top + window.scrollY) < 100;
+      
+      ScrollTrigger.create({
+        trigger: track,
+        start: isAtTop ? 'top top' : 'top bottom',
+        end: 'bottom top',
+        scrub: 0,
+        onUpdate: (self) => {
+          const progress = self.progress;
+          target.current = 1 + progress * (frameCount - 1);
+          if (onProgressRef.current) {
+            onProgressRef.current(progress, Math.round(target.current));
+          }
+        },
+      });
+    });
 
     const timer = setTimeout(() => ScrollTrigger.refresh(), 300);
-    return () => { clearTimeout(timer); ctx.revert(); };
+    return () => { 
+      clearTimeout(timer); 
+      mm.revert(); 
+    };
   }, [frameCount, scrollLengthVh]);
 
   // Find nearest available frame
@@ -388,8 +415,34 @@ export default function FrameScrub({
       const ir = bmp.width / bmp.height;
       
       let dw, dh, dx, dy;
-      if (ir > cr) { dh = canvas.height; dw = dh * ir; dx = (canvas.width - dw) / 2; dy = 0; }
-      else { dw = canvas.width; dh = dw / ir; dx = 0; dy = (canvas.height - dh) / 2; }
+      
+      if (containOnMobile && isMobile) {
+        // Contain logic: show whole image, letterbox remaining canvas space
+        if (ir > cr) {
+          dw = canvas.width;
+          dh = dw / ir;
+          dx = 0;
+          dy = (canvas.height - dh) / 2;
+        } else {
+          dh = canvas.height;
+          dw = dh * ir;
+          dx = (canvas.width - dw) / 2;
+          dy = 0;
+        }
+      } else {
+        // Cover logic: fill canvas, crop overflowing edges
+        if (ir > cr) {
+          dh = canvas.height;
+          dw = dh * ir;
+          dx = (canvas.width - dw) / 2;
+          dy = 0;
+        } else {
+          dw = canvas.width;
+          dh = dw / ir;
+          dx = 0;
+          dy = (canvas.height - dh) / 2;
+        }
+      }
       
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.imageSmoothingEnabled = true;
@@ -429,11 +482,23 @@ export default function FrameScrub({
     window.addEventListener('resize', resize);
     raf = requestAnimationFrame(loop);
     return () => { cancelAnimationFrame(raf); window.removeEventListener('resize', resize); };
-  }, [ready, findNearestFrame, decodeFrames, tierResolved]);
+  }, [ready, findNearestFrame, decodeFrames, tierResolved, isMobile, containOnMobile]);
 
   return (
-    <div ref={trackRef} className={className} style={{ position: 'relative' }}>
-      <div ref={stickyRef} style={{ height: '100vh', overflow: 'hidden', position: 'relative' }}>
+    <div 
+      ref={trackRef} 
+      className={`${className || ''} max-md:h-[100dvh] max-md:min-h-[100dvh] max-md:w-screen max-md:overflow-hidden max-md:relative`} 
+      style={{ position: 'relative' }}
+    >
+      <div 
+        ref={stickyRef} 
+        style={{ 
+          height: isMobile ? '100dvh' : '100vh', 
+          overflow: 'hidden', 
+          position: 'relative',
+          width: isMobile ? '100vw' : 'auto'
+        }}
+      >
         {reduced
           ? <img src={poster} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'contrast(1.04) saturate(1.06) brightness(1.01)' }} />
           : <>

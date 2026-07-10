@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, ArrowRight } from 'lucide-react';
 import { lenis, registerAnimation, ScrollTrigger } from '../lib/scroll';
-import logoWhite from '../assets/logo-white.png';
+import { Logo } from '../components/Logo';
 
 export const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -52,7 +52,11 @@ export const Header: React.FC = () => {
     setIsMenuOpen(false);
     const element = document.getElementById(id);
     if (element) {
-      lenis.scrollTo(element, { offset: -80 });
+      if (window.innerWidth < 768) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        lenis.scrollTo(element, { offset: -80 });
+      }
     }
   };
 
@@ -69,13 +73,13 @@ export const Header: React.FC = () => {
       <header
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ease-out select-none flex items-center ${
           isScrolled
-            ? 'h-[96px] bg-[rgba(10,10,10,0.7)] backdrop-blur-[12px] border-b border-white/5'
-            : 'h-[128px] bg-transparent border-b border-transparent'
+            ? 'h-16 md:h-[96px] bg-[rgba(10,10,10,0.7)] backdrop-blur-[12px] border-b border-white/5'
+            : 'h-16 md:h-[128px] bg-transparent border-b border-transparent'
         }`}
         style={{ backdropFilter: isScrolled ? 'blur(12px)' : 'none' }}
       >
         <div className="w-full max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
-          {/* Logo brand (ready | homes) */}
+          {/* Logo brand (flooring | studio) */}
           <a
             href="#hero"
             onClick={(e) => {
@@ -84,7 +88,7 @@ export const Header: React.FC = () => {
             }}
             className="flex items-center select-none cursor-pointer"
           >
-            <img src={logoWhite} alt="Ready Homes Logo" className="h-10 md:h-12 w-auto object-contain select-none" />
+            <Logo className="h-6 md:h-12 w-auto select-none" color="white" />
           </a>
 
           {/* Center: Navigation capsule (hidden on mobile, visible on desktop) */}
@@ -186,7 +190,7 @@ export const Header: React.FC = () => {
                   e.preventDefault();
                   handleScrollTo(link.id);
                 }}
-                className={`text-lg font-bold tracking-widest text-left transition-colors cursor-pointer ${
+                className={`text-lg font-bold tracking-widest text-left transition-colors cursor-pointer min-h-[44px] py-3 flex items-center ${
                   activeSection === link.id ? 'text-white' : 'text-neutral-400 hover:text-white'
                 }`}
               >

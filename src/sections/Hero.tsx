@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { registerAnimation, gsap, lenis } from '../lib/scroll';
 import FrameScrub from '../components/FrameScrub';
 import { ArrowRight } from 'lucide-react';
-import logoWhite from '../assets/logo-white.png';
 import { getFrameTier, type FrameTier } from '../lib/frameTier';
+import { Logo } from '../components/Logo';
 
 export const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -17,6 +17,15 @@ export const Hero: React.FC = () => {
   const [activeFrame, setActiveFrame] = useState(0);
   const [tier] = useState<FrameTier>(getFrameTier);
   const [preloaderDone, setPreloaderDone] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // 2. Run Preloader image time-lapse loop sequence
   useEffect(() => {
@@ -55,9 +64,9 @@ export const Hero: React.FC = () => {
       // Slide preloader overlay up out of screen
       .to(preloaderRef.current, {
         yPercent: -100,
-        duration: 1.2,
+        duration: 1.0,
         ease: 'power4.inOut',
-        delay: 0.8,
+        delay: 0.4,
       })
       // Reveal subheadings
       .fromTo(
@@ -121,11 +130,7 @@ export const Hero: React.FC = () => {
             ref={preloaderText1Ref}
             className="flex items-center justify-center select-none"
           >
-            <img 
-              src={logoWhite} 
-              alt="Ready Homes Logo" 
-              className="w-[60vw] max-w-[360px] h-auto object-contain" 
-            />
+            <Logo className="w-[60vw] max-w-[320px] h-auto select-none" color="white" />
           </div>
 
           {/* Animated image sequence — using ultra-compressed 2KB thumbnails */}
@@ -147,33 +152,76 @@ export const Hero: React.FC = () => {
 
         {/* Preloader bottom copyrights */}
         <div className="text-[10px] md:text-xs font-semibold tracking-wider text-neutral-500 uppercase text-center">
-          © 2026 READY HOMES. ALL RIGHTS RESERVED.
+          © 2026 FLOORING STUDIO. ALL RIGHTS RESERVED.
         </div>
       </div>
 
       {/* 2. Main Hero Section (Scroller Canvas replaces the video, locked in track) */}
-      <section ref={containerRef} id="hero" className="w-full bg-[#141316] relative select-none hero-track">
+      <section ref={containerRef} id="hero" className="w-full bg-[#141316] relative select-none hero-track max-md:h-[100dvh] max-md:min-h-[100dvh] max-md:w-screen max-md:overflow-hidden">
         <FrameScrub
           frameCount={150}
           framePath={framePath}
           fallbackFramePath={tier && tier.dir === 'desktop-hq' ? fallbackFramePath : undefined}
           poster="/frames/hero/desktop/0001.webp"
-          scrollLengthVh={200}
-          className="w-full hero-sticky"
+          scrollLengthVh={isMobile ? 100 : 200}
+          className="w-full hero-sticky max-md:h-[100dvh] max-md:min-h-[100dvh] max-md:w-screen max-md:overflow-hidden"
           eager
           tierResolved={!!tier}
           pathKey={tier ? tier.dir : ''}
         >
-          {/* Main Overlay contents */}
-          <div className="w-full h-full flex flex-col justify-center items-center py-16 px-6 md:px-12 relative z-20 pointer-events-none hero-content">
+          {/* Subtle dark overlay for hero video readability */}
+          <div className="absolute inset-0 bg-[#141316]/30 pointer-events-none z-10" />
+
+          {/* Mobile bottom-positioned content overlay */}
+          <div 
+            className="block md:hidden absolute left-0 bottom-0 w-full text-left z-30 flex flex-col gap-4 pointer-events-none"
+            style={{
+              padding: '2rem 1.5rem calc(env(safe-area-inset-bottom) + 2rem)',
+              background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%)'
+            }}
+          >
+            <div>
+              <h2 className="text-white text-[2rem] font-bold tracking-tight leading-tight hero-text-font mb-2 uppercase">
+                Premium Surfaces
+              </h2>
+              <p className="text-white text-base opacity-90 font-medium">
+                Crafted for the spaces you love.
+              </p>
+            </div>
+            <div className="pointer-events-auto">
+              <a
+                href="#featured-work"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const element = document.getElementById('featured-work');
+                  if (element) {
+                    if (window.innerWidth < 768) {
+                      element.scrollIntoView({ behavior: 'smooth' });
+                    } else {
+                      lenis.scrollTo(element, { offset: -80 });
+                    }
+                  }
+                }}
+                className="btn-pill-white cursor-pointer hero-text-font min-h-[44px] px-5 py-3"
+              >
+                <span>Explore Our Work</span>
+                <span className="arrow-circle-blue">
+                  <ArrowRight className="w-4 h-4 text-white" />
+                </span>
+              </a>
+            </div>
+          </div>
+
+          {/* Desktop Center Overlay contents */}
+          <div className="hidden md:flex w-full h-full flex-col justify-center items-center py-16 px-6 md:px-12 relative z-20 pointer-events-none hero-content">
             <div className="w-full max-w-7xl mx-auto flex flex-col justify-center items-center flex-1">
               {/* Centered alignment for subheading and button */}
               <div
                 ref={subHeadingRef}
                 className="flex flex-col items-center justify-center w-full text-center gap-8 select-none"
               >
-                <div className="text-white text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.15] max-w-3xl hero-text-font">
-                  Where luxury meets lifestyle. Welcome to 1159 Diamond St.
+                <div className="text-white text-2xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.15] max-w-3xl hero-text-font">
+                  Premium surfaces. Crafted for the spaces you love.
                 </div>
                 
                 <div className="pointer-events-auto">
@@ -188,7 +236,7 @@ export const Hero: React.FC = () => {
                     }}
                     className="btn-pill-white cursor-pointer hero-text-font"
                   >
-                    <span>Explore the Property</span>
+                    <span>Explore Our Work</span>
                     <span className="arrow-circle-blue">
                       <ArrowRight className="w-4 h-4 text-white" />
                     </span>
