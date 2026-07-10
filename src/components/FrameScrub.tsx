@@ -10,36 +10,61 @@ type Props = {
   children?: React.ReactNode;
   onProgress?: (progress: number, frame: number) => void;
   eager?: boolean;                           // if true, skip IO and start loading immediately
+  tierResolved?: boolean;                    // true if resolution-tier is ready to load
+  fallbackFramePath?: (i: number) => string; // fallback path if the main path fails (e.g. for HQ tier)
+  pathKey?: string;                          // stable key representing the path/tier (to prevent inline function re-runs)
 };
 
 const LERP = 0.18;        // Snappy interpolation
-const CONCURRENCY = 12;   // Max parallel loads — images are tiny now
+const CONCURRENCY = 6;    // Max parallel loads — restored to 6 as specced
 
 export default function FrameScrub({
-  frameCount, framePath, poster, className, scrollLengthVh = 400, children, onProgress, eager = false
+  frameCount, framePath, poster, className, scrollLengthVh = 400, children, onProgress, eager = false, tierResolved = true, fallbackFramePath, pathKey = ''
 }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
   
-  // Use native Image objects for hardware-accelerated drawing and better browser caching
-  const images = useRef<(HTMLImageElement | null)[]>(new Array(frameCount + 1).fill(null));
+  // High-performance double-buffered caching engine
+  const compressedBlobs = useRef<Map<number, Blob>>(new Map());
+  const decodedBitmaps = useRef<Map<number, ImageBitmap>>(new Map());
+  const fetchedOrInFlight = useRef<Set<number>>(new Set());
+  const decodingFrames = useRef<Set<number>>(new Set());
+  const pumpRef = useRef<(() => void) | undefined>(undefined);
   
   const playhead = useRef(1);
   const target = useRef(1);
   const [ready, setReady] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [isFallenBack, setIsFallenBack] = useState(false);
+  const [firstFrameDrawn, setFirstFrameDrawn] = useState(false);
+  const [grainDataUrl, setGrainDataUrl] = useState<string>('');
+  const [inViewport, setInViewport] = useState(false);
+  
   const onProgressRef = useRef(onProgress);
   onProgressRef.current = onProgress;
 
+  // Store function props in refs to completely decouple preloader lifecycle from identity changes
   const framePathRef = useRef(framePath);
   framePathRef.current = framePath;
+
+  const fallbackFramePathRef = useRef(fallbackFramePath);
+  fallbackFramePathRef.current = fallbackFramePath;
+
+  // Reset fallback and transition state when the path key changes (stable tier change)
+  useEffect(() => {
+    setIsFallenBack(false);
+    setFirstFrameDrawn(false);
+  }, [pathKey]);
 
   const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth < 768);
 
   const lastWidth = useRef(typeof window !== 'undefined' ? window.innerWidth : 1200);
   const lastHeight = useRef(typeof window !== 'undefined' ? window.innerHeight : 800);
   const lastOrientation = useRef(typeof window !== 'undefined' && window.innerWidth > window.innerHeight ? 'landscape' : 'portrait');
+
+  const reduced = typeof window !== 'undefined'
+    && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   useEffect(() => {
     const handleResize = () => {
@@ -58,6 +83,41 @@ export default function FrameScrub({
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Generate 128x128 monochrome low-alpha noise texture once on mount for desktop viewports
+  useEffect(() => {
+    if (isMobile) return;
+    const canvas = document.createElement('canvas');
+    canvas.width = 128;
+    canvas.height = 128;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    const imgData = ctx.createImageData(128, 128);
+    const data = imgData.data;
+    for (let i = 0; i < data.length; i += 4) {
+      const val = Math.floor(Math.random() * 255);
+      data[i] = val;
+      data[i + 1] = val;
+      data[i + 2] = val;
+      data[i + 3] = 255;
+    }
+    ctx.putImageData(imgData, 0, 0);
+    setGrainDataUrl(canvas.toDataURL());
+  }, [isMobile]);
+
+  // Continuous viewport check to toggle animation play state and optimize performance
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setInViewport(entry.isIntersecting);
+      },
+      { threshold: 0 }
+    );
+    observer.observe(track);
+    return () => observer.disconnect();
   }, []);
 
   // IntersectionObserver — start loading when near viewport (or immediately if eager)
@@ -81,14 +141,39 @@ export default function FrameScrub({
     return () => observer.disconnect();
   }, [eager]);
 
-  // Highly optimized HTTP/2 Image Preloader
+  // Clean up decoded ImageBitmaps and Blobs on unmount
   useEffect(() => {
-    if (!visible) return;
+    const bitmaps = decodedBitmaps.current;
+    const blobs = compressedBlobs.current;
+    const inflight = fetchedOrInFlight.current;
+    const decoding = decodingFrames.current;
+    return () => {
+      bitmaps.forEach(bitmap => bitmap.close());
+      bitmaps.clear();
+      blobs.clear();
+      inflight.clear();
+      decoding.clear();
+      pumpRef.current = undefined;
+    };
+  }, []);
+
+  // Highly optimized HTTP/2 Image Preloader using Blob fetching
+  useEffect(() => {
+    if (!visible || !tierResolved || reduced) return;
+    
     let cancelled = false;
     let loadedCount = 0;
-    const requiredForReady = isMobile ? 6 : 10;
+    const requiredForReady = 24; // Ready threshold set to 24 frames
 
-    // We generate an optimized loading order: spread out first, then fill in the gaps
+    // Reset caches on parameter/viewport/fallback updates
+    compressedBlobs.current.clear();
+    decodedBitmaps.current.forEach(bitmap => bitmap.close());
+    decodedBitmaps.current.clear();
+    fetchedOrInFlight.current.clear();
+    decodingFrames.current.clear();
+    setReady(false);
+
+    // We generate an optimized loading order: spread out first, then fill in the gaps (Stride loading)
     const order: number[] = [];
     const step = isMobile ? 2 : 1;
     for (const stride of [8, 4, 2, 1]) {
@@ -101,43 +186,88 @@ export default function FrameScrub({
     let idx = 0;
     let inFlight = 0;
 
+    const findPriorityFrame = (center: number, maxDistance = 15): number | null => {
+      for (let dist = 0; dist <= maxDistance; dist++) {
+        const framePlus = center + dist;
+        if (framePlus >= 1 && framePlus <= frameCount && !fetchedOrInFlight.current.has(framePlus)) {
+          return framePlus;
+        }
+        if (dist > 0) {
+          const frameMinus = center - dist;
+          if (frameMinus >= 1 && frameMinus <= frameCount && !fetchedOrInFlight.current.has(frameMinus)) {
+            return frameMinus;
+          }
+        }
+      }
+      return null;
+    };
+
     const pump = () => {
       if (cancelled) return;
-      while (inFlight < CONCURRENCY && idx < order.length) {
-        const frame = order[idx++];
+      while (inFlight < CONCURRENCY) {
+        // 1. Try playhead-priority frame search first
+        const center = Math.round(playhead.current);
+        let frame = findPriorityFrame(center, 15);
+        
+        // 2. Fall back to base stride order queue
+        if (frame === null) {
+          while (idx < order.length) {
+            const candidate = order[idx++];
+            if (!fetchedOrInFlight.current.has(candidate)) {
+              frame = candidate;
+              break;
+            }
+          }
+        }
+        
+        if (frame === null) {
+          break;
+        }
+        
+        fetchedOrInFlight.current.add(frame);
         inFlight++;
         
-        const img = new Image();
-        img.src = framePathRef.current(frame);
-        
-        const onLoadFinish = () => {
+        const currentFrame = frame;
+        const targetPath = (isFallenBack && fallbackFramePathRef.current) 
+          ? fallbackFramePathRef.current(currentFrame) 
+          : framePathRef.current(currentFrame);
+
+        fetch(targetPath)
+          .then(res => {
+            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+            return res.blob();
+          })
+          .then(blob => {
             if (cancelled) return;
-            inFlight--;
-            images.current[frame] = img;
+            compressedBlobs.current.set(currentFrame, blob);
             loadedCount++;
             if (loadedCount === requiredForReady) {
-                setReady(true);
+              setReady(true);
             }
+            inFlight--;
             pump();
-        };
-
-        img.onload = onLoadFinish;
-        img.onerror = onLoadFinish;
-        
-        // Eagerly trigger decode if available to avoid main-thread jank during render
-        if ('decode' in img) {
-            img.decode().catch(() => {});
-        }
+          })
+          .catch(() => {
+            if (cancelled) return;
+            if (!isFallenBack && fallbackFramePathRef.current) {
+              setIsFallenBack(true);
+              cancelled = true;
+            } else {
+              inFlight--;
+              pump();
+            }
+          });
       }
     };
     
-    // Start immediately — images are tiny (~20-27KB each)
+    pumpRef.current = pump;
     pump();
 
     return () => { 
-        cancelled = true; 
+      cancelled = true; 
+      pumpRef.current = undefined;
     };
-  }, [visible, frameCount, isMobile]);
+  }, [visible, frameCount, isMobile, tierResolved, reduced, isFallenBack]);
 
   // GSAP ScrollTrigger pin — this is the key: pin the section and
   // use ScrollTrigger progress to drive frame target
@@ -170,29 +300,92 @@ export default function FrameScrub({
 
   // Find nearest available frame
   const findNearestFrame = useCallback((frame: number): number | null => {
-    if (images.current[frame]) return frame;
-    for (let delta = 1; delta <= 12; delta++) {
-      if (images.current[frame + delta]) return frame + delta;
-      if (images.current[frame - delta]) return frame - delta;
+    if (decodedBitmaps.current.has(frame)) return frame;
+    for (let delta = 1; delta <= 10; delta++) {
+      if (decodedBitmaps.current.has(frame + delta)) return frame + delta;
+      if (decodedBitmaps.current.has(frame - delta)) return frame - delta;
     }
     return null;
   }, []);
 
+  // Async frame decoder with sliding window cache eviction and decode budget
+  const decodeFrames = useCallback(async (center: number) => {
+    const DECODE_WINDOW = isMobile ? 15 : 30;
+    const lo = Math.max(1, center - DECODE_WINDOW);
+    const hi = Math.min(frameCount, center + DECODE_WINDOW);
+
+    // 1. Evict frames outside the decode window first (reclaim memory first)
+    for (const [key, bitmap] of decodedBitmaps.current) {
+      if (key < lo || key > hi) {
+        bitmap.close();
+        decodedBitmaps.current.delete(key);
+      }
+    }
+
+    // 2. Decode outward search order from center
+    const decodeOrder: number[] = [];
+    const maxDist = DECODE_WINDOW;
+    for (let dist = 0; dist <= maxDist; dist++) {
+      const p = center + dist;
+      if (p >= lo && p <= hi) {
+        decodeOrder.push(p);
+      }
+      if (dist > 0) {
+        const m = center - dist;
+        if (m >= lo && m <= hi) {
+          decodeOrder.push(m);
+        }
+      }
+    }
+
+    // 3. Decode at most 4 bitmaps per invocation
+    let decodedCount = 0;
+    const BUDGET = 4;
+
+    for (const i of decodeOrder) {
+      if (decodedCount >= BUDGET) break;
+
+      if (!decodedBitmaps.current.has(i) && !decodingFrames.current.has(i) && compressedBlobs.current.has(i)) {
+        const blob = compressedBlobs.current.get(i);
+        if (blob) {
+          decodedCount++;
+          decodingFrames.current.add(i);
+          
+          createImageBitmap(blob)
+            .then(bmp => {
+              decodingFrames.current.delete(i);
+              // Verify bounds in case the playhead shifted during async decode
+              const currentCenter = Math.round(playhead.current);
+              const currentLo = Math.max(1, currentCenter - DECODE_WINDOW);
+              const currentHi = Math.min(frameCount, currentCenter + DECODE_WINDOW);
+              if (i >= currentLo && i <= currentHi) {
+                decodedBitmaps.current.set(i, bmp);
+              } else {
+                bmp.close();
+              }
+            })
+            .catch(() => {
+              decodingFrames.current.delete(i);
+            });
+        }
+      }
+    }
+  }, [frameCount, isMobile]);
+
   // Render loop — only draws
   useEffect(() => {
-    if (!ready) return;
+    if (!ready || !tierResolved) return;
     let raf = 0, lastDrawn = -1;
 
     const draw = (frame: number) => {
       const canvas = canvasRef.current;
-      const img = images.current[frame];
-      if (!canvas || !img) return;
+      const bmp = decodedBitmaps.current.get(frame);
+      if (!canvas || !bmp) return;
       const ctx = canvas.getContext('2d', { alpha: false });
       if (!ctx) return;
       const cr = canvas.width / canvas.height;
       
-      // Use naturalWidth for native Image objects
-      const ir = (img.naturalWidth || img.width) / (img.naturalHeight || img.height);
+      const ir = bmp.width / bmp.height;
       
       let dw, dh, dx, dy;
       if (ir > cr) { dh = canvas.height; dw = dh * ir; dx = (canvas.width - dw) / 2; dy = 0; }
@@ -201,7 +394,9 @@ export default function FrameScrub({
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.imageSmoothingEnabled = true;
       ctx.imageSmoothingQuality = 'high';
-      ctx.drawImage(img, dx, dy, dw, dh);
+      ctx.drawImage(bmp, dx, dy, dw, dh);
+
+      setFirstFrameDrawn(true);
     };
 
     const loop = () => {
@@ -213,6 +408,10 @@ export default function FrameScrub({
         draw(frame);
         lastDrawn = frame;
       }
+      decodeFrames(idealFrame);
+      if (pumpRef.current) {
+        pumpRef.current();
+      }
       raf = requestAnimationFrame(loop);
     };
 
@@ -220,6 +419,7 @@ export default function FrameScrub({
       const c = canvasRef.current;
       if (!c) return;
       const isMob = window.innerWidth < 768;
+      // Cap DPR at 1.5 on mobile to save GPU memory on 3x devices, and 2.0 on desktop
       const dpr = Math.min(window.devicePixelRatio || 1, isMob ? 1.5 : 2);
       const r = c.getBoundingClientRect();
       c.width = r.width * dpr; c.height = r.height * dpr;
@@ -229,19 +429,73 @@ export default function FrameScrub({
     window.addEventListener('resize', resize);
     raf = requestAnimationFrame(loop);
     return () => { cancelAnimationFrame(raf); window.removeEventListener('resize', resize); };
-  }, [ready, findNearestFrame]);
-
-  const reduced = typeof window !== 'undefined'
-    && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }, [ready, findNearestFrame, decodeFrames, tierResolved]);
 
   return (
     <div ref={trackRef} className={className} style={{ position: 'relative' }}>
       <div ref={stickyRef} style={{ height: '100vh', overflow: 'hidden', position: 'relative' }}>
         {reduced
-          ? <img src={poster} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          ? <img src={poster} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'contrast(1.04) saturate(1.06) brightness(1.01)' }} />
           : <>
-              <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
-              {!ready && <img src={poster} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />}
+              <canvas 
+                ref={canvasRef} 
+                style={{ 
+                  position: 'absolute', 
+                  inset: 0, 
+                  width: '100%', 
+                  height: '100%', 
+                  objectFit: 'cover',
+                  opacity: firstFrameDrawn ? 1 : 0,
+                  transition: 'opacity 0.4s ease-out',
+                  display: 'block',
+                  transform: 'translateZ(0)',
+                  filter: 'contrast(1.04) saturate(1.06) brightness(1.01)'
+                }} 
+              />
+              <img 
+                src={poster} 
+                alt="" 
+                style={{ 
+                  position: 'absolute', 
+                  inset: 0, 
+                  width: '100%', 
+                  height: '100%', 
+                  objectFit: 'cover',
+                  opacity: firstFrameDrawn ? 0 : 1,
+                  transition: 'opacity 0.4s ease-out',
+                  pointerEvents: 'none',
+                  display: 'block',
+                  filter: 'contrast(1.04) saturate(1.06) brightness(1.01)'
+                }} 
+              />
+              <style dangerouslySetInnerHTML={{__html: `
+                @keyframes grainShift {
+                  0%, 100% { background-position: 0px 0px; }
+                  12.5% { background-position: -20px 10px; }
+                  25% { background-position: 40px -30px; }
+                  37.5% { background-position: -10px -10px; }
+                  50% { background-position: 30px 20px; }
+                  62.5% { background-position: -30px 40px; }
+                  75% { background-position: 10px -20px; }
+                  87.5% { background-position: 20px -10px; }
+                }
+              `}} />
+              {grainDataUrl && !isMobile && (
+                <div 
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    backgroundImage: `url(${grainDataUrl})`,
+                    backgroundRepeat: 'repeat',
+                    opacity: 0.035,
+                    mixBlendMode: 'overlay',
+                    pointerEvents: 'none',
+                    zIndex: 5,
+                    animation: 'grainShift 0.66s steps(8) infinite',
+                    animationPlayState: inViewport && !reduced ? 'running' : 'paused'
+                  }}
+                />
+              )}
             </>}
         {/* Overlay children */}
         <div className="absolute inset-0 z-10 pointer-events-none">

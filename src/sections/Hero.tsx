@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { registerAnimation, gsap, lenis } from '../lib/scroll';
 import FrameScrub from '../components/FrameScrub';
 import { ArrowRight } from 'lucide-react';
 import logoWhite from '../assets/logo-white.png';
+import { getFrameTier, type FrameTier } from '../lib/frameTier';
 
 export const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -14,15 +15,18 @@ export const Hero: React.FC = () => {
   const preloaderImgsRef = useRef<HTMLDivElement>(null);
 
   const [activeFrame, setActiveFrame] = useState(0);
+  const [tier] = useState<FrameTier>(getFrameTier);
+  const [preloaderDone, setPreloaderDone] = useState(false);
 
-  // 1. Run Preloader image time-lapse loop sequence
+  // 2. Run Preloader image time-lapse loop sequence
   useEffect(() => {
+    if (preloaderDone) return;
     const interval = setInterval(() => {
       setActiveFrame((prev) => (prev + 1) % 9);
     }, 150);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [preloaderDone]);
 
   // 2. Animations trigger setup
   useEffect(() => {
@@ -31,6 +35,7 @@ export const Hero: React.FC = () => {
         if (preloaderRef.current) {
           preloaderRef.current.style.display = 'none';
         }
+        setPreloaderDone(true);
       },
     });
 
@@ -80,16 +85,24 @@ export const Hero: React.FC = () => {
       });
     });
   }, []);
+ 
+  const framePath = useCallback(
+    (i: number) => {
+      return tier ? `/frames/hero/${tier.dir}/${String(i).padStart(4, '0')}.${tier.ext}` : '';
+    },
+    [tier]
+  );
+ 
+  const fallbackFramePath = useCallback(
+    (i: number) => {
+      return tier && tier.dir === 'desktop-hq'
+        ? `/frames/hero/desktop/${String(i).padStart(4, '0')}.webp`
+        : '';
+    },
+    [tier]
+  );
 
-  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth < 768);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   return (
     <>
@@ -141,15 +154,15 @@ export const Hero: React.FC = () => {
       {/* 2. Main Hero Section (Scroller Canvas replaces the video, locked in track) */}
       <section ref={containerRef} id="hero" className="w-full bg-[#141316] relative select-none hero-track">
         <FrameScrub
-          frameCount={100}
-          framePath={(i) => {
-            const dir = isMobile ? 'hero-mobile' : 'hero';
-            return `/frames/${dir}/${String(i).padStart(4, '0')}.webp`;
-          }}
-          poster="/frames/hero/0001.webp"
+          frameCount={150}
+          framePath={framePath}
+          fallbackFramePath={tier && tier.dir === 'desktop-hq' ? fallbackFramePath : undefined}
+          poster="/frames/hero/desktop/0001.webp"
           scrollLengthVh={200}
           className="w-full hero-sticky"
           eager
+          tierResolved={!!tier}
+          pathKey={tier ? tier.dir : ''}
         >
           {/* Main Overlay contents */}
           <div className="w-full h-full flex flex-col justify-center items-center py-16 px-6 md:px-12 relative z-20 pointer-events-none hero-content">

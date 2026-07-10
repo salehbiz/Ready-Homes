@@ -24,3 +24,10 @@ dist-ssr
 *.sw?
 .vercel
 .env*
+
+# Scratch and build assets
+tmp/
+sharp/
+desktop-hq-final/
+halo-check.png
+first-last-check.png
