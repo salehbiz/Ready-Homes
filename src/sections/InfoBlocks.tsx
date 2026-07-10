@@ -223,6 +223,7 @@ export const InfoBlocks: React.FC = () => {
             ref={introImgRef}
             src="/videos/neighborhood.webp"
             alt="Coastal neighborhood drone view"
+            loading="lazy"
             className="w-full h-full object-cover scale-110"
           />
         </div>
@@ -281,6 +282,7 @@ export const InfoBlocks: React.FC = () => {
                     src={work.img}
                     alt={work.title}
                     className="w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-700 ease-out select-none pointer-events-none"
+                    loading="lazy"
                   />
                   {/* Floating logo watermark */}
                   <img
@@ -360,6 +362,7 @@ export const InfoBlocks: React.FC = () => {
                   src={srv.img}
                   alt={srv.title}
                   className="w-full h-full object-cover scale-100 hover:scale-105 transition-transform duration-500 ease-out pointer-events-none"
+                  loading="lazy"
                 />
               </div>
 

@@ -11,8 +11,8 @@ type Props = {
   onProgress?: (progress: number, frame: number) => void;
 };
 
-const LERP = 0.15;        // Smoother, snappier interpolation
-const CONCURRENCY = 8;    // Increased concurrency for fast network
+const LERP = 0.18;        // Snappy interpolation
+const CONCURRENCY = 12;   // Max parallel loads — images are tiny now
 
 export default function FrameScrub({
   frameCount, framePath, poster, className, scrollLengthVh = 400, children, onProgress
@@ -81,7 +81,7 @@ export default function FrameScrub({
     if (!visible) return;
     let cancelled = false;
     let loadedCount = 0;
-    const requiredForReady = isMobile ? 10 : 20;
+    const requiredForReady = isMobile ? 6 : 10;
 
     // We generate an optimized loading order: spread out first, then fill in the gaps
     const order: number[] = [];
@@ -126,15 +126,11 @@ export default function FrameScrub({
       }
     };
     
-    // Delay the initial pump to ensure it doesn't block the critical rendering path
-    // and layout/paint of the hero section on initial page load.
-    const delayTimer = setTimeout(() => {
-        pump();
-    }, 1200);
+    // Start immediately — images are tiny (~20-27KB each)
+    pump();
 
     return () => { 
         cancelled = true; 
-        clearTimeout(delayTimer);
     };
   }, [visible, frameCount, isMobile]);
 

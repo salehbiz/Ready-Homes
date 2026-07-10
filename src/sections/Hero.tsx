@@ -13,29 +13,16 @@ export const Hero: React.FC = () => {
   const preloaderText1Ref = useRef<HTMLDivElement>(null);
   const preloaderImgsRef = useRef<HTMLDivElement>(null);
 
-  // preloader image frames - using current site portfolio and design images
-  const preloaderImages = [
-    '/portfolio/work1.webp',
-    '/portfolio/work2.webp',
-    '/portfolio/work3.webp',
-    '/portfolio/work4.webp',
-    '/portfolio/service_marketing.webp',
-    '/portfolio/service_branding.webp',
-    '/portfolio/service_packaging.webp',
-    '/portfolio/service_illustration.webp',
-    '/videos/neighborhood.webp',
-  ];
-
   const [activeFrame, setActiveFrame] = useState(0);
 
-  // 1. Run Preloader opacity frame loop sequence
+  // 1. Run Preloader gradient frame loop sequence
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveFrame((prev) => (prev + 1) % preloaderImages.length);
-    }, 150);
+      setActiveFrame((prev) => (prev + 1) % 4);
+    }, 200);
 
     return () => clearInterval(interval);
-  }, [preloaderImages.length]);
+  }, []);
 
   // 2. Animations trigger setup
   useEffect(() => {
@@ -128,18 +115,21 @@ export const Hero: React.FC = () => {
             />
           </div>
 
-          {/* Stacked sequence image frames */}
+          {/* Animated gradient squares — no network requests */}
           <div
             ref={preloaderImgsRef}
             className="relative w-16 h-16 md:w-20 md:h-20 select-none"
           >
-            {preloaderImages.map((imgUrl, idx) => (
-              <img
+            {[
+              'linear-gradient(135deg, #2a2a3e 0%, #3d3556 100%)',
+              'linear-gradient(135deg, #1e3a3a 0%, #2d5a4e 100%)',
+              'linear-gradient(135deg, #3a2a1e 0%, #5a4e2d 100%)',
+              'linear-gradient(135deg, #1e2a3a 0%, #2d4e5a 100%)',
+            ].map((grad, idx) => (
+              <div
                 key={idx}
-                src={imgUrl}
-                alt=""
-                className="absolute inset-0 w-full h-full object-cover rounded-[12px] shadow-lg transition-opacity duration-150 ease-out border border-white/10"
-                style={{ opacity: activeFrame === idx ? 1 : 0 }}
+                className="absolute inset-0 w-full h-full rounded-[12px] shadow-lg transition-opacity duration-150 ease-out border border-white/10"
+                style={{ background: grad, opacity: activeFrame % 4 === idx ? 1 : 0 }}
               />
             ))}
           </div>
