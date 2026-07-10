@@ -11,9 +11,8 @@ type Props = {
   onProgress?: (progress: number, frame: number) => void;
 };
 
-const CONCURRENCY = 6;
-const LERP = 0.25;        // Snappy spring-like interpolation
-const DECODE_INTERVAL = 60; // ms between decode batches
+const LERP = 0.15;        // Smoother, snappier interpolation
+const CONCURRENCY = 8;    // Increased concurrency for fast network
 
 export default function FrameScrub({
   frameCount, framePath, poster, className, scrollLengthVh = 400, children, onProgress
@@ -21,18 +20,17 @@ export default function FrameScrub({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
-  const blobs = useRef(new Map<number, Blob>());
-  const bitmaps = useRef(new Map<number, ImageBitmap>());
+  
+  // Use native Image objects for hardware-accelerated drawing and better browser caching
+  const images = useRef<(HTMLImageElement | null)[]>(new Array(frameCount + 1).fill(null));
+  
   const playhead = useRef(1);
   const target = useRef(1);
   const [ready, setReady] = useState(false);
   const [visible, setVisible] = useState(false);
-  const decodeCenter = useRef(1);
-  const isDecoding = useRef(false);
   const onProgressRef = useRef(onProgress);
   onProgressRef.current = onProgress;
 
-  // Stabilize framePath in a ref
   const framePathRef = useRef(framePath);
   framePathRef.current = framePath;
 
@@ -61,8 +59,6 @@ export default function FrameScrub({
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const windowSize = useRef(isMobile ? 15 : 35);
-
   // IntersectionObserver — start loading when near viewport
   useEffect(() => {
     const track = trackRef.current;
@@ -74,16 +70,20 @@ export default function FrameScrub({
           observer.disconnect();
         }
       },
-      { rootMargin: '400px 0px' }
+      { rootMargin: '800px 0px' } // Load earlier
     );
     observer.observe(track);
     return () => observer.disconnect();
   }, []);
 
-  // Stride loader
+  // Highly optimized HTTP/2 Image Preloader
   useEffect(() => {
     if (!visible) return;
     let cancelled = false;
+    let loadedCount = 0;
+    const requiredForReady = isMobile ? 10 : 20;
+
+    // We generate an optimized loading order: spread out first, then fill in the gaps
     const order: number[] = [];
     const step = isMobile ? 2 : 1;
     for (const stride of [8, 4, 2, 1]) {
@@ -92,66 +92,43 @@ export default function FrameScrub({
         if (!order.includes(i)) order.push(i);
       }
     }
-    let idx = 0, inFlight = 0, loadedEarly = 0;
-    const earlyLimit = Math.min(isMobile ? 12 : 24, order.length);
+
+    let idx = 0;
+    let inFlight = 0;
 
     const pump = () => {
-      while (inFlight < CONCURRENCY && idx < order.length && !cancelled) {
+      if (cancelled) return;
+      while (inFlight < CONCURRENCY && idx < order.length) {
         const frame = order[idx++];
         inFlight++;
-        fetch(framePathRef.current(frame))
-          .then(r => r.blob())
-          .then(async (b) => {
+        
+        const img = new Image();
+        img.src = framePathRef.current(frame);
+        
+        const onLoadFinish = () => {
             if (cancelled) return;
-            blobs.current.set(frame, b);
-            if (loadedEarly < earlyLimit) {
-              try {
-                const bmp = await createImageBitmap(b);
-                if (!cancelled) bitmaps.current.set(frame, bmp);
-              } catch { /* skip */ }
+            inFlight--;
+            images.current[frame] = img;
+            loadedCount++;
+            if (loadedCount === requiredForReady) {
+                setReady(true);
             }
-            if (++loadedEarly === earlyLimit) setReady(true);
-          })
-          .catch(() => {})
-          .finally(() => { inFlight--; pump(); });
+            pump();
+        };
+
+        img.onload = onLoadFinish;
+        img.onerror = onLoadFinish;
+        
+        // Eagerly trigger decode if available to avoid main-thread jank during render
+        if (img.decode) {
+            img.decode().catch(() => {});
+        }
       }
     };
+    
     pump();
     return () => { cancelled = true; };
   }, [visible, frameCount, isMobile]);
-
-  // Decode loop
-  const runDecode = useCallback(async () => {
-    if (isDecoding.current) return;
-    isDecoding.current = true;
-    const WINDOW = windowSize.current;
-    const center = decodeCenter.current;
-    const lo = Math.max(1, center - WINDOW);
-    const hi = Math.min(frameCount, center + WINDOW);
-
-    for (const [k, bmp] of bitmaps.current) {
-      if (k < lo || k > hi) { bmp.close(); bitmaps.current.delete(k); }
-    }
-    for (let i = center; i <= hi; i++) {
-      if (!bitmaps.current.has(i) && blobs.current.has(i)) {
-        try { bitmaps.current.set(i, await createImageBitmap(blobs.current.get(i)!)); }
-        catch { /* skip */ }
-      }
-    }
-    for (let i = center - 1; i >= lo; i--) {
-      if (!bitmaps.current.has(i) && blobs.current.has(i)) {
-        try { bitmaps.current.set(i, await createImageBitmap(blobs.current.get(i)!)); }
-        catch { /* skip */ }
-      }
-    }
-    isDecoding.current = false;
-  }, [frameCount]);
-
-  useEffect(() => {
-    if (!ready) return;
-    const timer = setInterval(runDecode, DECODE_INTERVAL);
-    return () => clearInterval(timer);
-  }, [ready, runDecode]);
 
   // GSAP ScrollTrigger pin — this is the key: pin the section and
   // use ScrollTrigger progress to drive frame target
@@ -166,7 +143,7 @@ export default function FrameScrub({
         end: () => `+=${window.innerHeight * (scrollLengthVh / 100 - 1)}`,
         pin: true,
         anticipatePin: 1,
-        scrub: true,
+        scrub: 0, // Direct map, smooth via LERP
         invalidateOnRefresh: true,
         onUpdate: (self) => {
           const progress = self.progress;
@@ -184,10 +161,10 @@ export default function FrameScrub({
 
   // Find nearest available frame
   const findNearestFrame = useCallback((frame: number): number | null => {
-    if (bitmaps.current.has(frame)) return frame;
+    if (images.current[frame]) return frame;
     for (let delta = 1; delta <= 12; delta++) {
-      if (bitmaps.current.has(frame + delta)) return frame + delta;
-      if (bitmaps.current.has(frame - delta)) return frame - delta;
+      if (images.current[frame + delta]) return frame + delta;
+      if (images.current[frame - delta]) return frame - delta;
     }
     return null;
   }, []);
@@ -199,23 +176,29 @@ export default function FrameScrub({
 
     const draw = (frame: number) => {
       const canvas = canvasRef.current;
-      const bmp = bitmaps.current.get(frame);
-      if (!canvas || !bmp) return;
+      const img = images.current[frame];
+      if (!canvas || !img) return;
       const ctx = canvas.getContext('2d', { alpha: false });
       if (!ctx) return;
       const cr = canvas.width / canvas.height;
-      const ir = bmp.width / bmp.height;
+      
+      // Use naturalWidth for native Image objects
+      const ir = (img.naturalWidth || img.width) / (img.naturalHeight || img.height);
+      
       let dw, dh, dx, dy;
       if (ir > cr) { dh = canvas.height; dw = dh * ir; dx = (canvas.width - dw) / 2; dy = 0; }
       else { dw = canvas.width; dh = dw / ir; dx = 0; dy = (canvas.height - dh) / 2; }
+      
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(bmp, dx, dy, dw, dh);
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = 'high';
+      ctx.drawImage(img, dx, dy, dw, dh);
     };
 
     const loop = () => {
+      // Very smooth LERP interpolation
       playhead.current += (target.current - playhead.current) * LERP;
       const idealFrame = Math.round(playhead.current);
-      decodeCenter.current = idealFrame;
       const frame = findNearestFrame(idealFrame);
       if (frame !== null && frame !== lastDrawn) {
         draw(frame);
