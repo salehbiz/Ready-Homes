@@ -16,56 +16,65 @@ export const Hero: React.FC = () => {
   const [activeFrame, setActiveFrame] = useState(0);
   const [tier] = useState<FrameTier>(getFrameTier);
   const [preloaderDone, setPreloaderDone] = useState(false);
+  const [isMobileViewport, setIsMobileViewport] = useState(false);
 
 
   // 2. Run Preloader image time-lapse loop sequence
   useEffect(() => {
-    if (preloaderDone) return;
+    if (preloaderDone || isMobileViewport) return;
     const interval = setInterval(() => {
       setActiveFrame((prev) => (prev + 1) % 9);
     }, 150);
 
     return () => clearInterval(interval);
-  }, [preloaderDone]);
+  }, [preloaderDone, isMobileViewport]);
 
   // 2. Animations trigger setup
   useEffect(() => {
-    const tlPreloader = gsap.timeline({
-      onComplete: () => {
-        if (preloaderRef.current) {
-          preloaderRef.current.style.display = 'none';
-        }
-        setPreloaderDone(true);
-      },
-    });
+    const isMob = window.innerWidth < 768;
+    setIsMobileViewport(isMob);
 
-    // Reveal preloader elements
-    tlPreloader
-      .fromTo(
-        preloaderText1Ref.current,
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }
-      )
-      .fromTo(
-        preloaderImgsRef.current,
-        { opacity: 0, scale: 0.8 },
-        { opacity: 1, scale: 1, duration: 0.5, ease: 'power3.out' },
-        '-=0.3'
-      )
-      // Slide preloader overlay up out of screen
-      .to(preloaderRef.current, {
-        yPercent: -100,
-        duration: 1.0,
-        ease: 'power4.inOut',
-        delay: 0.4,
-      })
-      // Reveal subheadings
-      .fromTo(
+    if (isMob) {
+      setPreloaderDone(true);
+      // Mobile text reveal animation runs immediately
+      gsap.fromTo(
         subHeadingRef.current ? subHeadingRef.current.querySelectorAll('div') : [],
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', stagger: 0.15 },
-        '-=0.2'
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', stagger: 0.12 }
       );
+    } else {
+      // Desktop curtain slide-up preloader animation
+      const tlPreloader = gsap.timeline({
+        onComplete: () => {
+          setPreloaderDone(true);
+        },
+      });
+
+      tlPreloader
+        .fromTo(
+          preloaderText1Ref.current,
+          { opacity: 0, y: 30 },
+          { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }
+        )
+        .fromTo(
+          preloaderImgsRef.current,
+          { opacity: 0, scale: 0.8 },
+          { opacity: 1, scale: 1, duration: 0.5, ease: 'power3.out' },
+          '-=0.3'
+        )
+        .to(preloaderRef.current, {
+          yPercent: -100,
+          duration: 1.0,
+          ease: 'power4.inOut',
+          delay: 0.4,
+        })
+        .fromTo(
+          subHeadingRef.current ? subHeadingRef.current.querySelectorAll('div') : [],
+          { opacity: 0, y: 30 },
+          { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', stagger: 0.15 },
+          '-=0.2'
+        );
+    }
 
     // Register scroll-driven ScrollTriggers in global context
     registerAnimation(() => {
@@ -107,49 +116,51 @@ export const Hero: React.FC = () => {
   return (
     <>
       {/* 1. Black Fullscreen loading preloader */}
-      <div
-        ref={preloaderRef}
-        className="fixed inset-0 z-[100] bg-[#141316] flex flex-col justify-between select-none px-6 md:px-12 py-16"
-      >
-        {/* Top spacer to maintain vertical centering */}
-        <div className="h-16 md:h-20 w-auto"></div>
+      {!preloaderDone && !isMobileViewport && (
+        <div
+          ref={preloaderRef}
+          className="fixed inset-0 z-[100] bg-[#141316] flex flex-col justify-between select-none px-6 md:px-12 py-16"
+        >
+          {/* Top spacer to maintain vertical centering */}
+          <div className="h-16 md:h-20 w-auto"></div>
 
-        {/* Center alignment logo image & cycle image frames */}
-        <div className="flex flex-col items-center justify-center gap-6 w-full max-w-4xl mx-auto flex-1 select-none">
-          {/* Centered Large Original Logo Image */}
-          <div
-            ref={preloaderText1Ref}
-            className="flex items-center justify-center select-none"
-          >
-            <img 
-              src="/logo-white.png" 
-              alt="Ready Homes Logo" 
-              className="w-[60vw] max-w-[360px] h-auto object-contain select-none" 
-            />
-          </div>
-
-          {/* Animated image sequence — using ultra-compressed 2KB thumbnails */}
-          <div
-            ref={preloaderImgsRef}
-            className="relative w-16 h-16 md:w-20 md:h-20 select-none"
-          >
-            {Array.from({ length: 9 }).map((_, idx) => (
-              <img
-                key={idx}
-                src={`/preloader/${idx + 1}.webp`}
-                alt=""
-                className="absolute inset-0 w-full h-full object-cover rounded-[12px] shadow-lg transition-opacity duration-150 ease-out border border-white/10"
-                style={{ opacity: activeFrame === idx ? 1 : 0 }}
+          {/* Center alignment logo image & cycle image frames */}
+          <div className="flex flex-col items-center justify-center gap-6 w-full max-w-4xl mx-auto flex-1 select-none">
+            {/* Centered Large Original Logo Image */}
+            <div
+              ref={preloaderText1Ref}
+              className="flex items-center justify-center select-none"
+            >
+              <img 
+                src="/logo-white.webp" 
+                alt="Ready Homes Logo" 
+                className="w-[60vw] max-w-[360px] h-auto object-contain select-none" 
               />
-            ))}
+            </div>
+
+            {/* Animated image sequence — using ultra-compressed 2KB thumbnails */}
+            <div
+              ref={preloaderImgsRef}
+              className="relative w-16 h-16 md:w-20 md:h-20 select-none"
+            >
+              {Array.from({ length: 9 }).map((_, idx) => (
+                <img
+                  key={idx}
+                  src={`/preloader/${idx + 1}.webp`}
+                  alt=""
+                  className="absolute inset-0 w-full h-full object-cover rounded-[12px] shadow-lg transition-opacity duration-150 ease-out border border-white/10"
+                  style={{ opacity: activeFrame === idx ? 1 : 0 }}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Preloader bottom copyrights */}
+          <div className="text-[10px] md:text-xs font-semibold tracking-wider text-neutral-500 uppercase text-center">
+            © 2026 READY HOMES. ALL RIGHTS RESERVED.
           </div>
         </div>
-
-        {/* Preloader bottom copyrights */}
-        <div className="text-[10px] md:text-xs font-semibold tracking-wider text-neutral-500 uppercase text-center">
-          © 2026 READY HOMES. ALL RIGHTS RESERVED.
-        </div>
-      </div>
+      )}
 
       <section ref={containerRef} id="hero" className="w-full bg-[#141316] relative select-none hero-track max-md:w-screen">
         <FrameScrub

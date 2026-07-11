@@ -203,7 +203,7 @@ export default function FrameScrub({
     
     let cancelled = false;
     let loadedCount = 0;
-    const requiredForReady = 24; // Ready threshold set to 24 frames
+    const requiredForReady = isMobile ? 1 : 24; // Draw canvas immediately on mobile
 
     // Reset caches on parameter/viewport/fallback updates
     compressedBlobs.current.clear();
