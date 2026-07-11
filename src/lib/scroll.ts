@@ -23,10 +23,6 @@ gsap.ticker.add((time) => {
 });
 gsap.ticker.lagSmoothing(0);
 
-// Normalize scroll mechanics on mobile/touch screens to ensure smooth pinning transitions
-if (typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0)) {
-  ScrollTrigger.normalizeScroll({ allowNestedScroll: true });
-}
 
 // Create a single GSAP context for the entire application animations
 export const gsapCtx = gsap.context(() => {});
