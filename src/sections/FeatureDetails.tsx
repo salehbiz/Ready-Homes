@@ -33,7 +33,7 @@ export const FeatureDetails: React.FC = () => {
             */}
             <div className="w-full md:w-[60%] aspect-[4/3] rounded-[24px] md:rounded-[36px] overflow-hidden bg-[#f5f5f7] border border-neutral-200/50 shadow-sm order-2 md:order-1">
               <img
-                src="/tour/house_aerial.jpg"
+                src="/tour/house_aerial.webp"
                 alt="Aerial view of 1159 Diamond"
                 loading="lazy"
                 className="w-full h-full object-cover select-none pointer-events-none"
@@ -64,7 +64,7 @@ export const FeatureDetails: React.FC = () => {
             */}
             <div className="w-full md:w-[60%] aspect-[4/3] rounded-[24px] md:rounded-[36px] overflow-hidden bg-[#f5f5f7] border border-neutral-200/50 shadow-sm order-1 md:order-2">
               <img
-                src="/tour/house_address.jpg"
+                src="/tour/house_address.webp"
                 alt="1159 Diamond Street Address"
                 loading="lazy"
                 className="w-full h-full object-cover select-none pointer-events-none"
