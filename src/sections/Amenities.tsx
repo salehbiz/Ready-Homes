@@ -39,7 +39,7 @@ export const Amenities: React.FC = () => {
       ref={containerRef}
       className="py-16 bg-white overflow-hidden select-none border-b border-neutral-100"
     >
-      <div className="max-w-7xl mx-auto px-6 flex justify-center items-center">
+      <div className="w-full px-6 md:px-12 lg:px-16 flex justify-center items-center">
         {/* Infinite scrolling marquee track */}
         <div className="relative w-full max-w-[800px] overflow-hidden select-none">
           {/* Edge overlays to fade out the marquee boundaries */}

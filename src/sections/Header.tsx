@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, ArrowRight } from 'lucide-react';
 import { lenis, registerAnimation, ScrollTrigger } from '../lib/scroll';
-import { Logo } from '../components/Logo';
+import logoWhite from '../assets/logo-white.png';
 
 export const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -78,8 +78,8 @@ export const Header: React.FC = () => {
         }`}
         style={{ backdropFilter: isScrolled ? 'blur(12px)' : 'none' }}
       >
-        <div className="w-full max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
-          {/* Logo brand (flooring | studio) */}
+        <div className="w-full px-6 md:px-12 lg:px-16 flex items-center justify-between">
+          {/* Logo brand (ready | homes) */}
           <a
             href="#hero"
             onClick={(e) => {
@@ -88,7 +88,7 @@ export const Header: React.FC = () => {
             }}
             className="flex items-center select-none cursor-pointer"
           >
-            <Logo className="h-6 md:h-12 w-auto select-none" color="white" />
+            <img src={logoWhite} alt="Ready Homes Logo" className="h-9 md:h-12 w-auto object-contain select-none" />
           </a>
 
           {/* Center: Navigation capsule (hidden on mobile, visible on desktop) */}

@@ -16,10 +16,7 @@ const App: React.FC = () => {
     // Initialize custom cursor and crisp quality interactions
     initCrispQualityEffects();
 
-    // On mobile, destroy Lenis to allow native scroll snapping to work perfectly
-    if (typeof window !== 'undefined' && window.innerWidth < 768) {
-      lenis.destroy();
-    }
+
 
     return () => {
       // Clean up Lenis instance
@@ -28,7 +25,7 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative w-full bg-white text-neutral-900 antialiased selection:bg-neutral-900 selection:text-white">
+    <div className="relative w-full bg-white text-neutral-900 antialiased selection:bg-neutral-900 selection:text-white" style={{ overflowX: 'clip' }}>
       {/* 1. Sticky Navigation Header */}
       <Header />
 

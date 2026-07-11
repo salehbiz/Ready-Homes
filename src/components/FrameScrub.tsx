@@ -14,13 +14,18 @@ type Props = {
   fallbackFramePath?: (i: number) => string; // fallback path if the main path fails (e.g. for HQ tier)
   pathKey?: string;                          // stable key representing the path/tier (to prevent inline function re-runs)
   containOnMobile?: boolean;                 // if true, use contain mode on mobile to avoid cropping landscape frames
+  focalX?: number;
+  focalY?: number;
+  mobileFocalX?: number;
+  mobileFocalY?: number;
+  zoomOnMobile?: boolean;
 };
 
 const LERP = 0.18;        // Snappy interpolation
 const CONCURRENCY = 6;    // Max parallel loads — restored to 6 as specced
 
 export default function FrameScrub({
-  frameCount, framePath, poster, className, scrollLengthVh = 400, children, onProgress, eager = false, tierResolved = true, fallbackFramePath, pathKey = '', containOnMobile = false
+  frameCount, framePath, poster, className, scrollLengthVh = 400, children, onProgress, eager = false, tierResolved = true, fallbackFramePath, pathKey = '', containOnMobile = false, focalX = 0.5, focalY = 0.5, mobileFocalX, mobileFocalY, zoomOnMobile = false
 }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -45,12 +50,23 @@ export default function FrameScrub({
   const onProgressRef = useRef(onProgress);
   onProgressRef.current = onProgress;
 
-  // Store function props in refs to completely decouple preloader lifecycle from identity changes
+  // Store function props and focal properties in refs to completely decouple preloader lifecycle from identity changes
   const framePathRef = useRef(framePath);
   framePathRef.current = framePath;
 
   const fallbackFramePathRef = useRef(fallbackFramePath);
   fallbackFramePathRef.current = fallbackFramePath;
+
+  const focalXRef = useRef(focalX);
+  focalXRef.current = focalX;
+  const focalYRef = useRef(focalY);
+  focalYRef.current = focalY;
+  const mobileFocalXRef = useRef(mobileFocalX);
+  mobileFocalXRef.current = mobileFocalX;
+  const mobileFocalYRef = useRef(mobileFocalY);
+  mobileFocalYRef.current = mobileFocalY;
+
+  const [supportsSvh] = useState(() => typeof CSS !== 'undefined' && CSS.supports && CSS.supports('height', '100svh'));
 
   // Reset fallback and transition state when the path key changes (stable tier change)
   useEffect(() => {
@@ -270,16 +286,12 @@ export default function FrameScrub({
     };
   }, [visible, frameCount, isMobile, tierResolved, reduced, isFallenBack]);
 
-  // GSAP ScrollTrigger pin — this is the key: pin the section and
-  // use ScrollTrigger progress to drive frame target
+  // GSAP ScrollTrigger pin — unified for all viewports (desktop and mobile pin identically)
   useEffect(() => {
     const track = trackRef.current;
     if (!track) return;
 
-    const mm = gsap.matchMedia();
-
-    // Desktop layout stays exactly as-is
-    mm.add('(min-width: 768px)', () => {
+    const ctx = gsap.context(() => {
       ScrollTrigger.create({
         trigger: track,
         start: 'top top',
@@ -296,34 +308,41 @@ export default function FrameScrub({
           }
         },
       });
-    });
-
-    // Mobile layout: no pinning, just scrub as the section scrolls through viewport
-    mm.add('(max-width: 767px)', () => {
-      const rect = track.getBoundingClientRect();
-      const isAtTop = (rect.top + window.scrollY) < 100;
-      
-      ScrollTrigger.create({
-        trigger: track,
-        start: isAtTop ? 'top top' : 'top bottom',
-        end: 'bottom top',
-        scrub: 0,
-        onUpdate: (self) => {
-          const progress = self.progress;
-          target.current = 1 + progress * (frameCount - 1);
-          if (onProgressRef.current) {
-            onProgressRef.current(progress, Math.round(target.current));
-          }
-        },
-      });
-    });
+    }, track);
 
     const timer = setTimeout(() => ScrollTrigger.refresh(), 300);
     return () => { 
       clearTimeout(timer); 
-      mm.revert(); 
+      ctx.revert(); 
     };
   }, [frameCount, scrollLengthVh]);
+
+  // ScrollTrigger refresh after the first frame has successfully rendered
+  useEffect(() => {
+    if (firstFrameDrawn) {
+      ScrollTrigger.refresh();
+    }
+  }, [firstFrameDrawn]);
+
+  // Debounced ScrollTrigger refresh on orientation change or window resize
+  useEffect(() => {
+    let debounceTimer: number;
+    const handleResizeOrOrientation = () => {
+      clearTimeout(debounceTimer);
+      debounceTimer = window.setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 250);
+    };
+
+    window.addEventListener('resize', handleResizeOrOrientation);
+    window.addEventListener('orientationchange', handleResizeOrOrientation);
+
+    return () => {
+      clearTimeout(debounceTimer);
+      window.removeEventListener('resize', handleResizeOrOrientation);
+      window.removeEventListener('orientationchange', handleResizeOrOrientation);
+    };
+  }, []);
 
   // Find nearest available frame
   const findNearestFrame = useCallback((frame: number): number | null => {
@@ -415,6 +434,10 @@ export default function FrameScrub({
       const ir = bmp.width / bmp.height;
       
       let dw, dh, dx, dy;
+
+      const isMob = window.innerWidth < 768;
+      const fx = (isMob && mobileFocalXRef.current !== undefined) ? mobileFocalXRef.current : focalXRef.current;
+      const fy = (isMob && mobileFocalYRef.current !== undefined) ? mobileFocalYRef.current : focalYRef.current;
       
       if (containOnMobile && isMobile) {
         // Contain logic: show whole image, letterbox remaining canvas space
@@ -434,13 +457,13 @@ export default function FrameScrub({
         if (ir > cr) {
           dh = canvas.height;
           dw = dh * ir;
-          dx = (canvas.width - dw) / 2;
+          dx = (canvas.width - dw) * fx;
           dy = 0;
         } else {
           dw = canvas.width;
           dh = dw / ir;
           dx = 0;
-          dy = (canvas.height - dh) / 2;
+          dy = (canvas.height - dh) * fy;
         }
       }
       
@@ -487,20 +510,20 @@ export default function FrameScrub({
   return (
     <div 
       ref={trackRef} 
-      className={`${className || ''} max-md:h-[100dvh] max-md:min-h-[100dvh] max-md:w-screen max-md:overflow-hidden max-md:relative`} 
+      className={`${className || ''} max-md:w-screen max-md:relative`} 
       style={{ position: 'relative' }}
     >
       <div 
         ref={stickyRef} 
         style={{ 
-          height: isMobile ? '100dvh' : '100vh', 
+          height: supportsSvh ? '100svh' : '100vh', 
           overflow: 'hidden', 
           position: 'relative',
           width: isMobile ? '100vw' : 'auto'
         }}
       >
         {reduced
-          ? <img src={poster} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'contrast(1.04) saturate(1.06) brightness(1.01)' }} />
+          ? <img src={poster} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', transform: (zoomOnMobile && isMobile) ? 'scale(1.1) translateZ(0)' : 'translateZ(0)', filter: 'contrast(1.04) saturate(1.06) brightness(1.01)' }} />
           : <>
               <canvas 
                 ref={canvasRef} 
@@ -513,7 +536,7 @@ export default function FrameScrub({
                   opacity: firstFrameDrawn ? 1 : 0,
                   transition: 'opacity 0.4s ease-out',
                   display: 'block',
-                  transform: 'translateZ(0)',
+                  transform: (zoomOnMobile && isMobile) ? 'scale(1.1) translateZ(0)' : 'translateZ(0)',
                   filter: 'contrast(1.04) saturate(1.06) brightness(1.01)'
                 }} 
               />
@@ -530,6 +553,7 @@ export default function FrameScrub({
                   transition: 'opacity 0.4s ease-out',
                   pointerEvents: 'none',
                   display: 'block',
+                  transform: (zoomOnMobile && isMobile) ? 'scale(1.1) translateZ(0)' : 'translateZ(0)',
                   filter: 'contrast(1.04) saturate(1.06) brightness(1.01)'
                 }} 
               />

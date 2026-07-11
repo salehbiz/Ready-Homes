@@ -77,7 +77,7 @@ export const VideoSection: React.FC = () => {
 
   return (
     <section ref={sectionRef} className="w-full bg-[#f8f8fa] py-16 md:py-24 select-none">
-      <div className="max-w-7xl mx-auto px-6 select-none flex flex-col items-center gap-8 md:gap-12">
+      <div className="w-full px-6 md:px-12 lg:px-16 select-none flex flex-col items-center gap-8 md:gap-12">
         
         {/* Centered Heading */}
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 hero-text-font uppercase text-center">

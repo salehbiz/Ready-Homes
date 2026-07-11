@@ -33,7 +33,7 @@ export const ContactSection: React.FC = () => {
 
   return (
     <section id="contact-form-section" className="w-full bg-[#f8f8fa] py-12 md:py-28 select-none">
-      <div className="max-w-7xl mx-auto px-4 md:px-6 select-none">
+      <div className="w-full px-6 md:px-12 lg:px-16 select-none">
         
         {/* Contact Container Card */}
         <div className="bg-white border border-neutral-200 rounded-[24px] md:rounded-[48px] overflow-hidden p-4 md:p-12 lg:p-16 shadow-sm select-none">
