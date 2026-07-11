@@ -5,10 +5,23 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Ready Homes — Premium architecture, custom modern design, and luxury features crafted for the spaces you love." />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <title>Ready Homes</title>
+    <!-- Preload Hero Posters for LCP -->
+    <link rel="preload" as="image" href="/frames/hero-poster.webp" media="(min-width: 768px)" fetchpriority="high" />
+    <link rel="preload" as="image" href="/frames/hero-poster-mobile.webp" media="(max-width: 767px)" fetchpriority="high" />
+
+    <!-- Preload Headline Fonts -->
+    <link rel="preload" href="/fonts/inter-tight-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/inter-tight-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!-- Open Graph / Meta -->
+    <meta property="og:title" content="1159 Diamond St — Ready Homes" />
+    <meta property="og:description" content="Ready Homes — Premium architecture, custom modern design, and luxury features crafted for the spaces you love." />
+    <!-- Update og:image host when moving to the final production domain -->
+    <meta property="og:image" content="https://ready-homes-psi.vercel.app/frames/hero-poster.webp" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <title>1159 Diamond St — Ready Homes</title>
   </head>
   <body>
     <div id="root"></div>

@@ -5,6 +5,8 @@ type Props = {
   frameCount: number;
   framePath: (i: number) => string;        // 1-indexed
   poster: string;
+  posterMobile?: string;
+  isHero?: boolean;
   className?: string;
   scrollLengthVh?: number;                  // scroll track length, default 300
   children?: React.ReactNode;
@@ -25,7 +27,7 @@ const LERP = 0.18;        // Snappy interpolation
 const CONCURRENCY = 6;    // Max parallel loads — restored to 6 as specced
 
 export default function FrameScrub({
-  frameCount, framePath, poster, className, scrollLengthVh = 400, children, onProgress, eager = false, tierResolved = true, fallbackFramePath, pathKey = '', containOnMobile = false, focalX = 0.5, focalY = 0.5, mobileFocalX, mobileFocalY, zoomOnMobile = false
+  frameCount, framePath, poster, posterMobile, isHero = false, className, scrollLengthVh = 400, children, onProgress, eager = false, tierResolved = true, fallbackFramePath, pathKey = '', containOnMobile = false, focalX = 0.5, focalY = 0.5, mobileFocalX, mobileFocalY, zoomOnMobile = false
 }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -75,6 +77,27 @@ export default function FrameScrub({
   }, [pathKey]);
 
   const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth < 768);
+
+  const activePoster = (isMobile && posterMobile) ? posterMobile : poster;
+
+  const [pumpAllowed, setPumpAllowed] = useState(false);
+  const fetchCountRef = useRef(0);
+  const posterImgRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    if (posterImgRef.current?.complete) {
+      setPumpAllowed(true);
+      return;
+    }
+    const timer = setTimeout(() => {
+      setPumpAllowed(true);
+    }, 300);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handlePosterLoad = useCallback(() => {
+    setPumpAllowed(true);
+  }, []);
 
   const lastWidth = useRef(typeof window !== 'undefined' ? window.innerWidth : 1200);
   const lastHeight = useRef(typeof window !== 'undefined' ? window.innerHeight : 800);
@@ -176,7 +199,7 @@ export default function FrameScrub({
 
   // Highly optimized HTTP/2 Image Preloader using Blob fetching
   useEffect(() => {
-    if (!visible || !tierResolved || reduced) return;
+    if (!visible || !tierResolved || reduced || !pumpAllowed) return;
     
     let cancelled = false;
     let loadedCount = 0;
@@ -188,6 +211,7 @@ export default function FrameScrub({
     decodedBitmaps.current.clear();
     fetchedOrInFlight.current.clear();
     decodingFrames.current.clear();
+    fetchCountRef.current = 0; // Reset fetch counter
     setReady(false);
 
     // We generate an optimized loading order: spread out first, then fill in the gaps (Stride loading)
@@ -249,7 +273,16 @@ export default function FrameScrub({
           ? fallbackFramePathRef.current(currentFrame) 
           : framePathRef.current(currentFrame);
 
-        fetch(targetPath)
+        const fetchOptions: RequestInit = {};
+        if (isHero) {
+          if (fetchCountRef.current < 24) {
+            // @ts-ignore
+            fetchOptions.priority = 'low';
+          }
+          fetchCountRef.current++;
+        }
+
+        fetch(targetPath, fetchOptions)
           .then(res => {
             if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
             return res.blob();
@@ -284,7 +317,7 @@ export default function FrameScrub({
       cancelled = true; 
       pumpRef.current = undefined;
     };
-  }, [visible, frameCount, isMobile, tierResolved, reduced, isFallenBack]);
+  }, [visible, frameCount, isMobile, tierResolved, reduced, isFallenBack, pumpAllowed, isHero]);
 
   // GSAP ScrollTrigger pin — unified for all viewports (desktop and mobile pin identically)
   useEffect(() => {
@@ -523,7 +556,16 @@ export default function FrameScrub({
         }}
       >
         {reduced
-          ? <img src={poster} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', transform: (zoomOnMobile && isMobile) ? 'scale(1.1) translateZ(0)' : 'translateZ(0)', filter: 'contrast(1.04) saturate(1.06) brightness(1.01)' }} />
+          ? <img
+              ref={posterImgRef}
+              src={activePoster}
+              onLoad={handlePosterLoad}
+              // @ts-ignore
+              fetchPriority="high"
+              decoding="async"
+              alt=""
+              style={{ width: '100%', height: '100%', objectFit: 'cover', transform: (zoomOnMobile && isMobile) ? 'scale(1.1) translateZ(0)' : 'translateZ(0)', filter: 'contrast(1.04) saturate(1.06) brightness(1.01)' }}
+            />
           : <>
               <canvas 
                 ref={canvasRef} 
@@ -541,7 +583,12 @@ export default function FrameScrub({
                 }} 
               />
               <img 
-                src={poster} 
+                ref={posterImgRef}
+                src={activePoster}
+                onLoad={handlePosterLoad}
+                // @ts-ignore
+                fetchPriority="high"
+                decoding="async"
                 alt="" 
                 style={{ 
                   position: 'absolute', 

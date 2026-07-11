@@ -157,7 +157,9 @@ export const Hero: React.FC = () => {
           frameCount={150}
           framePath={framePath}
           fallbackFramePath={tier && tier.dir === 'desktop-hq' ? fallbackFramePath : undefined}
-          poster="/frames/hero/desktop/0001.webp"
+          poster="/frames/hero-poster.webp"
+          posterMobile="/frames/hero-poster-mobile.webp"
+          isHero
           scrollLengthVh={200}
           className="w-full hero-sticky max-md:w-screen"
           eager

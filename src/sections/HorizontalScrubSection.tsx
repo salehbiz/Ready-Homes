@@ -137,7 +137,6 @@ export const HorizontalScrubSection: React.FC = () => {
         className="w-full max-md:w-screen"
         onProgress={handleProgress}
         containOnMobile={false}
-        eager
         tierResolved={!!tier}
         pathKey={tier ? tier.dir : ''}
       >
