@@ -62,46 +62,6 @@ export const HorizontalScrubSection: React.FC = () => {
     }
   ];
 
-  const getRoomStyles = (idx: number, isMobile: boolean) => {
-    const numRooms = rooms.length;
-    const center = (idx + 0.5) / numRooms;
-    const step = 1 / numRooms;
-    
-    // Distance in step units
-    const relativeDist = (progress - center) / step;
-    const absDist = Math.abs(relativeDist);
-    
-    let opacity = 0;
-    if (absDist <= 0.35) {
-      opacity = 1;
-    } else if (absDist >= 0.75) {
-      opacity = 0;
-    } else {
-      const t = (absDist - 0.35) / (0.75 - 0.35);
-      opacity = 1 - (3 * t * t - 2 * t * t * t);
-    }
-    
-    // Boundary clamps to keep first/last solid at the limits
-    if (idx === 0 && progress <= center) {
-      opacity = 1;
-    }
-    if (idx === numRooms - 1 && progress >= center) {
-      opacity = 1;
-    }
-    
-    const maxShift = isMobile ? 12 : 20;
-    const clampedDist = Math.max(-1, Math.min(1, relativeDist));
-    const translateY = -clampedDist * maxShift;
-    
-    return {
-      opacity,
-      transform: `translateY(${translateY}px) translateZ(0)`,
-      pointerEvents: opacity > 0.5 ? ('auto' as const) : ('none' as const),
-      visibility: opacity > 0 ? ('visible' as const) : ('hidden' as const),
-      transition: 'opacity 0.4s ease-out, transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)',
-    };
-  };
-
   return (
     <section id="horizontal-scrub" className="w-full bg-[#141316] relative select-none max-md:w-screen">
       <FrameScrub
@@ -135,50 +95,78 @@ export const HorizontalScrubSection: React.FC = () => {
                minHeight: '220px'
              }}
         >
-          <div className="relative w-full h-[130px]">
+          <div className="relative w-full h-[130px] overflow-hidden">
+            <div 
+              className="w-full flex flex-col"
+              style={{ 
+                transform: `translate3d(0, ${-progress * (rooms.length - 1) * 130}px, 0)`,
+                transition: 'transform 0.35s cubic-bezier(0.16, 1, 0.3, 1)'
+              }}
+            >
+              {rooms.map((room, idx) => {
+                const center = idx / (rooms.length - 1);
+                const dist = Math.abs(progress - center);
+                const opacity = Math.max(0, 1 - dist * (rooms.length - 1));
+                return (
+                  <div
+                    key={idx}
+                    className="w-full h-[130px] flex flex-col text-left justify-end pb-1"
+                    style={{
+                      opacity,
+                      transition: 'opacity 0.2s ease-out'
+                    }}
+                  >
+                    <span className="text-[10px] font-bold tracking-widest text-white/50 uppercase block mb-1">
+                      Space {idx + 1} of 8
+                    </span>
+                    <h3 className="text-[2rem] font-bold text-white tracking-tight leading-tight hero-text-font mb-2 uppercase">
+                      {room.title}
+                    </h3>
+                    <p className="text-sm text-white/70 font-medium leading-relaxed max-w-sm">
+                      {room.desc}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* Desktop Info Overlay */}
+        <div className="hidden md:block absolute bottom-16 left-16 z-30 w-full max-w-md h-[180px] overflow-hidden pointer-events-none">
+          <div 
+            className="w-full flex flex-col"
+            style={{ 
+              transform: `translate3d(0, ${-progress * (rooms.length - 1) * 180}px, 0)`,
+              transition: 'transform 0.35s cubic-bezier(0.16, 1, 0.3, 1)'
+            }}
+          >
             {rooms.map((room, idx) => {
+              const center = idx / (rooms.length - 1);
+              const dist = Math.abs(progress - center);
+              const opacity = Math.max(0, 1 - dist * (rooms.length - 1));
               return (
                 <div
                   key={idx}
-                  className="absolute inset-x-0 bottom-0 flex flex-col text-left"
-                  style={getRoomStyles(idx, true)}
+                  className="w-full h-[180px] flex flex-col gap-2 text-left justify-end pb-1"
+                  style={{
+                    opacity,
+                    transition: 'opacity 0.2s ease-out'
+                  }}
                 >
-                  <span className="text-[10px] font-bold tracking-widest text-white/50 uppercase block mb-1">
+                  <span className="text-[10px] font-bold tracking-widest text-white/50 uppercase">
                     Space {idx + 1} of 8
                   </span>
-                  <h3 className="text-[2rem] font-bold text-white tracking-tight leading-tight hero-text-font mb-2 uppercase">
+                  <h3 className="text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.1] uppercase">
                     {room.title}
                   </h3>
-                  <p className="text-sm text-white/70 font-medium leading-relaxed max-w-sm">
+                  <p className="text-sm text-white/50 font-medium leading-relaxed max-w-xs mt-1">
                     {room.desc}
                   </p>
                 </div>
               );
             })}
           </div>
-        </div>
-
-        {/* Desktop Info Overlay */}
-        <div className="hidden md:block absolute bottom-16 left-16 z-30 w-full max-w-md h-[180px] pointer-events-none">
-          {rooms.map((room, idx) => {
-            return (
-              <div
-                key={idx}
-                className="absolute inset-x-0 bottom-0 flex flex-col gap-2 text-left"
-                style={getRoomStyles(idx, false)}
-              >
-                <span className="text-[10px] font-bold tracking-widest text-white/50 uppercase">
-                  Space {idx + 1} of 8
-                </span>
-                <h3 className="text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.1]">
-                  {room.title}
-                </h3>
-                <p className="text-sm text-white/50 font-medium leading-relaxed max-w-xs mt-1">
-                  {room.desc}
-                </p>
-              </div>
-            );
-          })}
         </div>
 
         {/* Scroll hint — bottom center, fades out as you scroll */}
