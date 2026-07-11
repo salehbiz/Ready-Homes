@@ -170,8 +170,7 @@ export const InfoBlocks: React.FC = () => {
             <div
               key={idx}
               ref={(el) => { if (el) workRefs.current.push(el); }}
-              className="flex-shrink-0 w-[85vw] md:w-[640px] flex flex-col gap-6 select-none"
-              style={{ scrollSnapAlign: 'start' }}
+              className="flex-shrink-0 w-[80vw] md:w-[640px] flex flex-col gap-6 featured-card-item"
             >
               {/* Image card */}
               <div className="w-full aspect-[4/3] rounded-[24px] md:rounded-[32px] overflow-hidden bg-[#f5f5f7] relative border border-neutral-100 select-none">
@@ -203,8 +202,8 @@ export const InfoBlocks: React.FC = () => {
         {/* Responsive padding and scrollbar hider */}
         <style dangerouslySetInnerHTML={{__html: `
           .featured-scroll-container {
-            padding-left: 1.5rem;
-            padding-right: 1.5rem;
+            padding-left: 10vw;
+            padding-right: 10vw;
             touch-action: pan-x pan-y;
           }
           @media (min-width: 768px) {
@@ -217,6 +216,14 @@ export const InfoBlocks: React.FC = () => {
             .featured-scroll-container {
               padding-left: 4rem;
               padding-right: 4rem;
+            }
+          }
+          .featured-card-item {
+            scroll-snap-align: center;
+          }
+          @media (min-width: 768px) {
+            .featured-card-item {
+              scroll-snap-align: start;
             }
           }
           .scrollbar-hide::-webkit-scrollbar {
