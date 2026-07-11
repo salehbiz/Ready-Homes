@@ -277,6 +277,9 @@ export default function FrameScrub({
         if (isHero) {
           if (fetchCountRef.current < 24) {
             // @ts-ignore
+            fetchOptions.priority = 'high';
+          } else {
+            // @ts-ignore
             fetchOptions.priority = 'low';
           }
           fetchCountRef.current++;

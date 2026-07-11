@@ -102,30 +102,6 @@ export const HorizontalScrubSection: React.FC = () => {
     };
   };
 
-  const getBlackFadeOpacity = (prog: number) => {
-    const numRooms = rooms.length;
-    const firstCenter = 0.5 / numRooms;
-    const lastCenter = (numRooms - 0.5) / numRooms;
-    if (prog < firstCenter || prog > lastCenter) {
-      return 0;
-    }
-
-    const relativePos = prog * numRooms;
-    const fraction = relativePos - Math.floor(relativePos);
-    const distFromCenter = Math.abs(fraction - 0.5);
-    
-    const fadeThreshold = 0.35;
-    if (distFromCenter <= fadeThreshold) {
-      return 0;
-    }
-    
-    const t = (distFromCenter - fadeThreshold) / (0.5 - fadeThreshold);
-    const smoothT = 3 * t * t - 2 * t * t * t;
-    
-    const maxOpacity = 0.85;
-    return smoothT * maxOpacity;
-  };
-
   return (
     <section id="horizontal-scrub" className="w-full bg-[#141316] relative select-none max-md:w-screen">
       <FrameScrub
@@ -142,15 +118,6 @@ export const HorizontalScrubSection: React.FC = () => {
       >
         {/* Dark gradient overlays for text readability */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30 pointer-events-none" />
-
-        {/* Cinematic black transition overlay */}
-        <div 
-          className="absolute inset-0 bg-black pointer-events-none z-10"
-          style={{ 
-            opacity: getBlackFadeOpacity(progress),
-            transition: 'opacity 0.15s linear'
-          }}
-        />
 
         {/* Progress bar at the very top */}
         <div className="absolute top-0 left-0 w-full h-[3px] z-50 bg-white/10">

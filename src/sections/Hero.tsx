@@ -3,7 +3,6 @@ import { registerAnimation, gsap, lenis } from '../lib/scroll';
 import FrameScrub from '../components/FrameScrub';
 import { ArrowRight } from 'lucide-react';
 import { getFrameTier, type FrameTier } from '../lib/frameTier';
-import logoWhite from '../assets/logo-white.png';
 
 export const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -123,7 +122,7 @@ export const Hero: React.FC = () => {
             className="flex items-center justify-center select-none"
           >
             <img 
-              src={logoWhite} 
+              src="/logo-white.png" 
               alt="Ready Homes Logo" 
               className="w-[60vw] max-w-[360px] h-auto object-contain select-none" 
             />
