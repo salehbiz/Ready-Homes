@@ -1,9 +1,27 @@
 import React, { useState, useCallback } from 'react';
 import FrameScrub from '../components/FrameScrub';
+import { getFrameTier, type FrameTier } from '../lib/frameTier';
 
 export const HorizontalScrubSection: React.FC = () => {
   const [progress, setProgress] = useState(0);
+  const [tier] = useState<FrameTier>(getFrameTier);
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
+  const framePath = useCallback(
+    (i: number) => {
+      return tier ? `/frames/section3/${tier.dir}/${String(i).padStart(4, '0')}.${tier.ext}` : '';
+    },
+    [tier]
+  );
+
+  const fallbackFramePath = useCallback(
+    (i: number) => {
+      return tier && tier.dir === 'desktop-hq'
+        ? `/frames/section3/desktop/${String(i).padStart(4, '0')}.webp`
+        : '';
+    },
+    [tier]
+  );
 
   const handleProgress = useCallback((prog: number) => {
     setProgress(prog);
@@ -13,13 +31,16 @@ export const HorizontalScrubSection: React.FC = () => {
     <section id="horizontal-scrub" className="w-full bg-[#141316] relative select-none max-md:h-[100dvh] max-md:min-h-[100dvh] max-md:w-screen max-md:overflow-hidden">
       <FrameScrub
         frameCount={120}
-        framePath={(i) => `/frames/section3/${String(i).padStart(4, '0')}.webp`}
+        framePath={framePath}
+        fallbackFramePath={tier && tier.dir === 'desktop-hq' ? fallbackFramePath : undefined}
         poster="/frames/section3-poster.webp"
         scrollLengthVh={isMobile ? 100 : 500}
         className="w-full max-md:h-[100dvh] max-md:min-h-[100dvh] max-md:w-screen max-md:overflow-hidden"
         onProgress={handleProgress}
         containOnMobile={false}
         eager
+        tierResolved={!!tier}
+        pathKey={tier ? tier.dir : ''}
       >
         {/* Dark gradient overlays for text readability */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30 pointer-events-none" />

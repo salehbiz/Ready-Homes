@@ -1,0 +1,16 @@
+{
+  "sourceVideo": "Hero Section Final VIdeo.mp4",
+  "durationSeconds": 10.041667,
+  "desktop": {
+    "frameCount": 150,
+    "directory": "/Users/apple/Documents/Projects/Ready Homes/public/frames/hero/desktop",
+    "pathTemplate": "/frames/hero/desktop/{index}.webp",
+    "dimensions": "2560x1440"
+  },
+  "mobile": {
+    "frameCount": 150,
+    "directory": "/Users/apple/Documents/Projects/Ready Homes/public/frames/hero/mobile",
+    "pathTemplate": "/frames/hero/mobile/{index}.webp",
+    "dimensions": "750x1334"
+  }
+}
