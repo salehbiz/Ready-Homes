@@ -1,10 +1,23 @@
-/node_modules
-/dist
-/Hero
-/Section 2
-/Section 3
-.git
-.DS_Store
-.vercel
-.agent
-.agents
+# Node modules & build
+/node_modules/
+/dist/
+
+# Intermediate frame directories
+/s2-tmp/
+/s2-sharp/
+/s3-tmp/
+/s3-sharp/
+/s2-halo-check.png
+/s3-halo-check.png
+
+# Raw source video folders at root
+/Section 2/
+/Section 3/
+/Hero/
+
+# Core temp assets
+/tmp/
+/sharp/
+/desktop-hq-final/
+/halo-check.png
+/first-last-check.png
