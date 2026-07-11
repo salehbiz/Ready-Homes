@@ -1,6 +1,6 @@
 export type FrameTier = {
   dir: 'desktop-hq' | 'desktop' | 'mobile';
-  ext: 'webp';
+  ext: 'webp' | 'avif';
 };
 
 export function getFrameTier(): FrameTier {
@@ -10,7 +10,7 @@ export function getFrameTier(): FrameTier {
   const slowConn =
     conn?.effectiveType === '3g' || (conn?.downlink && conn.downlink < 3);
 
-  if (w < 768) return { dir: 'mobile', ext: 'webp' };
+  if (w < 768) return { dir: 'mobile', ext: 'avif' };
 
   if (dpr >= 1.25 && !slowConn) {
     return { dir: 'desktop-hq', ext: 'webp' };
