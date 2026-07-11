@@ -160,7 +160,7 @@ export const InfoBlocks: React.FC = () => {
         {/* Snapping horizontal scroll view container */}
         <div 
           ref={scrollRef}
-          className="featured-scroll-container flex gap-6 overflow-x-auto pb-8 select-none scrollbar-hide"
+          className="featured-scroll-container flex gap-6 overflow-x-auto pb-8 scrollbar-hide"
           style={{
             scrollSnapType: 'x mandatory',
             WebkitOverflowScrolling: 'touch',
@@ -205,7 +205,7 @@ export const InfoBlocks: React.FC = () => {
           .featured-scroll-container {
             padding-left: 1.5rem;
             padding-right: 1.5rem;
-            touch-action: pan-x;
+            touch-action: pan-x pan-y;
           }
           @media (min-width: 768px) {
             .featured-scroll-container {
@@ -225,7 +225,7 @@ export const InfoBlocks: React.FC = () => {
           .scrollbar-hide {
             -ms-overflow-style: none;
             scrollbar-width: none;
-            touch-action: pan-x;
+            touch-action: pan-x pan-y;
           }
         `}} />
       </section>

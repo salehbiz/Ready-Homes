@@ -294,7 +294,7 @@ export const CloserLookTour: React.FC = () => {
 
           {/* Horizontally scrollable chips stack at bottom of container */}
           <div 
-            className="flex gap-2.5 overflow-x-auto py-4 px-6 select-none scrollbar-hide"
+            className="flex gap-2.5 overflow-x-auto py-4 px-6 scrollbar-hide"
           >
             {features.map((item) => {
               const isActive = activeId === item.id && (item.id === 'community' ? !isMobileDetailOpen : isMobileDetailOpen);
