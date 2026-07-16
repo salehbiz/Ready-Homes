@@ -13,7 +13,7 @@ export function getFrameTier(): FrameTier {
   if (w < 768) return { dir: 'mobile', ext: 'avif' };
 
   if (dpr >= 1.25 && !slowConn) {
-    return { dir: 'desktop-hq', ext: 'webp' };
+    return { dir: 'desktop-hq', ext: 'avif' };
   }
   return { dir: 'desktop', ext: 'webp' };
 }
