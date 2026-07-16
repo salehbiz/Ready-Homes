@@ -39,9 +39,9 @@ s2-halo-check.png
 s3-halo-check.png
 
 # Source raw videos (tracked historically but removed from index)
-Hero/
-Section 2/
-Section 3/
+/Hero/
+/Section 2/
+/Section 3/
 
 # Crop previews
 mobile-crop-preview-*.png
