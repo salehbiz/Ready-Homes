@@ -29,18 +29,6 @@ export const HorizontalScrubSection: React.FC = () => {
 
   const rooms = [
     {
-      title: "Living Room",
-      desc: "An open-concept, light-filled lounge featuring expansive windows and bespoke architecture, providing a grand setting for relaxation."
-    },
-    {
-      title: "Kitchen",
-      desc: "A gourmet chef's dream equipped with built-in professional appliances, custom millwork cabinets, and a massive marble center island."
-    },
-    {
-      title: "Stairs",
-      desc: "A floating architectural staircase that links the ground level with private quarters, showing structural elegance and clean modern geometry."
-    },
-    {
       title: "Master Bedroom",
       desc: "A quiet penthouse retreat that catches beautiful morning light, complete with double walk-in wardrobes and tree-lined neighborhood views."
     },
@@ -49,18 +37,24 @@ export const HorizontalScrubSection: React.FC = () => {
       desc: "A spa-like oasis designed with premium stone cladding, double oak vanities, a freestanding soaking tub, and custom brass hardware."
     },
     {
+      title: "Kitchen",
+      desc: "A gourmet chef's dream equipped with built-in professional appliances, custom millwork cabinets, and a massive marble center island."
+    },
+    {
       title: "Spa & Sauna",
       desc: "A dedicated wellness wing featuring a private cedar sauna, steam shower, and a lounge area designed for home rejuvenation."
     },
     {
-      title: "Pool",
-      desc: "A heated infinity-edge pool bordered by limestone paving and designer landscaping, ideal for outdoor dining and pool parties."
-    },
-    {
       title: "Cinema Room",
       desc: "An acoustically-optimized private theatre room featuring plush custom seating and state-of-the-art immersive sound setup."
+    },
+    {
+      title: "Backyard",
+      desc: "An expansive outdoor retreat featuring custom stone-paved lounge decks, designer landscaping, and a heated pool ideal for al fresco dining."
     }
   ];
+
+  const activeIdx = Math.round(progress * (rooms.length - 1));
 
   return (
     <section id="horizontal-scrub" className="w-full bg-[#141316] relative select-none max-md:w-screen">
@@ -95,72 +89,29 @@ export const HorizontalScrubSection: React.FC = () => {
                minHeight: '220px'
              }}
         >
-          <div className="relative w-full h-[130px] overflow-hidden">
-            <div 
-              className="w-full flex flex-col"
-              style={{ 
-                transform: `translate3d(0, ${-progress * (rooms.length - 1) * 130}px, 0)`,
-                transition: 'transform 0.35s cubic-bezier(0.16, 1, 0.3, 1)'
-              }}
-            >
-              {rooms.map((room, idx) => {
-                const center = idx / (rooms.length - 1);
-                const dist = Math.abs(progress - center);
-                const opacity = Math.max(0, 1 - dist * (rooms.length - 1));
-                return (
-                  <div
-                    key={idx}
-                    className="w-full h-[130px] flex flex-col text-left justify-end pb-1"
-                    style={{
-                      opacity,
-                      transition: 'opacity 0.2s ease-out'
-                    }}
-                  >
-                    <span className="text-[10px] font-bold tracking-widest text-white/50 uppercase block mb-1">
-                      Space {idx + 1} of 8
-                    </span>
-                    <h3 className="text-[2rem] font-bold text-white tracking-tight leading-tight hero-text-font mb-2 uppercase">
-                      {room.title}
-                    </h3>
-                    <p className="text-sm text-white/70 font-medium leading-relaxed max-w-sm">
-                      {room.desc}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-
-        {/* Desktop Info Overlay */}
-        <div className="hidden md:block absolute bottom-16 left-16 z-30 w-full max-w-md h-[180px] overflow-hidden pointer-events-none">
-          <div 
-            className="w-full flex flex-col"
-            style={{ 
-              transform: `translate3d(0, ${-progress * (rooms.length - 1) * 180}px, 0)`,
-              transition: 'transform 0.35s cubic-bezier(0.16, 1, 0.3, 1)'
-            }}
-          >
+          <div className="relative w-full h-[130px]">
             {rooms.map((room, idx) => {
-              const center = idx / (rooms.length - 1);
-              const dist = Math.abs(progress - center);
-              const opacity = Math.max(0, 1 - dist * (rooms.length - 1));
+              const isActive = idx === activeIdx;
               return (
                 <div
                   key={idx}
-                  className="w-full h-[180px] flex flex-col gap-2 text-left justify-end pb-1"
+                  className="w-full h-full flex flex-col text-left justify-end pb-1"
                   style={{
-                    opacity,
-                    transition: 'opacity 0.2s ease-out'
+                    opacity: isActive ? 1 : 0,
+                    transform: isActive ? 'translate3d(0, 0, 0)' : 'translate3d(0, 15px, 0)',
+                    transition: 'opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), transform 0.6s cubic-bezier(0.25, 1, 0.5, 1)',
+                    position: 'absolute',
+                    inset: 0,
+                    pointerEvents: isActive ? 'auto' : 'none'
                   }}
                 >
-                  <span className="text-[10px] font-bold tracking-widest text-white/50 uppercase">
-                    Space {idx + 1} of 8
+                  <span className="text-[10px] font-bold tracking-widest text-white/50 uppercase block mb-1">
+                    Space {idx + 1} of {rooms.length}
                   </span>
-                  <h3 className="text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.1] uppercase">
+                  <h3 className="text-[2rem] font-bold text-white tracking-tight leading-tight hero-text-font mb-2 uppercase">
                     {room.title}
                   </h3>
-                  <p className="text-sm text-white/50 font-medium leading-relaxed max-w-xs mt-1">
+                  <p className="text-sm text-white/70 font-medium leading-relaxed max-w-sm">
                     {room.desc}
                   </p>
                 </div>
@@ -169,10 +120,41 @@ export const HorizontalScrubSection: React.FC = () => {
           </div>
         </div>
 
+        {/* Desktop Info Overlay */}
+        <div className="hidden md:block absolute bottom-16 left-16 z-30 w-full max-w-md h-[180px] pointer-events-none">
+          {rooms.map((room, idx) => {
+            const isActive = idx === activeIdx;
+            return (
+              <div
+                key={idx}
+                className="w-full h-full flex flex-col gap-2 text-left justify-end pb-1"
+                style={{
+                  opacity: isActive ? 1 : 0,
+                  transform: isActive ? 'translate3d(0, 0, 0)' : 'translate3d(0, 15px, 0)',
+                  transition: 'opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), transform 0.6s cubic-bezier(0.25, 1, 0.5, 1)',
+                  position: 'absolute',
+                  inset: 0,
+                  pointerEvents: isActive ? 'auto' : 'none'
+                }}
+              >
+                <span className="text-[10px] font-bold tracking-widest text-white/50 uppercase">
+                  Space {idx + 1} of {rooms.length}
+                </span>
+                <h3 className="text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.1] uppercase">
+                  {room.title}
+                </h3>
+                <p className="text-sm text-white/50 font-medium leading-relaxed max-w-xs mt-1">
+                  {room.desc}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+
         {/* Scroll hint — bottom center, fades out as you scroll */}
         <div
           className="absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 text-white/40 pointer-events-none"
-          style={{ opacity: Math.max(0, 1 - progress * 8) }}
+          style={{ opacity: Math.max(0, 1 - progress * rooms.length) }}
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M12 5v14" />

@@ -23,7 +23,7 @@ type Props = {
   zoomOnMobile?: boolean;
 };
 
-const LERP = 0.18;        // Snappy interpolation
+const LERP = 0.06;        // Ultra-smooth interpolation
 const CONCURRENCY = 6;    // Max parallel loads — restored to 6 as specced
 
 export default function FrameScrub({
