@@ -1,7 +1,16 @@
 {
   "headers": [
     {
-      "source": "/(frames|tour|featured|videos)/(.*)",
+      "source": "/frames/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(tour|featured|videos)/(.*)",
       "headers": [
         {
           "key": "Cache-Control",

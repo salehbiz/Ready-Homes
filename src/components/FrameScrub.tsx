@@ -40,6 +40,7 @@ export default function FrameScrub({
   const fetchedOrInFlight = useRef<Set<number>>(new Set());
   const decodingFrames = useRef<Set<number>>(new Set());
   const pumpRef = useRef<(() => void) | undefined>(undefined);
+  const isDecodingRef = useRef(false);
   
   const playhead = useRef(1);
   const target = useRef(1);
@@ -53,6 +54,7 @@ export default function FrameScrub({
   const onProgressRef = useRef(onProgress);
   onProgressRef.current = onProgress;
 
+  // NOTE: If frames are ever re-rendered, version the folder name (e.g. /frames/hero-v2/) instead of overwriting to bypass the Vercel cache headers.
   // Store function props and focal properties in refs to completely decouple preloader lifecycle from identity changes
   const framePathRef = useRef(framePath);
   framePathRef.current = framePath;
@@ -225,40 +227,38 @@ export default function FrameScrub({
       }
     }
 
-    let idx = 0;
-    let inFlight = 0;
+    const orderIndexMap = new Map<number, number>();
+    order.forEach((f, idx) => {
+      orderIndexMap.set(f, idx);
+    });
 
-    const findPriorityFrame = (center: number, maxDistance = 15): number | null => {
-      for (let dist = 0; dist <= maxDistance; dist++) {
-        const framePlus = center + dist;
-        if (framePlus >= 1 && framePlus <= frameCount && !fetchedOrInFlight.current.has(framePlus)) {
-          return framePlus;
-        }
-        if (dist > 0) {
-          const frameMinus = center - dist;
-          if (frameMinus >= 1 && frameMinus <= frameCount && !fetchedOrInFlight.current.has(frameMinus)) {
-            return frameMinus;
-          }
-        }
-      }
-      return null;
-    };
+    const pending = new Set<number>(order);
+    let inFlight = 0;
 
     const pump = () => {
       if (cancelled) return;
       while (inFlight < CONCURRENCY) {
-        // 1. Try playhead-priority frame search first
-        const center = Math.round(playhead.current);
-        let frame = findPriorityFrame(center, 15);
-        
-        // 2. Fall back to base stride order queue
-        if (frame === null) {
-          while (idx < order.length) {
-            const candidate = order[idx++];
-            if (!fetchedOrInFlight.current.has(candidate)) {
+        let frame: number | null = null;
+        if (pending.size > 0) {
+          let minDist = Infinity;
+          let minRank = Infinity;
+          for (const candidate of pending) {
+            const dist = Math.abs(candidate - target.current);
+            const rank = orderIndexMap.get(candidate) ?? Infinity;
+            if (dist < minDist) {
+              minDist = dist;
               frame = candidate;
-              break;
+              minRank = rank;
+            } else if (dist === minDist) {
+              if (rank < minRank) {
+                minRank = rank;
+                frame = candidate;
+              }
             }
+          }
+          if (frame !== null) {
+            pending.delete(frame);
+            fetchedOrInFlight.current.add(frame);
           }
         }
         
@@ -266,7 +266,6 @@ export default function FrameScrub({
           break;
         }
         
-        fetchedOrInFlight.current.add(frame);
         inFlight++;
         
         const currentFrame = frame;
@@ -299,7 +298,7 @@ export default function FrameScrub({
               setReady(true);
             }
             inFlight--;
-            pump();
+            if (pumpRef.current) pumpRef.current();
           })
           .catch(() => {
             if (cancelled) return;
@@ -308,7 +307,7 @@ export default function FrameScrub({
               cancelled = true;
             } else {
               inFlight--;
-              pump();
+              if (pumpRef.current) pumpRef.current();
             }
           });
       }
@@ -385,74 +384,92 @@ export default function FrameScrub({
   // Find nearest available frame
   const findNearestFrame = useCallback((frame: number): number | null => {
     if (decodedBitmaps.current.has(frame)) return frame;
-    for (let delta = 1; delta <= 10; delta++) {
-      if (decodedBitmaps.current.has(frame + delta)) return frame + delta;
-      if (decodedBitmaps.current.has(frame - delta)) return frame - delta;
+    let nearest: number | null = null;
+    let minDiff = Infinity;
+    for (const key of decodedBitmaps.current.keys()) {
+      const diff = Math.abs(key - frame);
+      if (diff < minDiff) {
+        minDiff = diff;
+        nearest = key;
+      }
     }
-    return null;
+    return nearest;
   }, []);
 
   // Async frame decoder with sliding window cache eviction and decode budget
   const decodeFrames = useCallback(async (center: number) => {
-    const DECODE_WINDOW = isMobile ? 15 : 30;
-    const lo = Math.max(1, center - DECODE_WINDOW);
-    const hi = Math.min(frameCount, center + DECODE_WINDOW);
+    if (isDecodingRef.current) return;
+    isDecodingRef.current = true;
 
-    // 1. Evict frames outside the decode window first (reclaim memory first)
-    for (const [key, bitmap] of decodedBitmaps.current) {
-      if (key < lo || key > hi) {
-        bitmap.close();
-        decodedBitmaps.current.delete(key);
-      }
-    }
+    try {
+      const DECODE_WINDOW = isMobile ? 15 : 30;
+      const lo = Math.max(1, center - DECODE_WINDOW);
+      const hi = Math.min(frameCount, center + DECODE_WINDOW);
 
-    // 2. Decode outward search order from center
-    const decodeOrder: number[] = [];
-    const maxDist = DECODE_WINDOW;
-    for (let dist = 0; dist <= maxDist; dist++) {
-      const p = center + dist;
-      if (p >= lo && p <= hi) {
-        decodeOrder.push(p);
-      }
-      if (dist > 0) {
-        const m = center - dist;
-        if (m >= lo && m <= hi) {
-          decodeOrder.push(m);
+      // 1. Evict frames outside the decode window first (reclaim memory first)
+      for (const [key, bitmap] of decodedBitmaps.current) {
+        if (key < lo || key > hi) {
+          bitmap.close();
+          decodedBitmaps.current.delete(key);
         }
       }
-    }
 
-    // 3. Decode at most 4 bitmaps per invocation
-    let decodedCount = 0;
-    const BUDGET = 4;
-
-    for (const i of decodeOrder) {
-      if (decodedCount >= BUDGET) break;
-
-      if (!decodedBitmaps.current.has(i) && !decodingFrames.current.has(i) && compressedBlobs.current.has(i)) {
-        const blob = compressedBlobs.current.get(i);
-        if (blob) {
-          decodedCount++;
-          decodingFrames.current.add(i);
-          
-          createImageBitmap(blob)
-            .then(bmp => {
-              decodingFrames.current.delete(i);
-              // Verify bounds in case the playhead shifted during async decode
-              const currentCenter = Math.round(playhead.current);
-              const currentLo = Math.max(1, currentCenter - DECODE_WINDOW);
-              const currentHi = Math.min(frameCount, currentCenter + DECODE_WINDOW);
-              if (i >= currentLo && i <= currentHi) {
-                decodedBitmaps.current.set(i, bmp);
-              } else {
-                bmp.close();
-              }
-            })
-            .catch(() => {
-              decodingFrames.current.delete(i);
-            });
+      // 2. Decode outward search order from center
+      const decodeOrder: number[] = [];
+      const maxDist = DECODE_WINDOW;
+      for (let dist = 0; dist <= maxDist; dist++) {
+        const p = center + dist;
+        if (p >= lo && p <= hi) {
+          decodeOrder.push(p);
+        }
+        if (dist > 0) {
+          const m = center - dist;
+          if (m >= lo && m <= hi) {
+            decodeOrder.push(m);
+          }
         }
       }
+
+      // 3. Decode at most 4 bitmaps per invocation
+      let decodedCount = 0;
+      const BUDGET = 4;
+      const promises: Promise<void>[] = [];
+
+      for (const i of decodeOrder) {
+        if (decodedCount >= BUDGET) break;
+
+        if (!decodedBitmaps.current.has(i) && !decodingFrames.current.has(i) && compressedBlobs.current.has(i)) {
+          const blob = compressedBlobs.current.get(i);
+          if (blob) {
+            decodedCount++;
+            decodingFrames.current.add(i);
+            
+            const p = createImageBitmap(blob)
+              .then(bmp => {
+                decodingFrames.current.delete(i);
+                // Verify bounds in case the playhead shifted during async decode
+                const currentCenter = Math.round(playhead.current);
+                const currentLo = Math.max(1, currentCenter - DECODE_WINDOW);
+                const currentHi = Math.min(frameCount, currentCenter + DECODE_WINDOW);
+                if (i >= currentLo && i <= currentHi) {
+                  decodedBitmaps.current.set(i, bmp);
+                } else {
+                  bmp.close();
+                }
+              })
+              .catch(() => {
+                decodingFrames.current.delete(i);
+              });
+            promises.push(p);
+          }
+        }
+      }
+
+      if (promises.length > 0) {
+        await Promise.all(promises);
+      }
+    } finally {
+      isDecodingRef.current = false;
     }
   }, [frameCount, isMobile]);
 
