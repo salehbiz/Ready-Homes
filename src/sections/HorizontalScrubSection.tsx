@@ -54,7 +54,8 @@ export const HorizontalScrubSection: React.FC = () => {
     }
   ];
 
-  const activeIdx = Math.round(progress * (rooms.length - 1));
+  const animProgress = Math.min(1, progress / 0.77);
+  const activeIdx = Math.round(animProgress * (rooms.length - 1));
 
   return (
     <section id="horizontal-scrub" className="w-full bg-[#141316] relative select-none max-md:w-screen">
@@ -63,7 +64,8 @@ export const HorizontalScrubSection: React.FC = () => {
         framePath={framePath}
         fallbackFramePath={tier && tier.dir === 'desktop-hq' ? fallbackFramePath : undefined}
         poster="/frames/section3-poster.webp"
-        scrollLengthVh={500}
+        scrollLengthVh={650}
+        animationEndProgress={0.77}
         className="w-full max-md:w-screen"
         onProgress={handleProgress}
         containOnMobile={false}

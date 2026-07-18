@@ -131,8 +131,8 @@ export const InfoBlocks: React.FC = () => {
 
 
       {/* 3. Featured Work - Take a Closer Look Slider */}
-      <section id="featured-work" className="py-16 md:py-36 w-full select-none overflow-hidden bg-white">
-        <div className="w-full px-6 md:px-12 lg:px-16 flex justify-between items-end border-b border-neutral-100 pb-6 md:pb-8 mb-10 md:mb-12 select-none">
+      <section id="featured-work" className="pt-6 md:pt-12 pb-16 md:pb-36 w-full select-none overflow-hidden bg-white">
+        <div className="w-full px-6 md:px-12 lg:px-16 flex justify-between items-end border-b border-neutral-100 pb-1.5 md:pb-2 mb-1.5 md:mb-2 select-none">
           <div>
             <h2 className="text-3xl md:text-6xl font-bold tracking-tight text-neutral-900 text-left font-sans">
               Take a closer look.
@@ -160,7 +160,7 @@ export const InfoBlocks: React.FC = () => {
         {/* Snapping horizontal scroll view container */}
         <div 
           ref={scrollRef}
-          className="featured-scroll-container flex gap-6 overflow-x-auto pb-8 scrollbar-hide"
+          className="featured-scroll-container flex gap-6 overflow-x-auto pb-8 scrollbar-hide px-6 md:px-12 lg:px-16"
           style={{
             scrollSnapType: 'x mandatory',
             WebkitOverflowScrolling: 'touch',
@@ -170,10 +170,10 @@ export const InfoBlocks: React.FC = () => {
             <div
               key={idx}
               ref={(el) => { if (el) workRefs.current.push(el); }}
-              className="flex-shrink-0 w-[80vw] md:w-[640px] flex flex-col gap-6 featured-card-item"
+              className="flex-shrink-0 w-[80vw] md:w-[480px] flex flex-col gap-4 featured-card-item"
             >
               {/* Image card */}
-              <div className="w-full aspect-[4/3] rounded-[24px] md:rounded-[32px] overflow-hidden bg-[#f5f5f7] relative border border-neutral-100 select-none">
+              <div className="w-full aspect-[4/3] rounded-[20px] md:rounded-[24px] overflow-hidden bg-[#f5f5f7] relative border border-neutral-100 select-none">
                 <img
                   src={work.img}
                   alt={work.title}
@@ -183,8 +183,8 @@ export const InfoBlocks: React.FC = () => {
               </div>
 
               {/* Text caption below */}
-              <div className="px-2 text-left select-none max-w-[600px]">
-                <p className="text-[15px] md:text-[17px] text-[#86868b] font-normal leading-relaxed">
+              <div className="px-2 text-left select-none max-w-[480px]">
+                <p className="text-sm md:text-[15px] text-[#86868b] font-normal leading-relaxed">
                   {work.boldText && (
                     <strong className="text-[#1d1d1f] font-semibold">{work.boldText}</strong>
                   )}
@@ -202,21 +202,12 @@ export const InfoBlocks: React.FC = () => {
         {/* Responsive padding and scrollbar hider */}
         <style dangerouslySetInnerHTML={{__html: `
           .featured-scroll-container {
-            padding-left: 10vw;
-            padding-right: 10vw;
             touch-action: pan-x pan-y;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
           }
-          @media (min-width: 768px) {
-            .featured-scroll-container {
-              padding-left: 3rem;
-              padding-right: 3rem;
-            }
-          }
-          @media (min-width: 1024px) {
-            .featured-scroll-container {
-              padding-left: 4rem;
-              padding-right: 4rem;
-            }
+          .featured-scroll-container::-webkit-scrollbar {
+            display: none;
           }
           .featured-card-item {
             scroll-snap-align: center;
@@ -225,9 +216,6 @@ export const InfoBlocks: React.FC = () => {
             .featured-card-item {
               scroll-snap-align: start;
             }
-          }
-          .scrollbar-hide::-webkit-scrollbar {
-            display: none;
           }
           .scrollbar-hide {
             -ms-overflow-style: none;

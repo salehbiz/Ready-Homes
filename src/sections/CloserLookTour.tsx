@@ -104,8 +104,8 @@ export const CloserLookTour: React.FC = () => {
   };
 
   return (
-    <section id="closer-look" className="py-16 md:py-32 w-full bg-white select-none overflow-hidden">
-      <div className="w-full px-6 md:px-12 lg:px-16 mb-10 select-none text-left">
+    <section id="closer-look" className="pt-16 md:pt-32 pb-0 w-full bg-white select-none overflow-hidden">
+      <div className="w-full px-6 md:px-12 lg:px-16 mb-1.5 md:mb-2 select-none text-left">
         <h2 className="text-3xl md:text-6xl font-bold tracking-tight text-neutral-900 font-sans">
           Take a closer look.
         </h2>
@@ -114,32 +114,32 @@ export const CloserLookTour: React.FC = () => {
       {/* Main Container */}
       <div className="w-full relative select-none">
         {/* Desktop Layout */}
-        <div className="hidden md:flex mx-6 md:mx-12 lg:mx-16 bg-[#f5f5f7] rounded-[24px] md:rounded-[36px] p-8 md:p-12 lg:p-16 min-h-[640px] gap-12 md:gap-16 relative overflow-hidden border border-neutral-200/50 shadow-sm">
+        <div className="hidden md:flex mx-6 md:mx-12 lg:mx-16 bg-[#f5f5f7] rounded-[24px] md:rounded-[36px] p-6 md:p-8 lg:p-8 min-h-[520px] gap-8 md:gap-10 lg:gap-12 relative overflow-hidden border border-neutral-200/50 shadow-sm">
           
           {/* Left Column - Navigation & Text Description */}
           <div className="w-[35%] flex flex-col justify-between z-10 select-none">
             
             {/* Pills Stack */}
-            <div className="flex flex-col gap-3 text-left">
+            <div className="flex flex-col gap-1.5 text-left">
               {features.map((item) => {
                 const isActive = activeId === item.id;
                 return (
                   <button
                     key={item.id}
                     onClick={() => handlePillClick(item.id)}
-                    className={`flex items-center gap-2.5 py-3 px-5 rounded-full transition-all text-left w-fit select-none font-sans text-[15px] font-semibold cursor-pointer ${
+                    className={`flex items-center gap-2 py-1.5 px-3.5 rounded-full transition-all text-left w-fit select-none font-sans text-sm font-semibold cursor-pointer ${
                       isActive
                         ? 'bg-[#e8e8ed] text-[#1d1d1f] shadow-sm'
                         : 'bg-transparent text-[#86868b] hover:text-[#1d1d1f]'
                     }`}
                   >
                     {item.id === 'community' ? (
-                      <span className="w-4 h-4 rounded-full border border-neutral-400 bg-neutral-800" />
+                      <span className="w-3.5 h-3.5 rounded-full border border-neutral-400 bg-neutral-800" />
                     ) : (
-                      <span className={`w-4 h-4 rounded-full flex items-center justify-center border ${
+                      <span className={`w-3.5 h-3.5 rounded-full flex items-center justify-center border ${
                         isActive ? 'border-[#1d1d1f] text-[#1d1d1f]' : 'border-[#86868b] text-[#86868b]'
                       }`}>
-                        <Plus className="w-2.5 h-2.5 stroke-[3]" />
+                        <Plus className="w-2 h-2 stroke-[3]" />
                       </span>
                     )}
                     {item.label}
@@ -150,8 +150,8 @@ export const CloserLookTour: React.FC = () => {
 
             {/* Floating Detail card for Active detail feature */}
             {activeId !== 'community' && (
-              <div className="bg-[#e8e8ed]/80 backdrop-blur-md border border-white/20 p-6 rounded-[24px] max-w-sm mt-8 shadow-sm flex flex-col gap-4 text-left transition-all duration-300">
-                <p className="text-[15px] leading-relaxed text-[#1d1d1f]">
+              <div className="bg-[#e8e8ed]/80 backdrop-blur-md border border-white/20 p-4.5 rounded-[20px] max-w-sm mt-4 shadow-sm flex flex-col gap-3.5 text-left transition-all duration-300">
+                <p className="text-sm leading-relaxed text-[#1d1d1f]">
                   <strong className="font-semibold text-[#1d1d1f]">{activeFeature.title}. </strong>
                   {activeFeature.desc}
                 </p>

@@ -8,8 +8,7 @@
     <!-- Preload Hero Posters for LCP -->
     <link rel="preload" as="image" href="/frames/hero-poster.webp" media="(min-width: 768px)" fetchpriority="high" />
     <link rel="preload" as="image" href="/frames/hero-poster-mobile.webp" media="(max-width: 767px)" fetchpriority="high" />
-    <!-- Preload Logo for instant Preloader Paint -->
-    <link rel="preload" as="image" href="/logo-white.webp" fetchpriority="high" />
+
 
     <!-- Preload Headline Fonts -->
     <link rel="preload" href="/fonts/inter-tight-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin />
@@ -26,22 +25,7 @@
     <title>1159 Diamond St — Ready Homes</title>
   </head>
   <body>
-    <div id="root">
-      <!-- Static Preloader Screen (fades out instantly when React mounts) -->
-      <div id="static-preloader" style="position: fixed; inset: 0; z-index: 100; background-color: #141316; display: flex; flex-direction: column; justify-content: space-between; padding: 4rem 1.5rem; align-items: center; pointer-events: none; font-family: 'Inter Tight', sans-serif; box-sizing: border-box;">
-        <div style="height: 5rem;"></div>
-        <div style="display: flex; flex-direction: column; align-items: center; gap: 1.5rem;">
-          <img src="/logo-white.webp" alt="Ready Homes" style="width: 60vw; max-w: 360px; height: auto; object-fit: contain;" />
-          <div style="width: 2.5rem; height: 2.5rem; border: 2px solid rgba(255,255,255,0.1); border-top-color: #fff; border-radius: 50%; animation: static-spin 1s linear infinite; box-sizing: border-box;"></div>
-        </div>
-        <div style="font-size: 10px; font-weight: 600; letter-spacing: 0.1em; color: #737373; text-transform: uppercase;">
-          © 2026 READY HOMES. ALL RIGHTS RESERVED.
-        </div>
-      </div>
-      <style>
-        @keyframes static-spin { to { transform: rotate(360deg); } }
-      </style>
-    </div>
+    <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

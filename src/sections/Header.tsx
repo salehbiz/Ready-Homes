@@ -55,7 +55,7 @@ export const Header: React.FC = () => {
       if (window.innerWidth < 768) {
         element.scrollIntoView({ behavior: 'smooth' });
       } else {
-        lenis.scrollTo(element, { offset: -80 });
+        lenis.scrollTo(element, { offset: -64 });
       }
     }
   };
@@ -73,10 +73,10 @@ export const Header: React.FC = () => {
       <header
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ease-out select-none flex items-center ${
           isScrolled
-            ? 'h-16 md:h-[96px] bg-[rgba(10,10,10,0.7)] backdrop-blur-[12px] border-b border-white/5'
-            : 'h-16 md:h-[128px] bg-transparent border-b border-transparent'
+            ? 'h-14 md:h-16 bg-[rgba(10,10,10,0.35)] backdrop-blur-[20px] border-b border-white/8 shadow-[0_8px_32px_rgba(0,0,0,0.37)]'
+            : 'h-16 md:h-20 bg-transparent border-b border-transparent'
         }`}
-        style={{ backdropFilter: isScrolled ? 'blur(12px)' : 'none' }}
+        style={{ backdropFilter: isScrolled ? 'blur(20px)' : 'none' }}
       >
         <div className="w-full px-6 md:px-12 lg:px-16 flex items-center justify-between">
           {/* Logo brand (ready | homes) */}
@@ -88,7 +88,13 @@ export const Header: React.FC = () => {
             }}
             className="flex items-center select-none cursor-pointer"
           >
-            <img src={logoWhite} alt="Ready Homes Logo" className="h-9 md:h-12 w-auto object-contain select-none" />
+            <img 
+              src={logoWhite} 
+              alt="Ready Homes Logo" 
+              className={`w-auto object-contain select-none transition-all duration-300 ease-out ${
+                isScrolled ? 'h-7 md:h-8' : 'h-8 md:h-10'
+              }`} 
+            />
           </a>
 
           {/* Center: Navigation capsule (hidden on mobile, visible on desktop) */}
@@ -155,7 +161,7 @@ export const Header: React.FC = () => {
               }}
               className="!hidden sm:!inline-flex btn-pill-white"
             >
-              <span>Book a Showing</span>
+              <span>Schedule a Call</span>
               <span className="arrow-circle-blue">
                 <ArrowRight className="w-4 h-4 text-white" />
               </span>

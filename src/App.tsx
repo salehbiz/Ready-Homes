@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { Header } from './sections/Header';
 import { Hero } from './sections/Hero';
 import { lenis, ScrollTrigger } from './lib/scroll';
-import { initCrispQualityEffects } from './lib/quality';
 
 // Lazy load below-the-fold content sections to drastically reduce initial JS bundle size and TBT
 const InfoBlocks = React.lazy(() => import('./sections/InfoBlocks').then(m => ({ default: m.InfoBlocks })));
@@ -26,9 +25,6 @@ const App: React.FC = () => {
     // Refresh ScrollTriggers when app elements are fully loaded
     ScrollTrigger.refresh();
 
-    // Initialize custom cursor and crisp quality interactions
-    initCrispQualityEffects();
-
     return () => {
       // Clean up Lenis instance
       lenis.destroy();
@@ -40,7 +36,7 @@ const App: React.FC = () => {
       {/* 1. Sticky Navigation Header */}
       <Header />
 
-      {/* 2. Full-viewport Hero (includes entry preloader & slanted sliding image track) */}
+      {/* 2. Full-viewport Hero (includes slanted sliding image track) */}
       <Hero />
 
       {/* Dynamic suspense boundaries for asynchronous sections */}

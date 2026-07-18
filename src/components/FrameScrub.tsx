@@ -21,13 +21,14 @@ type Props = {
   mobileFocalX?: number;
   mobileFocalY?: number;
   zoomOnMobile?: boolean;
+  animationEndProgress?: number;
 };
 
 const LERP = 0.06;        // Ultra-smooth interpolation
 const CONCURRENCY = 6;    // Max parallel loads — restored to 6 as specced
 
 export default function FrameScrub({
-  frameCount, framePath, poster, posterMobile, isHero = false, className, scrollLengthVh = 400, children, onProgress, eager = false, tierResolved = true, fallbackFramePath, pathKey = '', containOnMobile = false, focalX = 0.5, focalY = 0.5, mobileFocalX, mobileFocalY, zoomOnMobile = false
+  frameCount, framePath, poster, posterMobile, isHero = false, className, scrollLengthVh = 400, children, onProgress, eager = false, tierResolved = true, fallbackFramePath, pathKey = '', containOnMobile = false, focalX = 0.5, focalY = 0.5, mobileFocalX, mobileFocalY, zoomOnMobile = false, animationEndProgress = 1.0
 }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -338,7 +339,8 @@ export default function FrameScrub({
         invalidateOnRefresh: true,
         onUpdate: (self) => {
           const progress = self.progress;
-          target.current = 1 + progress * (frameCount - 1);
+          const animProgress = Math.min(1, progress / animationEndProgress);
+          target.current = 1 + animProgress * (frameCount - 1);
           if (onProgressRef.current) {
             onProgressRef.current(progress, Math.round(target.current));
           }
@@ -351,7 +353,7 @@ export default function FrameScrub({
       clearTimeout(timer); 
       ctx.revert(); 
     };
-  }, [frameCount, scrollLengthVh]);
+  }, [frameCount, scrollLengthVh, animationEndProgress]);
 
   // ScrollTrigger refresh after the first frame has successfully rendered
   useEffect(() => {
