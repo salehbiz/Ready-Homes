@@ -1,31 +1,2214 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Ready Homes — Premium architecture, custom modern design, and luxury features crafted for the spaces you love." />
-    <!-- Preload Hero Posters for LCP -->
-    <link rel="preload" as="image" href="/frames/hero-poster.webp" media="(min-width: 768px)" fetchpriority="high" />
-    <link rel="preload" as="image" href="/frames/hero-poster-mobile.webp" media="(max-width: 767px)" fetchpriority="high" />
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <title>Ready Homes</title>
+  
+  <!-- Preconnect to Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Mulish:ital,wght@0,400;0,600;0,700;1,400&family=Trirong:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- Core Theme Stylesheet -->
+  <link rel="stylesheet" href="/assets/css/main.css">
+  
+  <!-- Additional Section/Component Stylesheets -->
+  <link rel="stylesheet" href="/assets/css/page-sektion-template.css">
+  <!-- Main interactive javascript bundle (must load first) -->
+  <script src="/assets/js/main.js" defer></script>
+  <link rel="stylesheet" href="/assets/css/animate-on-scroll.css">
+  <script src="/assets/js/animate-on-scroll.js" defer></script>
+  <link rel="stylesheet" href="/assets/css/video.css">
+  <link rel="stylesheet" href="/assets/css/feature-rating.css">
+  <link rel="stylesheet" href="/assets/css/scrolling-image-list.css">
+  <link rel="stylesheet" href="/assets/css/modal.css">
+  <link rel="stylesheet" href="/assets/css/pop-up.css">
+
+  <style>@font-face {
+  font-family: Montserrat;
+  font-weight: 400;
+  font-style: normal;
+  font-display: fallback;
+  src: url("//us.fronteriors.co/cdn/fonts/montserrat/montserrat_n4.81949fa0ac9fd2021e16436151e8eaa539321637.woff2") format("woff2"),
+       url("//us.fronteriors.co/cdn/fonts/montserrat/montserrat_n4.a6c632ca7b62da89c3594789ba828388aac693fe.woff") format("woff");
+}
+@font-face {
+  font-family: Montserrat;
+  font-weight: 700;
+  font-style: normal;
+  font-display: fallback;
+  src: url("//us.fronteriors.co/cdn/fonts/montserrat/montserrat_n7.3c434e22befd5c18a6b4afadb1e3d77c128c7939.woff2") format("woff2"),
+       url("//us.fronteriors.co/cdn/fonts/montserrat/montserrat_n7.5d9fa6e2cae713c8fb539a9876489d86207fe957.woff") format("woff");
+}
+@font-face {
+  font-family: Montserrat;
+  font-weight: 500;
+  font-style: normal;
+  font-display: fallback;
+  src: url("//us.fronteriors.co/cdn/fonts/montserrat/montserrat_n5.07ef3781d9c78c8b93c98419da7ad4fbeebb6635.woff2") format("woff2"),
+       url("//us.fronteriors.co/cdn/fonts/montserrat/montserrat_n5.adf9b4bd8b0e4f55a0b203cdd84512667e0d5e4d.woff") format("woff");
+}
+@font-face {
+  font-family: Montserrat;
+  font-weight: 400;
+  font-style: italic;
+  font-display: fallback;
+  src: url("//us.fronteriors.co/cdn/fonts/montserrat/montserrat_i4.5a4ea298b4789e064f62a29aafc18d41f09ae59b.woff2") format("woff2"),
+       url("//us.fronteriors.co/cdn/fonts/montserrat/montserrat_i4.072b5869c5e0ed5b9d2021e4c2af132e16681ad2.woff") format("woff");
+}
+@font-face {
+  font-family: Montserrat;
+  font-weight: 700;
+  font-style: italic;
+  font-display: fallback;
+  src: url("//us.fronteriors.co/cdn/fonts/montserrat/montserrat_i7.a0d4a463df4f146567d871890ffb3c80408e7732.woff2") format("woff2"),
+       url("//us.fronteriors.co/cdn/fonts/montserrat/montserrat_i7.f6ec9f2a0681acc6f8152c40921d2a4d2e1a2c78.woff") format("woff");
+}
+@font-face {
+  font-family: Muli;
+  font-weight: 600;
+  font-style: normal;
+  font-display: fallback;
+  src: url("//us.fronteriors.co/cdn/fonts/muli/muli_n6.cc1d2d4222c93c9ee9f6de4489226d2e1332d85b.woff2") format("woff2"),
+       url("//us.fronteriors.co/cdn/fonts/muli/muli_n6.2bb79714f197c09d3f5905925734a3f1166d5d27.woff") format("woff");
+}
+@font-face {
+  font-family: Trirong;
+  font-weight: 700;
+  font-style: normal;
+  font-display: fallback;
+  src: url("//us.fronteriors.co/cdn/fonts/trirong/trirong_n7.a33ed6536f9a7c6d7a9d0b52e1e13fd44f544eff.woff2") format("woff2"),
+       url("//us.fronteriors.co/cdn/fonts/trirong/trirong_n7.cdb88d0f8e5c427b393745c8cdeb8bc085cbacff.woff") format("woff");
+}
+@font-face {
+  font-family: Montserrat;
+  font-weight: 400;
+  font-style: normal;
+  font-display: fallback;
+  src: url("//us.fronteriors.co/cdn/fonts/montserrat/montserrat_n4.81949fa0ac9fd2021e16436151e8eaa539321637.woff2") format("woff2"),
+       url("//us.fronteriors.co/cdn/fonts/montserrat/montserrat_n4.a6c632ca7b62da89c3594789ba828388aac693fe.woff") format("woff");
+}
+@font-face {
+  font-family: Montserrat;
+  font-weight: 600;
+  font-style: normal;
+  font-display: fallback;
+  src: url("//us.fronteriors.co/cdn/fonts/montserrat/montserrat_n6.1326b3e84230700ef15b3a29fb520639977513e0.woff2") format("woff2"),
+       url("//us.fronteriors.co/cdn/fonts/montserrat/montserrat_n6.652f051080eb14192330daceed8cd53dfdc5ead9.woff") format("woff");
+}
+:root {
+  --page-container-width:          1600px;
+  --reading-container-width:       720px;
+  --divider-opacity:               0.14;
+  --gutter-large:                  30px;
+  --gutter-desktop:                20px;
+  --gutter-mobile:                 16px;
+  --section-padding:               50px;
+  --larger-section-padding:        80px;
+  --larger-section-padding-mobile: 60px;
+  --largest-section-padding:       110px;
+  --aos-animate-duration:          0.6s;
+
+  --base-font-family:              Montserrat, sans-serif;
+  --base-font-weight:              400;
+  --base-font-style:               normal;
+  --heading-font-family:           Muli, sans-serif;
+  --heading-font-weight:           600;
+  --heading-font-style:            normal;
+  --logo-font-family:              Trirong, serif;
+  --logo-font-weight:              700;
+  --logo-font-style:               normal;
+  --nav-font-family:               Montserrat, sans-serif;
+  --nav-font-weight:               400;
+  --nav-font-style:                normal;
+
+  --base-text-size:15px;
+  --base-line-height:              1.6;
+  --input-text-size:16px;
+  --smaller-text-size-1:12px;
+  --smaller-text-size-2:14px;
+  --smaller-text-size-3:12px;
+  --smaller-text-size-4:11px;
+  --larger-text-size:30px;
+  --super-large-text-size:53px;
+  --super-large-mobile-text-size:24px;
+  --larger-mobile-text-size:24px;
+  --logo-text-size:26px;--btn-letter-spacing: 0.08em;
+    --btn-text-transform: uppercase;
+    --button-text-size: 13px;
+    --quickbuy-button-text-size: 13;
+    --small-feature-link-font-size: 0.75em;
+    --input-btn-padding-top:             1.2em;
+    --input-btn-padding-bottom:          1.2em;--heading-text-transform:none;
+  --nav-text-size:                      12px;
+  --mobile-menu-font-weight:            600;
+
+  --body-bg-color:                      255 255 255;
+  --bg-color:                           255 255 255;
+  --body-text-color:                    0 0 0;
+  --text-color:                         0 0 0;
+
+  --header-text-col:                    #000000;--header-text-hover-col:             var(--main-nav-link-hover-col);--header-bg-col:                     #ffffff;
+  --heading-color:                     0 0 0;
+  --body-heading-color:                0 0 0;
+  --heading-divider-col:               rgba(0,0,0,0);
+
+  --logo-col:                          #000000;
+  --main-nav-bg:                       #ffffff;
+  --main-nav-link-col:                 #000000;
+  --main-nav-link-hover-col:           #dbd5ce;
+  --main-nav-link-featured-col:        #8f725c;
+
+  --link-color:                        0 0 0;
+  --body-link-color:                   0 0 0;
+
+  --btn-bg-color:                        0 0 0;
+  --btn-bg-hover-color:                  219 213 206;
+  --btn-border-color:                    0 0 0;
+  --btn-border-hover-color:              219 213 206;
+  --btn-text-color:                      255 255 255;
+  --btn-text-hover-color:                255 255 255;--btn-alt-bg-color:                    255 255 255;
+  --btn-alt-text-color:                  0 0 0;
+  --btn-alt-border-color:                0 0 0;
+  --btn-alt-border-hover-color:          0 0 0;--btn-ter-bg-color:                    235 235 235;
+  --btn-ter-text-color:                  0 0 0;
+  --btn-ter-bg-hover-color:              0 0 0;
+  --btn-ter-text-hover-color:            255 255 255;--btn-border-radius: 3px;--color-scheme-default:                             #ffffff;
+  --color-scheme-default-color:                       255 255 255;
+  --color-scheme-default-text-color:                  0 0 0;
+  --color-scheme-default-head-color:                  0 0 0;
+  --color-scheme-default-link-color:                  0 0 0;
+  --color-scheme-default-btn-text-color:              255 255 255;
+  --color-scheme-default-btn-text-hover-color:        255 255 255;
+  --color-scheme-default-btn-bg-color:                0 0 0;
+  --color-scheme-default-btn-bg-hover-color:          219 213 206;
+  --color-scheme-default-btn-border-color:            0 0 0;
+  --color-scheme-default-btn-border-hover-color:      219 213 206;
+  --color-scheme-default-btn-alt-text-color:          0 0 0;
+  --color-scheme-default-btn-alt-bg-color:            255 255 255;
+  --color-scheme-default-btn-alt-border-color:        0 0 0;
+  --color-scheme-default-btn-alt-border-hover-color:  0 0 0;
+
+  --color-scheme-1:                             #fbf5e8;
+  --color-scheme-1-color:                       251 245 232;
+  --color-scheme-1-text-color:                  0 0 0;
+  --color-scheme-1-head-color:                  0 0 0;
+  --color-scheme-1-link-color:                  143 114 92;
+  --color-scheme-1-btn-text-color:              255 255 255;
+  --color-scheme-1-btn-text-hover-color:        255 255 255;
+  --color-scheme-1-btn-bg-color:                0 0 0;
+  --color-scheme-1-btn-bg-hover-color:          72 72 72;
+  --color-scheme-1-btn-border-color:            0 0 0;
+  --color-scheme-1-btn-border-hover-color:      72 72 72;
+  --color-scheme-1-btn-alt-text-color:          0 0 0;
+  --color-scheme-1-btn-alt-bg-color:            255 255 255;
+  --color-scheme-1-btn-alt-border-color:        0 0 0;
+  --color-scheme-1-btn-alt-border-hover-color:  0 0 0;
+
+  --color-scheme-2:                             #f2efec;
+  --color-scheme-2-color:                       242 239 236;
+  --color-scheme-2-text-color:                  0 0 0;
+  --color-scheme-2-head-color:                  0 0 0;
+  --color-scheme-2-link-color:                  64 66 81;
+  --color-scheme-2-btn-text-color:              255 255 255;
+  --color-scheme-2-btn-text-hover-color:        255 255 255;
+  --color-scheme-2-btn-bg-color:                0 0 0;
+  --color-scheme-2-btn-bg-hover-color:          72 72 72;
+  --color-scheme-2-btn-border-color:            0 0 0;
+  --color-scheme-2-btn-border-hover-color:      72 72 72;
+  --color-scheme-2-btn-alt-text-color:          83 50 49;
+  --color-scheme-2-btn-alt-bg-color:            255 255 255;
+  --color-scheme-2-btn-alt-border-color:        83 50 49;
+  --color-scheme-2-btn-alt-border-hover-color:  83 50 49;
+
+  /* Shop Pay payment terms */
+  --payment-terms-background-color:    #ffffff;--quickbuy-bg: 255 255 255;--body-input-background-color:       rgb(var(--body-bg-color));
+  --input-background-color:            rgb(var(--body-bg-color));
+  --body-input-text-color:             var(--body-text-color);
+  --input-text-color:                  var(--body-text-color);
+  --body-input-border-color:           rgb(191, 191, 191);
+  --input-border-color:                rgb(191, 191, 191);
+  --input-border-color-hover:          rgb(115, 115, 115);
+  --input-border-color-active:         rgb(0, 0, 0);
+
+  --swatch-cross-svg:                  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 24 24' fill='none' stroke='rgb(191, 191, 191)' stroke-width='0.09' preserveAspectRatio='none' %3E%3Cline x1='24' y1='0' x2='0' y2='24'%3E%3C/line%3E%3C/svg%3E");
+  --swatch-cross-hover:                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 24 24' fill='none' stroke='rgb(115, 115, 115)' stroke-width='0.09' preserveAspectRatio='none' %3E%3Cline x1='24' y1='0' x2='0' y2='24'%3E%3C/line%3E%3C/svg%3E");
+  --swatch-cross-active:               url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 24 24' fill='none' stroke='rgb(0, 0, 0)' stroke-width='0.09' preserveAspectRatio='none' %3E%3Cline x1='24' y1='0' x2='0' y2='24'%3E%3C/line%3E%3C/svg%3E");
+
+  --footer-divider-col:                #000000;
+  --footer-text-col:                   0 0 0;
+  --footer-heading-col:                0 0 0;
+  --footer-bg:                         #ffffff;--product-label-overlay-justify: flex-start;--product-label-overlay-align: flex-start;--product-label-overlay-reduction-text:   #ffffff;
+  --product-label-overlay-reduction-bg:     #8F725c;
+  --product-label-overlay-stock-text:       #ffffff;
+  --product-label-overlay-stock-bg:         #8F725c;
+  --product-label-overlay-new-text:         #ffffff;
+  --product-label-overlay-new-bg:           #8F725c;
+  --product-label-overlay-meta-text:        #ffffff;
+  --product-label-overlay-meta-bg:          #5e5f46;
+  --product-label-sale-text:                #c20000;
+  --product-label-sold-text:                #171717;
+  --product-label-preorder-text:            #8F725c;
+
+  --product-block-crop-align:               center;
+
+  
+  --product-block-price-align:              flex-start;
+  --product-block-price-item-margin-start:  initial;
+  --product-block-price-item-margin-end:    .5rem;
+  
+
+  --collection-block-image-position:   center center;
+
+  --swatch-picker-image-size:          40px;
+  --swatch-crop-align:                 center center;
+
+  --image-overlay-text-color:          255 255 255;--image-overlay-bg:                  rgba(0, 0, 0, 0.15);
+  --image-overlay-shadow-start:        rgb(0 0 0 / 0.13);
+  --image-overlay-box-opacity:         0.06;.image-overlay--bg-box .text-overlay .text-overlay__text {
+      --image-overlay-box-bg: 255 255 255;
+      --heading-color: var(--body-heading-color);
+      --text-color: var(--body-text-color);
+      --link-color: var(--body-link-color);
+    }--product-inventory-ok-box-color:            #f2faf0;
+  --product-inventory-ok-text-color:           #5e5f46;
+  --product-inventory-ok-icon-box-fill-color:  #fff;
+  --product-inventory-low-box-color:           #fcf1cd;
+  --product-inventory-low-text-color:          #dd9a1a;
+  --product-inventory-low-icon-box-fill-color: #fff;
+  --product-inventory-low-text-color-channels: 94, 95, 70;
+  --product-inventory-ok-text-color-channels:  221, 154, 26;
+
+  --rating-star-color: 143 114 92;
+}::selection {
+    background: rgb(var(--body-heading-color));
+    color: rgb(var(--body-bg-color));
+  }
+  ::-moz-selection {
+    background: rgb(var(--body-heading-color));
+    color: rgb(var(--body-bg-color));
+  }.use-color-scheme--default {
+  --product-label-sale-text:           #c20000;
+  --product-label-sold-text:           #171717;
+  --product-label-preorder-text:       #8F725c;
+  --input-background-color:            rgb(var(--body-bg-color));
+  --input-text-color:                  var(--body-input-text-color);
+  --input-border-color:                rgb(191, 191, 191);
+  --input-border-color-hover:          rgb(115, 115, 115);
+  --input-border-color-active:         rgb(0, 0, 0);
+}.use-color-scheme--1 {
+  --product-label-sale-text:           currentColor;
+  --product-label-sold-text:           currentColor;
+  --product-label-preorder-text:       currentColor;
+  --input-background-color:            transparent;
+  --input-text-color:                  0 0 0;
+  --input-border-color:                rgb(176, 172, 162);
+  --input-border-color-hover:          rgb(113, 110, 104);
+  --input-border-color-active:         rgb(0, 0, 0);
+}</style>
+
+  <script>
+    // Global debounce utility to prevent ReferenceErrors
+    window.debounce = function(fn, wait = 300) {
+      let t;
+      return function(...args) {
+        clearTimeout(t);
+        t = setTimeout(() => fn.apply(this, args), wait);
+      }
+    };
+    // Expose as plain debounce since some scripts use it without window.
+    function debounce(fn, wait = 300) {
+      return window.debounce(fn, wait);
+    }
+
+    document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+
+    window.theme = {
+      info: {
+        name: 'Symmetry',
+        version: '7.3.0'
+      },
+      device: {
+        hasTouch: window.matchMedia('(any-pointer: coarse)').matches,
+        hasHover: window.matchMedia('(hover: hover)').matches
+      },
+      mediaQueries: {
+        md: '(min-width: 768px)',
+        productMediaCarouselBreak: '(min-width: 1041px)'
+      },
+      routes: {
+        base: 'https://us.fronteriors.co',
+        cart: '/cart',
+        cartAdd: '/cart/add.js',
+        cartUpdate: '/cart/update.js',
+        predictiveSearch: '/search/suggest'
+      },
+      strings: {
+        cartTermsConfirmation: "You must agree to the terms and conditions before continuing.",
+        cartItemsQuantityError: "You can only add [QUANTITY] of this item to your cart.",
+        generalSearchViewAll: "View all search results",
+        noStock: "Sold out",
+        noVariant: "Unavailable",
+        productsProductChooseA: "Choose a",
+        generalSearchPages: "Pages",
+        generalSearchNoResultsWithoutTerms: "Sorry, we couldnʼt find any results",
+        shippingCalculator: {
+          singleRate: "There is one shipping rate for this destination:",
+          multipleRates: "There are multiple shipping rates for this destination:",
+          noRates: "We do not ship to this destination."
+        }
+      },
+      settings: {
+        moneyWithCurrencyFormat: "${{amount}} USD",
+        cartType: "drawer",
+        afterAddToCart: "drawer",
+        quickbuyStyle: "off",
+        externalLinksNewTab: true,
+        internalLinksSmoothScroll: true
+      }
+    };
+
+    theme.inlineNavigationCheck = function() {
+      var pageHeader = document.querySelector('.pageheader'),
+          inlineNavContainer = pageHeader.querySelector('.logo-area__left__inner'),
+          inlineNav = inlineNavContainer.querySelector('.navigation--left');
+      if (inlineNav && getComputedStyle(inlineNav).display != 'none') {
+        var inlineMenuCentered = document.querySelector('.pageheader--layout-inline-menu-center'),
+            logoContainer = document.querySelector('.logo-area__middle__inner');
+        if(inlineMenuCentered) {
+          var rightWidth = document.querySelector('.logo-area__right__inner').clientWidth,
+              middleWidth = logoContainer.clientWidth,
+              logoArea = document.querySelector('.logo-area'),
+              computedLogoAreaStyle = getComputedStyle(logoArea),
+              logoAreaInnerWidth = logoArea.clientWidth - Math.ceil(parseFloat(computedLogoAreaStyle.paddingLeft)) - Math.ceil(parseFloat(computedLogoAreaStyle.paddingRight)),
+              availableNavWidth = logoAreaInnerWidth - Math.max(rightWidth, middleWidth) * 2 - 40;
+          inlineNavContainer.style.maxWidth = availableNavWidth + 'px';
+        }
+
+        var firstInlineNavLink = inlineNav.querySelector('.navigation__item:first-child'),
+            lastInlineNavLink = inlineNav.querySelector('.navigation__item:last-child');
+        if (lastInlineNavLink) {
+          var inlineNavWidth = null;
+          if(document.querySelector('html[dir=rtl]')) {
+            inlineNavWidth = firstInlineNavLink.offsetLeft - lastInlineNavLink.offsetLeft + firstInlineNavLink.offsetWidth;
+          } else {
+            inlineNavWidth = lastInlineNavLink.offsetLeft - firstInlineNavLink.offsetLeft + lastInlineNavLink.offsetWidth;
+          }
+          if (inlineNavContainer.offsetWidth >= inlineNavWidth) {
+            pageHeader.classList.add('pageheader--layout-inline-permitted');
+            var tallLogo = logoContainer.clientHeight > lastInlineNavLink.clientHeight + 20;
+            if (tallLogo) {
+              inlineNav.classList.add('navigation--tight-underline');
+            } else {
+              inlineNav.classList.remove('navigation--tight-underline');
+            }
+          } else {
+            pageHeader.classList.remove('pageheader--layout-inline-permitted');
+          }
+        }
+      }
+    };
+
+    theme.setInitialHeaderHeightProperty = () => {
+      const section = document.querySelector('.section-header');
+      if (section) {
+        document.documentElement.style.setProperty('--theme-header-height', Math.ceil(section.clientHeight) + 'px');
+      }
+    };
+
+    // Run layout tasks as soon as DOM is ready
+    document.addEventListener('DOMContentLoaded', () => {
+      theme.setInitialHeaderHeightProperty();
+      if (theme.inlineNavigationCheck) theme.inlineNavigationCheck();
+    });
+    window.addEventListener('resize', () => {
+      theme.setInitialHeaderHeightProperty();
+      if (theme.inlineNavigationCheck) theme.inlineNavigationCheck();
+    });
+  </script>
+</head>
+<body  class="template-index
+ swatch-source-native swatch-method-swatches swatch-style-icon_circle
+ cc-animate-enabled">
+
+  
+<!-- Google Tag Manager (noscript) -->
+
+<!-- End Google Tag Manager (noscript) -->
+  
+  <a class="skip-link visually-hidden" href="#content" data-cs-role="skip">Skip to content</a><!-- BEGIN sections: header-group -->
+<div id="shopify-section-sections--24392109293842__header" class="shopify-section shopify-section-group-header-group section-header" style="position: fixed; top: 0; width: 100%; z-index: 9999; background-color: transparent; transition: background-color 0.3s ease;"><style data-shopify>
+  .logo img {
+    width: 180px;
+  }
+  .logo-area__middle--logo-image {
+    max-width: 180px;
+  }
+  @media (max-width: 767.98px) {
+    .logo img {
+      width: 130px;
+    }
+  }.section-header {
+    position: -webkit-sticky;
+    position: sticky;
+  }.section-header {
+      margin-bottom: calc(var(--theme-header-height) * -1);
+      --transparent-header-text-color: #000000;
+    }
+    .section-store-messages {
+      display: none;
+    }
+    #content .shopify-section:first-child .text-overlay {
+      padding-top: var(--theme-header-height);
+    }</style>
+<page-header data-section-id="sections--24392109293842__header">
+  <div id="pageheader" class="pageheader pageheader--layout-inline-menu-left pageheader--transparent-permitted pageheader--transparent pageheader--sticky">
+    <div class="logo-area container container--no-max">
+      <div class="logo-area__left">
+        <div class="logo-area__left__inner">
+          <button class="mobile-nav-toggle" aria-label="Menu" aria-controls="main-nav"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon feather feather-menu" aria-hidden="true" focusable="false" role="presentation"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
+          
+            <a class="show-search-link" href="/search" aria-label="Search">
+              <span class="show-search-link__icon"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false" role="presentation"><g transform="translate(3 3)" stroke="currentColor" stroke-width="1.5" fill="none" fill-rule="evenodd"><circle cx="7.824" cy="7.824" r="7.824"/><path stroke-linecap="square" d="m13.971 13.971 4.47 4.47"/></g></svg></span>
+              <span class="show-search-link__text visually-hidden">Search</span>
+            </a>
+          
+          
+            <div id="proxy-nav" class="navigation navigation--left" role="navigation" aria-label="Primary">
+              <div class="navigation__tier-1-container">
+                <ul class="navigation__tier-1">
+  <li class="navigation__item"><a href="/" class="navigation__link">HOME</a></li>
+  <li class="navigation__item"><a href="/about" class="navigation__link">ABOUT</a></li>
+  <li class="navigation__item"><a href="/gallery" class="navigation__link">GALLERY</a></li>
+  <li class="navigation__item"><a href="/amenities" class="navigation__link">AMENITIES</a></li>
+  <li class="navigation__item"><a href="/contact" class="navigation__link">CONTACT</a></li>
+</ul>
+              </div>
+            </div>
+          
+        </div>
+      </div>
+
+      <div class="logo-area__middle logo-area__middle--logo-image">
+        <div class="logo-area__middle__inner">
+          <div class="logo"><h1 class="logo__h1"><a class="logo__link" href="/" title="Ready Homes"><img class="logo__image" src="/assets/logo.png" alt="Ready Homes" itemprop="logo" style="width: 180px; height: auto; display: block;" loading="eager" /></a></h1></div>
+        </div>
+      </div>
+
+      <div class="logo-area__right">
+        <div class="logo-area__right__inner" style="display: flex; align-items: center;">
+          <a href="/contact" class="btn btn--secondary btn--compact" style="margin-left: 20px; font-size: 11px; padding: 10px 16px;">SCHEDULE A CALL</a>
+        </div>
+      </div>
+    </div><script src="/assets/js/main-search.js" defer></script>
+      <main-search class="main-search "
+          data-quick-search="true"
+          data-quick-search-meta="true">
+
+        <div class="main-search__container container">
+          <button class="main-search__close" aria-label="Close"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon feather feather-x" aria-hidden="true" focusable="false" role="presentation"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+
+          <form class="main-search__form" action="/search" method="get" autocomplete="off">
+            <div class="main-search__input-container">
+              <input class="main-search__input" type="text" name="q" autocomplete="off" placeholder="Search our store" aria-label="Search" />
+              <button class="main-search__button" type="submit" aria-label="Search"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false" role="presentation"><g transform="translate(3 3)" stroke="currentColor" stroke-width="1.5" fill="none" fill-rule="evenodd"><circle cx="7.824" cy="7.824" r="7.824"/><path stroke-linecap="square" d="m13.971 13.971 4.47 4.47"/></g></svg></button>
+            </div><script src="/assets/js/search-suggestions.js" defer></script>
+              <search-suggestions></search-suggestions></form>
+
+          <div class="main-search__results"></div>
+
+          
+        </div>
+      </main-search></div>
+
+  <main-navigation id="main-nav" class="desktop-only" data-proxy-nav="proxy-nav">
+    <div class="navigation navigation--main" role="navigation" aria-label="Primary">
+      <div class="navigation__tier-1-container">
+        <ul class="navigation__tier-1">
+  <li class="navigation__item"><a href="/" class="navigation__link">HOME</a></li>
+  <li class="navigation__item"><a href="/about" class="navigation__link">ABOUT</a></li>
+  <li class="navigation__item"><a href="/gallery" class="navigation__link">GALLERY</a></li>
+  <li class="navigation__item"><a href="/amenities" class="navigation__link">AMENITIES</a></li>
+  <li class="navigation__item"><a href="/contact" class="navigation__link">CONTACT</a></li>
+</ul>
+      </div>
+    </div><script class="mobile-navigation-drawer-template" type="text/template">
+      <div class="mobile-navigation-drawer" data-mobile-expand-with-entire-link="true">
+        <div class="navigation navigation--main" role="navigation" aria-label="Primary">
+          <div class="navigation__tier-1-container">
+            <div class="navigation__mobile-header">
+              <a href="#" class="mobile-nav-back has-ltr-icon" aria-label="Back"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" class="icon feather feather-chevron-left" aria-hidden="true" focusable="false" role="presentation"><path d="m15 18-6-6 6-6"/></svg></a>
+              <span class="mobile-nav-title"></span>
+              <a href="#" class="mobile-nav-toggle"  aria-label="Close"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" class="icon feather feather-x" aria-hidden="true" focusable="false" role="presentation"><path d="M18 6 6 18M6 6l12 12"/></svg></a>
+            </div>
+            <ul class="navigation__tier-1">
+  <li class="navigation__item"><a href="/" class="navigation__link">HOME</a></li>
+  <li class="navigation__item"><a href="/about" class="navigation__link">ABOUT</a></li>
+  <li class="navigation__item"><a href="/gallery" class="navigation__link">GALLERY</a></li>
+  <li class="navigation__item"><a href="/amenities" class="navigation__link">AMENITIES</a></li>
+  <li class="navigation__item"><a href="/contact" class="navigation__link">CONTACT</a></li>
+</ul>
+            
+          </div>
+        </div>
+        <div class="mobile-navigation-drawer__footer"></div>
+      </div>
+    </script>
+  </main-navigation>
+
+  <a href="#" class="header-shade mobile-nav-toggle" aria-label="Close"></a>
+</page-header>
+
+<script>
+  theme.inlineNavigationCheck();
+  setTimeout(theme.setInitialHeaderHeightProperty, 0);
+</script><script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "name": "Ready Homes",
+      "url": "https:\/\/us.fronteriors.co",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https:\/\/us.fronteriors.co\/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+  </script>
+
+</div><div id="shopify-section-sections--24392109293842__store-messages" class="shopify-section shopify-section-group-header-group section-store-messages">
+<div id="section-id-sections--24392109293842__store-messages">
+    <style data-shopify>
+      #section-id-sections--24392109293842__store-messages {
+        --background: #f4f6f8;
+        --text-1: #171717;
+        --text-2: #4c4c4b;
+      }
+    </style>
+    <div class="store-messages messages-0 desktop-only">
+      <div class="container"></div>
+    </div></div>
+</div>
+<!-- END sections: header-group --><main id="content" role="main">
+    <div class="container cf">
+
+      <div id="react-hero-root"></div>
+<script type="module" src="/src/hero-mount.tsx"></script>
 
 
-    <!-- Preload Headline Fonts -->
-    <link rel="preload" href="/fonts/inter-tight-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/inter-tight-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin />
 
-    <!-- Open Graph / Meta -->
-    <meta property="og:title" content="1159 Diamond St — Ready Homes" />
-    <meta property="og:description" content="Ready Homes — Premium architecture, custom modern design, and luxury features crafted for the spaces you love." />
-    <!-- Update og:image host when moving to the final production domain -->
-    <meta property="og:image" content="https://ready-homes-psi.vercel.app/frames/hero-poster.webp" />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
 
-    <title>1159 Diamond St — Ready Homes</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+</div><div id="shopify-section-template--24392116044050__1635927863703110df" class="shopify-section section-rich-text"><div class="fully-spaced-row--large" data-cc-animate>
+  <div class="container container--reading-width">
+    <div class="align-ltr-left spaced-column">
+      
+      
+
+            
+              <h2 class="majortitle in-content h1" >1159. But Elevated.</h2>
+            
+
+          
+      
+
+            <div class="rte lightly-spaced-row large-text" ><p>Discover 1159 Diamond, fully elevated, custom crafted property with beautifully curated finishes and designs. </p><p>Built in a neighborhood you will truly adore. Finished in a way you won't stop thinking about.</p></div>
+
+          
+      
+    </div>
+  </div>
+</div>
+
+
+
+</div><div id="react-horizontal-scrub-root"></div>
+<script type="module" src="/src/horizontal-mount.tsx"></script>
+</div><div id="shopify-section-template--24392116044050__cross_page_promos_bCknXf" class="shopify-section">
+  <div id="section-id-template--24392116044050__cross_page_promos_bCknXf" class="cross-page-promos">
+    <div class="container">
+      <div class="flexible-layout layout-all-quarters"><div
+            class="column column--quarter align-center block-id-icon_HEeRUJ"
+            
+          >
+            <div class="relative">
+              
+
+              
+                <div class="icon-with-caption">
+                  <div class="icon-with-caption__icon"><svg class="icon icon--medium icon--type-star" stroke-width="1" aria-hidden="true" focusable="false" role="presentation" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="currentColor" d="M8 1c.21 0 .4.13.47.33l1.62 4.54 4.92.1a.5.5 0 01.29.9l-3.92 2.9 1.42 4.58a.5.5 0 01-.75.56L8 12.17 3.95 14.9a.5.5 0 01-.75-.56l1.42-4.58L.7 6.87a.5.5 0 01.29-.9l4.92-.1 1.62-4.54A.5.5 0 018 1zm0 2L6.74 6.52a.5.5 0 01-.46.33l-3.8.08L5.5 9.17a.5.5 0 01.18.55l-1.1 3.56 3.14-2.13a.5.5 0 01.56 0l3.15 2.13-1.1-3.56a.5.5 0 01.17-.55l3.02-2.23-3.8-.08a.5.5 0 01-.46-.33L8 2.99z"/></svg></div>
+
+                  
+                    <div class="icon-with-caption__text">
+                      <div class="heading-font h6 align-center">Premium details crafted with care</div>
+                    </div>
+                  
+                </div>
+              
+
+              
+            </div>
+          </div><div
+            class="column column--quarter align-center block-id-icon_nWTENe"
+            
+          >
+            <div class="relative">
+              
+
+              
+                <div class="icon-with-caption">
+                  <div class="icon-with-caption__icon"><svg class="icon icon--medium icon--type-clock" stroke-width="1" aria-hidden="true" focusable="false" role="presentation" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><circle stroke="currentColor" fill="none" cx="8" cy="8" r="6.7097588" />
+      <polyline stroke="currentColor" fill="none" points="12 6 12 12 16 14" transform="matrix(0.67097581,0,0,0.67097581,-0.01963672,-0.01963672)" /></svg></div>
+
+                  
+                    <div class="icon-with-caption__text">
+                      <div class="heading-font h6 align-center">Ready to move in next month</div>
+                    </div>
+                  
+                </div>
+              
+
+              
+            </div>
+          </div><div
+            class="column column--quarter align-center block-id-icon_fxxYem"
+            
+          >
+            <div class="relative">
+              
+
+              
+                <div class="icon-with-caption">
+                  <div class="icon-with-caption__icon"><svg class="icon icon--medium icon--type-ruler" stroke-width="1" aria-hidden="true" focusable="false" role="presentation" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="currentColor" d="M14.93 4.11L12.1 1.28a1 1 0 00-1.41 0L6.8 5.17.78 11.18a1 1 0 000 1.42l2.82 2.82a1 1 0 001.42 0l9.9-9.9a1 1 0 000-1.4zm-10.6 10.6L1.48 11.9l1.41-1.41 1.06 1.06a.5.5 0 00.71-.71L3.61 9.77l1.42-1.42 1.05 1.06a.5.5 0 00.71-.7L5.73 7.65l1.42-1.42L8.2 7.3c.2.2.5.2.7 0s.2-.5 0-.7L7.85 5.53 9.27 4.1l1.06 1.06a.5.5 0 00.71-.7L9.98 3.4 11.39 2l2.83 2.83-9.9 9.9z"/></svg></div>
+
+                  
+                    <div class="icon-with-caption__text">
+                      <div class="heading-font h6 align-center">Private tours on request</div>
+                    </div>
+                  
+                </div>
+              
+
+              
+            </div>
+          </div><div
+            class="column column--quarter align-center block-id-icon_93yF9e"
+            
+          >
+            <div class="relative">
+              
+
+              
+                <div class="icon-with-caption">
+                  <div class="icon-with-caption__icon"><svg class="icon icon--medium icon--type-chat_bubble" stroke-width="1" aria-hidden="true" focusable="false" role="presentation" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="currentColor" d="M11.3 13.02a6 6 0 111.72-1.72L14 14l-2.7-.98zm2.82-1.62a7 7 0 10-2.72 2.72l2.26.82a1 1 0 001.28-1.28l-.82-2.26z"/>
+      <path fill="currentColor" d="M4.9 9.16c.52 0 .86-.36.86-.85 0-.5-.34-.85-.87-.85-.52 0-.86.36-.86.85 0 .5.34.85.86.85zM7.88 9.16c.53 0 .87-.36.87-.85 0-.5-.34-.85-.87-.85-.52 0-.87.36-.87.85 0 .5.35.85.87.85zM10.87 9.16c.52 0 .87-.36.87-.85 0-.5-.35-.85-.87-.85s-.87.36-.87.85c0 .5.35.85.87.85z"/></svg></div>
+
+                  
+                    <div class="icon-with-caption__text">
+                      <div class="heading-font h6 align-center">Friendly support from our experts</div>
+                    </div>
+                  
+                </div>
+              
+
+              
+            </div>
+          </div></div>
+    </div>
+  </div><style data-shopify>
+  #section-id-template--24392116044050__cross_page_promos_bCknXf {
+    --bg-color: #ffffff;
+    --text-color: #171717;
+  }</style>
+
+
+</div><div id="shopify-section-template--24392116044050__rich_text_dxT8Uf" class="shopify-section section-rich-text"><div class="use-color-scheme use-color-scheme--1 fully-padded-row--medium" data-cc-animate>
+  <div class="container container--reading-width">
+    <div class="align-ltr-left spaced-column">
+      
+      
+
+            
+              <h2 class="majortitle in-content h1" ></h2>
+            
+
+          
+      
+
+            <div class="rte lightly-spaced-row large-text" ><p>Discover the extraordinary world of 1159 Diamond, an exceptionally crafted property that elevates your lifestyle by offering bespoke design in each room. </p></div>
+
+          
+      
+    </div>
+  </div>
+</div>
+
+
+
+</div><div id="shopify-section-template--24392116044050__key_features_XHCKgr" class="shopify-section section-key-features"><link rel="stylesheet" href="/assets/css/feature-rating.css" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="/assets/css/scrolling-image-list.css" media="print" onload="this.media='all'">
+<script src="/assets/js/scrolling-image-list.js" defer></script><style data-shopify>
+  
+    #template--24392116044050__key_features_XHCKgr[data-current-index="1"] {
+      --text-color: 0 0 0;
+      --heading-color: 0 0 0;
+      --link-color: 0 0 0;
+    }
+
+    #template--24392116044050__key_features_XHCKgr .scrolling-image-list__background[data-index="1"] {
+      background: #ffffff;
+    }
+
+    #template--24392116044050__key_features_XHCKgr[data-current-index="1"] [data-index="1"] {
+      --content-fade-delay: 200ms;
+      --content-visibility: visible;
+      opacity: 1;
+    }
+
+    #template--24392116044050__key_features_XHCKgr[data-current-index="1"] .scrolling-image-list-dots__dot[data-index="1"] {
+      background: currentColor;
+    }
+  
+    #template--24392116044050__key_features_XHCKgr[data-current-index="2"] {
+      --text-color: 0 0 0;
+      --heading-color: 0 0 0;
+      --link-color: 0 0 0;
+    }
+
+    #template--24392116044050__key_features_XHCKgr .scrolling-image-list__background[data-index="2"] {
+      background: #f2efec;
+    }
+
+    #template--24392116044050__key_features_XHCKgr[data-current-index="2"] [data-index="2"] {
+      --content-fade-delay: 200ms;
+      --content-visibility: visible;
+      opacity: 1;
+    }
+
+    #template--24392116044050__key_features_XHCKgr[data-current-index="2"] .scrolling-image-list-dots__dot[data-index="2"] {
+      background: currentColor;
+    }
+  
+    #template--24392116044050__key_features_XHCKgr[data-current-index="3"] {
+      --text-color: 0 0 0;
+      --heading-color: 0 0 0;
+      --link-color: 0 0 0;
+    }
+
+    #template--24392116044050__key_features_XHCKgr .scrolling-image-list__background[data-index="3"] {
+      background: #ffffff;
+    }
+
+    #template--24392116044050__key_features_XHCKgr[data-current-index="3"] [data-index="3"] {
+      --content-fade-delay: 200ms;
+      --content-visibility: visible;
+      opacity: 1;
+    }
+
+    #template--24392116044050__key_features_XHCKgr[data-current-index="3"] .scrolling-image-list-dots__dot[data-index="3"] {
+      background: currentColor;
+    }
+  
+</style>
+
+<scrolling-image-list
+    id="template--24392116044050__key_features_XHCKgr"
+    data-current-index="1"
+    class="scrolling-image-list block use-color-scheme fully-padded-row--large"
+    style="--image-width: 700px">
+  
+    <div class="scrolling-image-list__background" data-index="1"></div>
+  
+    <div class="scrolling-image-list__background" data-index="2"></div>
+  
+    <div class="scrolling-image-list__background" data-index="3"></div>
+  
+  <div class="container container--not-mobile">
+    <div class="flexible-layout">
+      <div class="column column--half ">
+        <carousel-slider class="carousel block" data-dispatch-events="true">
+          <div class="slider slider--no-scrollbar fade-in-up" data-cc-animate data-cc-animate-delay="0.1s">
+            <div class="slider__grid md:block">
+              
+                <div class="slider__item flex-none basis-full" >
+                  <div class="scrolling-image-list__image" data-index="1" tabindex="0"><div class="img-ar img-ar--cover" style="--aspect-ratio: 1">
+<img src="/tour/house_aerial.webp" alt="" width="1920" height="1920" loading="lazy" sizes="(min-width: 1600px) 800px, (min-width: 768px) 50vw, 100vw" srcset="/tour/house_aerial.webp" class="theme-img"></div>
+<div class="mobile-only fully-spaced-row scrolling-image-list__content scrolling-image-list__content--mobile" data-index="1"><div class="subheading spaced-row" role="heading" aria-level="2">WHY 1159 DIAMOND</div><div class="feature-rating-row">
+                          <div class="feature-rating">
+  <div class="visually-hidden">
+    Rating of 1 means .<br>
+    
+    Rating of 3 means .<br>
+    The rating of this product for "" is 1.
+  </div>
+
+  <div class="segment-bar" role="presentation">
+      <div class="segment-bar__segment segment-bar__segment--filled"></div>
+      <div class="segment-bar__segment"></div>
+      <div class="segment-bar__segment"></div>
+    </div>
+
+  
+    <div class="feature-rating__labels" role="presentation">
+      <div class="feature-rating__label-left"></div>
+      
+      <div class="feature-rating__label-right"></div>
+    </div>
+  
+</div>
+
+                        </div><h3 class="h2">Premium quality delivered today</h3><div class="rte"><p>Expertly crafted with love and premium materials. All surfaces are finished with real wood flooring, quality paint, and more. No vinyl or plastics</p></div></div>
+                  </div>
+                </div>
+              
+                <div class="slider__item flex-none basis-full" >
+                  <div class="scrolling-image-list__image" data-index="2" tabindex="0"><div class="img-ar img-ar--cover" style="--aspect-ratio: 1">
+<img src="/tour/house_address.webp" alt="" width="800" height="800" loading="lazy" sizes="(min-width: 1600px) 800px, (min-width: 768px) 50vw, 100vw" srcset="/tour/house_address.webp" class="theme-img"></div>
+<div class="mobile-only fully-spaced-row scrolling-image-list__content scrolling-image-list__content--mobile" data-index="2"><div class="subheading spaced-row" role="heading" aria-level="2">WHY 1159 DIAMOND</div><div class="feature-rating-row">
+                          <div class="feature-rating">
+  <div class="visually-hidden">
+    Rating of 1 means .<br>
+    
+    Rating of 3 means .<br>
+    The rating of this product for "" is 2.
+  </div>
+
+  <div class="segment-bar" role="presentation">
+      <div class="segment-bar__segment segment-bar__segment--filled"></div>
+      <div class="segment-bar__segment segment-bar__segment--filled"></div>
+      <div class="segment-bar__segment"></div>
+    </div>
+
+  
+    <div class="feature-rating__labels" role="presentation">
+      <div class="feature-rating__label-left"></div>
+      
+      <div class="feature-rating__label-right"></div>
+    </div>
+  
+</div>
+
+                        </div><h3 class="h2">Friendly support from our team</h3><div class="rte"><p>We’re a small but mighty team who love connecting with customers. Alongside full consultations, we offer a <a href="/pages/discovery-call" title="DISCOVERY CALL"><strong>Complimentary Discovery</strong></a><a href="/pages/concept-call" target="_blank" title="CONCEPT CALL"><strong> Call</strong></a><strong> </strong> a quick way to ask your questions and get expert advice. Our team are equipped with all the tips and tricks you’ll need.</p></div></div>
+                  </div>
+                </div>
+              
+                <div class="slider__item flex-none basis-full" >
+                  <div class="scrolling-image-list__image" data-index="3" tabindex="0"><div class="img-ar img-ar--cover" style="--aspect-ratio: 1">
+<img src="/tour/tour_community.webp" alt="" width="1282" height="1282" loading="lazy" sizes="(min-width: 1600px) 800px, (min-width: 768px) 50vw, 100vw" srcset="/tour/tour_community.webp" class="theme-img"></div>
+<div class="mobile-only fully-spaced-row scrolling-image-list__content scrolling-image-list__content--mobile" data-index="3"><div class="subheading spaced-row" role="heading" aria-level="2">WHY 1159 DIAMOND</div><div class="feature-rating-row">
+                          <div class="feature-rating">
+  <div class="visually-hidden">
+    Rating of 1 means .<br>
+    
+    Rating of 3 means .<br>
+    The rating of this product for "" is 3.
+  </div>
+
+  <div class="segment-bar" role="presentation">
+      <div class="segment-bar__segment segment-bar__segment--filled"></div>
+      <div class="segment-bar__segment segment-bar__segment--filled"></div>
+      <div class="segment-bar__segment segment-bar__segment--filled"></div>
+    </div>
+
+  
+    <div class="feature-rating__labels" role="presentation">
+      <div class="feature-rating__label-left"></div>
+      
+      <div class="feature-rating__label-right"></div>
+    </div>
+  
+</div>
+
+                        </div><h3 class="h2">Beautiful and custom options</h3><div class="rte"><p>Our property is designed to fit modern, cozy, and highly functional families with custom styling on request. Contact us to discuss your showings.</p></div></div>
+                  </div>
+                </div>
+              
+            </div>
+          </div>
+
+          <div class="scrolling-image-list-dots flex justify-center mobile-only js" role="presentation"><div class="scrolling-image-list-dots__dot" data-index="1"></div><div class="scrolling-image-list-dots__dot" data-index="2"></div><div class="scrolling-image-list-dots__dot" data-index="3"></div></div>
+        </carousel-slider>
+      </div>
+
+      <div class="column column--half desktop-only scrolling-image-list__content-column" data-cc-animate>
+        <div class="scrolling-image-list__content-area">
+          <div class="feature-text-paired"><div class="subheading spaced-row" role="heading" aria-level="2">WHY 1159 DIAMOND</div><div class="scrolling-image-list__content-list">
+              
+                <div class="spaced-row scrolling-image-list__content" data-index="1" tabindex="0"><div class="feature-rating-row">
+                      <div class="feature-rating">
+  <div class="visually-hidden">
+    Rating of 1 means .<br>
+    
+    Rating of 3 means .<br>
+    The rating of this product for "" is 1.
+  </div>
+
+  <div class="segment-bar" role="presentation">
+      <div class="segment-bar__segment segment-bar__segment--filled"></div>
+      <div class="segment-bar__segment"></div>
+      <div class="segment-bar__segment"></div>
+    </div>
+
+  
+    <div class="feature-rating__labels" role="presentation">
+      <div class="feature-rating__label-left"></div>
+      
+      <div class="feature-rating__label-right"></div>
+    </div>
+  
+</div>
+
+                    </div><h3 class="h2">Premium quality delivered today</h3><div class="rte"><p>Expertly crafted with love and premium materials. All surfaces are finished with real wood flooring, quality paint, and more. No vinyl or plastics</p></div></div>
+              
+                <div class="spaced-row scrolling-image-list__content" data-index="2" tabindex="0"><div class="feature-rating-row">
+                      <div class="feature-rating">
+  <div class="visually-hidden">
+    Rating of 1 means .<br>
+    
+    Rating of 3 means .<br>
+    The rating of this product for "" is 2.
+  </div>
+
+  <div class="segment-bar" role="presentation">
+      <div class="segment-bar__segment segment-bar__segment--filled"></div>
+      <div class="segment-bar__segment segment-bar__segment--filled"></div>
+      <div class="segment-bar__segment"></div>
+    </div>
+
+  
+    <div class="feature-rating__labels" role="presentation">
+      <div class="feature-rating__label-left"></div>
+      
+      <div class="feature-rating__label-right"></div>
+    </div>
+  
+</div>
+
+                    </div><h3 class="h2">Friendly support from our team</h3><div class="rte"><p>We’re a small but mighty team who love connecting with customers. Alongside full consultations, we offer a <a href="/pages/discovery-call" title="DISCOVERY CALL"><strong>Complimentary Discovery</strong></a><a href="/pages/concept-call" target="_blank" title="CONCEPT CALL"><strong> Call</strong></a><strong> </strong> a quick way to ask your questions and get expert advice. Our team are equipped with all the tips and tricks you’ll need.</p></div></div>
+              
+                <div class="spaced-row scrolling-image-list__content" data-index="3" tabindex="0"><div class="feature-rating-row">
+                      <div class="feature-rating">
+  <div class="visually-hidden">
+    Rating of 1 means .<br>
+    
+    Rating of 3 means .<br>
+    The rating of this product for "" is 3.
+  </div>
+
+  <div class="segment-bar" role="presentation">
+      <div class="segment-bar__segment segment-bar__segment--filled"></div>
+      <div class="segment-bar__segment segment-bar__segment--filled"></div>
+      <div class="segment-bar__segment segment-bar__segment--filled"></div>
+    </div>
+
+  
+    <div class="feature-rating__labels" role="presentation">
+      <div class="feature-rating__label-left"></div>
+      
+      <div class="feature-rating__label-right"></div>
+    </div>
+  
+</div>
+
+                    </div><h3 class="h2">Beautiful and custom options</h3><div class="rte"><p>Our property is designed to fit modern, cozy, and highly functional families with custom styling on request. Contact us to discuss your showings.</p></div></div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</scrolling-image-list>
+
+
+
+</div><div id="shopify-section-template--24392116044050__rich_text_bkwWpz" class="shopify-section section-rich-text"><div class="fully-spaced-row--medium" data-cc-animate>
+  <div class="container container--reading-width">
+    <div class="align-ltr-left spaced-column">
+      
+      
+
+            
+              <h2 class="majortitle in-content h1" ></h2>
+            
+
+          
+      
+
+            <div class="rte lightly-spaced-row large-text" ></div>
+
+          
+      
+    </div>
+  </div>
+</div>
+
+
+
+</div><div id="shopify-section-template--24392116044050__rich_text_hd4Jgj" class="shopify-section section-rich-text"><div class="fully-spaced-row--medium" data-cc-animate>
+  <div class="container container--reading-width">
+    <div class="align-ltr-center spaced-column">
+      
+      
+
+            
+              <h2 class="majortitle in-content h1" >Shop Collections.</h2>
+            
+
+          
+      
+    </div>
+  </div>
+</div>
+
+
+
+</div><div id="shopify-section-template--24392116044050__collection_list_gPbGPE" class="shopify-section section-collection-list"><div class="section-id-template--24392116044050__collection_list_gPbGPE collection-slider-row for-collections ">
+  <div class="container container--no-max"><h2 class="hometitle h4 align-center has-paging" data-cc-animate data-cc-animate-delay="0.3s">
+      
+      <span class="has-paging__title"></span>
+      
+    </h2>
+
+    <div class="collection-listing fade-in-up" data-cc-animate>
+      <div class="product-grid product-grid--per-row-2 product-grid--per-row-mob-2 product-grid--image-shape-square"><div class="product-block collection-block" data-collection-id="440885379346"  >
+  <div class="block-inner">
+    <a class="product-link" href="/collections/besta">
+      <div class="image-cont">
+          <div class="product-block__image image-overlay__image img-stretch product-block__image--primary product-block__image--active"><div class="img-ar img-ar--cover" style="--aspect-ratio: 1.0">
+<img src="/featured/featured_bedroom.webp" alt="" width="1200" height="1200" loading="lazy" sizes="(min-width: 1600px) 800px, (min-width: 768px) 50vw, 50vw" srcset="/featured/featured_bedroom.webp" class="theme-img"></div>
+</div>
+        
+</div><div class="product-block__detail align-left"><div class="product-block__title">BESTA</div></div></a>
+  </div>
+</div>
+<div class="product-block collection-block" data-collection-id="442568278290"  >
+  <div class="block-inner">
+    <a class="product-link" href="/collections/pax">
+      <div class="image-cont">
+          <div class="product-block__image image-overlay__image img-stretch product-block__image--primary product-block__image--active"><div class="img-ar img-ar--cover" style="--aspect-ratio: 1.0">
+<img src="/featured/featured_living.webp" alt="" width="800" height="800" loading="lazy" sizes="(min-width: 1600px) 800px, (min-width: 768px) 50vw, 50vw" srcset="/featured/featured_living.webp" class="theme-img"></div>
+</div>
+        
+</div><div class="product-block__detail align-left"><div class="product-block__title">PAX</div></div></a>
+  </div>
+</div>
+<div class="product-block collection-block" data-collection-id="445501243666"  >
+  <div class="block-inner">
+    <a class="product-link" href="/collections/sektion">
+      <div class="image-cont">
+          <div class="product-block__image image-overlay__image img-stretch product-block__image--primary product-block__image--active"><div class="img-ar img-ar--cover" style="--aspect-ratio: 1.0">
+<img src="/tour/tour_bedrooms.png" alt="" width="1200" height="1200" loading="lazy" sizes="(min-width: 1600px) 800px, (min-width: 768px) 50vw, 50vw" srcset="/tour/tour_bedrooms.png" class="theme-img"></div>
+</div>
+        
+</div><div class="product-block__detail align-left"><div class="product-block__title">SEKTION</div></div></a>
+  </div>
+</div>
+<div class="product-block collection-block" data-collection-id="468915552530"  >
+  <div class="block-inner">
+    <a class="product-link" href="/collections/hardware">
+      <div class="image-cont">
+          <div class="product-block__image image-overlay__image img-stretch product-block__image--primary product-block__image--active"><div class="img-ar img-ar--cover" style="--aspect-ratio: 1.0">
+<img src="/tour/tour_pool.webp" alt="" width="1663" height="1663" loading="lazy" sizes="(min-width: 1600px) 800px, (min-width: 768px) 50vw, 50vw" srcset="/tour/tour_pool.webp" class="theme-img"></div>
+</div>
+        
+</div><div class="product-block__detail align-left"><div class="product-block__title">HARDWARE</div></div></a>
+  </div>
+</div>
+</div>
+    </div></div>
+</div>
+
+
+
+</div>
+  <!-- React Transformation Island -->
+  <div id="react-transformation-root"></div>
+  <script type="module" src="/src/transformation-mount.tsx"></script>
+  </div><div id="shopify-section-template--24392116044050__163592870141219e2f" class="shopify-section section-featured-blog"><div class="fully-spaced-row--medium">
+  <div class="container blog-row">
+    
+
+      <h2 class="hometitle h4 align-center"><a href="/blogs/features" data-cc-animate>Be inspired by featured projects.</a></h2>
+
+      
+
+        <div class="article-list article-layout--columns article-layout--one-row">
+          
+<div class="article" data-cc-animate data-cc-animate-delay="0.15s">
+            <div class="article__inner">
+              
+                <div class="article-image">
+                  <a href="/blogs/features/new-oak-veneer-finishes"><div class="img-ar img-ar--cover" style="--aspect-ratio: 1.0">
+<img src="/tour/tour_outdoor_kitchen.webp" alt="The Oak Collection, Expanded." width="1024" height="1024" loading="lazy" sizes="(min-width: 1024px) 440px, (min-width: 768px) 50vw, 100vw" srcset="/tour/tour_outdoor_kitchen.webp" class="theme-img"></div>
+</a>
+                </div>
+              
+
+              <h3><a href="/blogs/features/new-oak-veneer-finishes">The Oak Collection, Expanded.</a></h3><div class="meta">
+                <span class="iconmeta time">
+                  
+                  
+                </span>
+              </div>
+            </div>
+          </div>
+          
+<div class="article" data-cc-animate data-cc-animate-delay="0.3s">
+            <div class="article__inner">
+              
+                <div class="article-image">
+                  <a href="/blogs/features/reimagining-ikea-a-curated-retail-space-in-kauai-hawaii"><div class="img-ar img-ar--cover" style="--aspect-ratio: 1.0">
+<img src="/tour/tour_kitchen.webp" alt="Reimagining IKEA: A Curated Retail Space in Kauai, Hawaii" width="1420" height="1420" loading="lazy" sizes="(min-width: 1024px) 440px, (min-width: 768px) 50vw, 100vw" srcset="/tour/tour_kitchen.webp" class="theme-img"></div>
+</a>
+                </div>
+              
+
+              <h3><a href="/blogs/features/reimagining-ikea-a-curated-retail-space-in-kauai-hawaii">Reimagining IKEA: A Curated Retail Space in Kauai, Hawaii</a></h3><div class="meta">
+                <span class="iconmeta time">
+                  
+                  
+                </span>
+              </div>
+            </div>
+          </div>
+          
+<div class="article" data-cc-animate data-cc-animate-delay="0.45s">
+            <div class="article__inner">
+              
+                <div class="article-image">
+                  <a href="/blogs/features/a-calm-country-side-retreat-in-ceres-uk"><div class="img-ar img-ar--cover" style="--aspect-ratio: 1.0">
+<img src="/featured/featured_living.webp" alt="Contemporary Countryside Retreat in Ceres, UK with Custom IKEA Besta Cabinet Fronts" width="1025" height="1025" loading="lazy" sizes="(min-width: 1024px) 440px, (min-width: 768px) 50vw, 100vw" srcset="/featured/featured_living.webp" class="theme-img"></div>
+</a>
+                </div>
+              
+
+              <h3><a href="/blogs/features/a-calm-country-side-retreat-in-ceres-uk">Contemporary Countryside Retreat in Ceres, UK with Custom IKEA Besta Cabinet Fronts</a></h3><div class="meta">
+                <span class="iconmeta time">
+                  
+                  
+                </span>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      
+
+    
+  </div>
+</div>
+
+
+
+</div>
+
+    </div>
+  </main>
+
+  <div class="shopify-section section-contact" id="contact-form-section" style="background-color: #ffffff; padding: 100px 0;">
+    <div class="container container--no-max">
+      <div class="flexible-layout" style="align-items: center;">
+        
+        <!-- Left Column: Text & Image -->
+        <div class="column column--half">
+          <div class="contact-left-content" style="max-width: 520px; margin: 0 auto; padding: 20px;">
+            <h2 class="hero-text-font" style="font-size: clamp(2.5rem, 5vw, 3.5rem); line-height: 1.1; margin-bottom: 24px; font-weight: 700; color: #111;">
+              Ready to see 1159 Diamond in person?
+            </h2>
+            <p style="color: #555; margin-bottom: 40px; font-size: 1.1rem; line-height: 1.6;">
+              Schedule a private showing. Our team will walk you through every detail — from the hand-selected finishes to the resort-style backyard.
+            </p>
+            
+            <div class="image-cont" style="overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+              <div class="img-ar img-ar--cover" style="--aspect-ratio: 1.25;">
+                <img src="/tour/tour_kitchen.webp" alt="Kitchen at 1159 Diamond" loading="lazy" class="theme-img" style="object-fit: cover;">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Contact Form -->
+        <div class="column column--half">
+          <div class="contact-form-wrapper" style="max-width: 540px; margin: 0 auto; padding: 20px;">
+            <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you for your interest! Our team will contact you shortly.');">
+              <style>
+                .contact-form-wrapper .input-group { margin-bottom: 24px; }
+                .contact-form-wrapper .label { text-transform: uppercase; font-size: 11px; font-weight: 700; letter-spacing: 1px; display: block; margin-bottom: 8px; color: #333; }
+                .contact-form-wrapper .input, .contact-form-wrapper select.input { 
+                  border-radius: 0; border: 1px solid #eaeaea; padding: 16px 18px; 
+                  background-color: #fafafa; font-size: 15px; width: 100%; box-shadow: none;
+                  transition: border-color 0.2s ease;
+                }
+                .contact-form-wrapper .input:focus { border-color: #111; outline: none; }
+                .contact-form-wrapper .submit-btn {
+                  background-color: #141316; color: white; border-radius: 0; padding: 20px 30px; 
+                  font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; 
+                  width: 100%; display: flex; justify-content: center; align-items: center; gap: 10px;
+                  border: none; cursor: pointer; transition: background-color 0.2s ease;
+                }
+                .contact-form-wrapper .submit-btn:hover { background-color: #333; }
+                .contact-form-wrapper .form-row { display: flex; gap: 20px; margin-bottom: 24px; }
+                .contact-form-wrapper .form-col { flex: 1; }
+                @media (max-width: 767px) {
+                  .contact-form-wrapper .form-row { flex-direction: column; gap: 24px; }
+                }
+              </style>
+              
+              <div class="form-row">
+                <div class="form-col">
+                  <label for="contact_name" class="label">Name</label>
+                  <input type="text" id="contact_name" class="input" placeholder="Enter your name">
+                </div>
+                <div class="form-col">
+                  <label for="contact_last_name" class="label">Last Name*</label>
+                  <input type="text" id="contact_last_name" required class="input" placeholder="Enter your last name">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-col">
+                  <label for="contact_date" class="label">Preferred Showing Date*</label>
+                  <select id="contact_date" required class="input" style="appearance: auto; cursor: pointer;">
+                    <option value="" disabled selected>Select a date</option>
+                    <option value="today">Today</option>
+                    <option value="tomorrow">Tomorrow</option>
+                    <option value="this_week">This Week</option>
+                    <option value="next_week">Next Week</option>
+                  </select>
+                </div>
+                <div class="form-col">
+                  <label for="contact_email" class="label">Work Email*</label>
+                  <input type="email" id="contact_email" required class="input" placeholder="example@company.com">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-col">
+                  <label for="contact_buyer_type" class="label">Buyer Type*</label>
+                  <select id="contact_buyer_type" required class="input" style="appearance: auto; cursor: pointer;">
+                    <option value="" disabled selected>Select buyer type</option>
+                    <option value="first_time">First-Time Buyer</option>
+                    <option value="investor">Investor</option>
+                    <option value="upgrade">Upgrade</option>
+                  </select>
+                </div>
+                <div class="form-col">
+                  <label for="contact_budget" class="label">Budget Range*</label>
+                  <select id="contact_budget" required class="input" style="appearance: auto; cursor: pointer;">
+                    <option value="" disabled selected>Select range</option>
+                    <option value="1m-2m">$1M - $2M</option>
+                    <option value="2m-3m">$2M - $3M</option>
+                    <option value="3m+">$3M+</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="input-group">
+                <label for="contact_message" class="label">Message</label>
+                <textarea id="contact_message" class="input" rows="4" placeholder="Tell us what you're looking for in your next home..." style="resize: vertical;"></textarea>
+              </div>
+
+              <button type="submit" class="submit-btn">
+                SCHEDULE A PRIVATE SHOWING 
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+              </button>
+            </form>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div id="pagefooter"><!-- BEGIN sections: footer-group -->
+<div id="shopify-section-sections--24392109195538__footer" class="shopify-section shopify-section-group-footer-group section-footer">
+  <div class="container container--no-max section-footer__row-container">
+    <div class="section-footer__row section-footer__row--blocks" data-num-blocks="3">
+      
+        
+          <div class="section-footer__row__col section-footer__menu-block" role="navigation" aria-label="Secondary" >
+            
+<div class="section-footer__title heading-font h6 no-wrap">Quick links</div>
+            
+
+            
+              <ul class="section-footer__menu-block__menu" >
+                
+                  <li>
+                    <a href="/pages/our-story" class="no-wrap">ABOUT US</a>
+                  </li>
+                
+                  <li>
+                    <a href="/pages/contact" class="no-wrap">CONTACT US</a>
+                  </li>
+                
+                  <li>
+                    <a href="/pages/faq" class="no-wrap">FAQ</a>
+                  </li>
+                
+                  <li>
+                    <a href="/pages/trade-program" class="no-wrap">TRADE PROGRAM</a>
+                  </li>
+                
+                  <li>
+                    <a href="https://fronteriors-us.bixgrow.com/register" class="no-wrap">BECOME AN AFFILIATE</a>
+                  </li>
+                
+                  <li>
+                    <a href="/policies/shipping-policy" class="no-wrap">SHIPPING</a>
+                  </li>
+                
+                  <li>
+                    <a href="/policies/terms-of-service" class="no-wrap">TERMS OF SERVICE</a>
+                  </li>
+                
+                  <li>
+                    <a href="/policies/refund-policy" class="no-wrap">REFUND POLICY</a>
+                  </li>
+                
+                  <li>
+                    <a href="/policies/privacy-policy" class="no-wrap">PRIVACY POLICY</a>
+                  </li>
+                
+                  <li>
+                    <a href="/pages/accessibility" class="no-wrap">ACCESSIBILITY</a>
+                  </li>
+                
+                  <li>
+                    <a href="/pages/careers" class="no-wrap">CAREERS</a>
+                  </li>
+                
+              </ul>
+            
+          </div>
+
+        
+      
+        
+          <div class="section-footer__row__col section-footer__text-block section-footer__text-block--with-text" >
+            
+<div class="section-footer__title heading-font h6 no-wrap">What is Ready Homes?</div>
+            
+
+            
+              <div class="section-footer__text rte"><p>A curated collection of doors, sides and tops to transform IKEA kitchens, wardrobes and storage cabinets, specifically tailored for the Besta, Pax, and Sektion series - allowing interior enthusiasts to create something that reflects their unique personal style.<br/><br/>The concept offers all the benefits of IKEA’s practicality and affordability combined with Ready Homes quality craftsmanship.</p></div>
+            
+
+            
+
+            
+              <div class="section-footer__text-block__social"><ul class="social inline-flex flex-wrap "><li>
+      <a class="social__link flex items-center justify-center" href="https://www.facebook.com/Ready Homes/" target="_blank" rel="noopener" title="Ready Homes on Facebook"><svg aria-hidden="true" class="icon icon-facebook" viewBox="2 2 16 16" focusable="false" role="presentation"><path fill="currentColor" d="M18 10.049C18 5.603 14.419 2 10 2c-4.419 0-8 3.603-8 8.049C2 14.067 4.925 17.396 8.75 18v-5.624H6.719v-2.328h2.03V8.275c0-2.017 1.195-3.132 3.023-3.132.874 0 1.79.158 1.79.158v1.98h-1.009c-.994 0-1.303.621-1.303 1.258v1.51h2.219l-.355 2.326H11.25V18c3.825-.604 6.75-3.933 6.75-7.951Z"/></svg><span class="visually-hidden">Facebook</span>
+      </a>
+    </li><li>
+      <a class="social__link flex items-center justify-center" href="https://www.youtube.com/channel/UCPmSzEYWoaBH8klO-fRh8ug" target="_blank" rel="noopener" title="Ready Homes on YouTube"><svg class="icon" width="48" height="34" viewBox="0 0 48 34" aria-hidden="true" focusable="false" role="presentation"><path d="m19.044 23.27-.001-13.582 12.968 6.814-12.967 6.768ZM47.52 7.334s-.47-3.33-1.908-4.798C43.787.61 41.74.601 40.803.49 34.086 0 24.01 0 24.01 0h-.02S13.914 0 7.197.49C6.258.6 4.213.61 2.387 2.535.947 4.003.48 7.334.48 7.334S0 11.247 0 15.158v3.668c0 3.912.48 7.823.48 7.823s.468 3.331 1.906 4.798c1.827 1.926 4.226 1.866 5.294 2.067C11.52 33.885 24 34 24 34s10.086-.015 16.803-.505c.938-.113 2.984-.122 4.809-2.048 1.439-1.467 1.908-4.798 1.908-4.798s.48-3.91.48-7.823v-3.668c0-3.911-.48-7.824-.48-7.824Z" fill="currentColor" fill-rule="evenodd"/></svg><span class="visually-hidden">YouTube</span>
+      </a>
+    </li><li>
+      <a class="social__link flex items-center justify-center" href="https://www.instagram.com/fronteriors/" target="_blank" rel="noopener" title="Ready Homes on Instagram"><svg class="icon" width="48" height="48" viewBox="0 0 48 48" aria-hidden="true" focusable="false" role="presentation"><path d="M24 0c-6.518 0-7.335.028-9.895.144-2.555.117-4.3.523-5.826 1.116-1.578.613-2.917 1.434-4.25 2.768C2.693 5.362 1.872 6.701 1.26 8.28.667 9.806.26 11.55.144 14.105.028 16.665 0 17.482 0 24s.028 7.335.144 9.895c.117 2.555.523 4.3 1.116 5.826.613 1.578 1.434 2.917 2.768 4.25 1.334 1.335 2.673 2.156 4.251 2.77 1.527.592 3.271.998 5.826 1.115 2.56.116 3.377.144 9.895.144s7.335-.028 9.895-.144c2.555-.117 4.3-.523 5.826-1.116 1.578-.613 2.917-1.434 4.25-2.768 1.335-1.334 2.156-2.673 2.77-4.251.592-1.527.998-3.271 1.115-5.826.116-2.56.144-3.377.144-9.895s-.028-7.335-.144-9.895c-.117-2.555-.523-4.3-1.116-5.826-.613-1.578-1.434-2.917-2.768-4.25-1.334-1.335-2.673-2.156-4.251-2.769-1.527-.593-3.271-1-5.826-1.116C31.335.028 30.518 0 24 0Zm0 4.324c6.408 0 7.167.025 9.698.14 2.34.107 3.61.498 4.457.827 1.12.435 1.92.955 2.759 1.795.84.84 1.36 1.64 1.795 2.76.33.845.72 2.116.827 4.456.115 2.53.14 3.29.14 9.698s-.025 7.167-.14 9.698c-.107 2.34-.498 3.61-.827 4.457-.435 1.12-.955 1.92-1.795 2.759-.84.84-1.64 1.36-2.76 1.795-.845.33-2.116.72-4.456.827-2.53.115-3.29.14-9.698.14-6.409 0-7.168-.025-9.698-.14-2.34-.107-3.61-.498-4.457-.827-1.12-.435-1.92-.955-2.759-1.795-.84-.84-1.36-1.64-1.795-2.76-.33-.845-.72-2.116-.827-4.456-.115-2.53-.14-3.29-.14-9.698s.025-7.167.14-9.698c.107-2.34.498-3.61.827-4.457.435-1.12.955-1.92 1.795-2.759.84-.84 1.64-1.36 2.76-1.795.845-.33 2.116-.72 4.456-.827 2.53-.115 3.29-.14 9.698-.14Zm0 7.352c-6.807 0-12.324 5.517-12.324 12.324 0 6.807 5.517 12.324 12.324 12.324 6.807 0 12.324-5.517 12.324-12.324 0-6.807-5.517-12.324-12.324-12.324ZM24 32a8 8 0 1 1 0-16 8 8 0 0 1 0 16Zm15.691-20.811a2.88 2.88 0 1 1-5.76 0 2.88 2.88 0 0 1 5.76 0Z" fill="currentColor" fill-rule="evenodd"/></svg><span class="visually-hidden">Instagram</span>
+      </a>
+    </li><li>
+      <a class="social__link flex items-center justify-center" href="https://www.pinterest.com/fronteriors/" target="_blank" rel="noopener" title="Ready Homes on Pinterest"><svg class="icon" width="48" height="48" viewBox="0 0 48 48" aria-hidden="true" focusable="false" role="presentation"><path d="M24.001 0C10.748 0 0 10.745 0 24.001c0 9.825 5.91 18.27 14.369 21.981-.068-1.674-.012-3.689.415-5.512.462-1.948 3.087-13.076 3.087-13.076s-.765-1.533-.765-3.799c0-3.556 2.064-6.212 4.629-6.212 2.182 0 3.237 1.64 3.237 3.604 0 2.193-1.4 5.476-2.12 8.515-.6 2.549 1.276 4.623 3.788 4.623 4.547 0 7.61-5.84 7.61-12.76 0-5.258-3.543-9.195-9.986-9.195-7.279 0-11.815 5.427-11.815 11.49 0 2.094.616 3.567 1.581 4.708.446.527.505.736.344 1.34-.113.438-.378 1.505-.488 1.925-.16.607-.652.827-1.2.601-3.355-1.369-4.916-5.04-4.916-9.17 0-6.816 5.75-14.995 17.152-14.995 9.164 0 15.195 6.636 15.195 13.75 0 9.416-5.233 16.45-12.952 16.45-2.588 0-5.026-1.4-5.862-2.99 0 0-1.394 5.53-1.688 6.596-.508 1.85-1.504 3.7-2.415 5.14 2.159.638 4.44.985 6.801.985C37.255 48 48 37.255 48 24.001 48 10.745 37.255 0 24.001 0" fill="currentColor" fill-rule="evenodd"/></svg><span class="visually-hidden">Pinterest</span>
+      </a>
+    </li></ul>
+</div>
+            
+</div>
+
+        
+      
+        
+          <div class="section-footer__row__col section-footer__newsletter-block" >
+            
+<div class="section-footer__title heading-font h6 no-wrap">Stay in touch</div>
+            
+
+            
+              <div class="section-footer__text rte">
+                <p>If you're in need of assistance with your order, reach out to our helpful team at<strong> </strong><a href="mailto:info@readyhomes.com" title="mailto:info@readyhomes.com">info@readyhomes.com</a></p><p><strong>GET YOURSELF ON THE LIST</strong><br/>Sign up for our newsletter and get 5% discount on your first order. </p>
+              </div>
+            
+
+            <div class="signup-form">
+  <form method="post" action="/contact#contact_form" id="contact_form" accept-charset="UTF-8" class="contact-form"><input type="hidden" name="form_type" value="customer" /><input type="hidden" name="utf8" value="✓" />
+    
+<input type="hidden" name="contact[tags]" value="prospect,newsletter"/>
+      <p>
+        <input type="email"
+          placeholder="Your email"
+          class="signup-form__email"
+          value=""
+          name="contact[email]"
+          aria-label="Email"
+          
+          required />
+      </p>
+      <button class="btn btn--primary signup-form__button" type="submit">Subscribe</button>
+    
+  </form>
+</div>
+
+
+            
+          </div>
+
+        
+      
+    </div>
+  </div>
+
+<div class="container container--no-max section-footer__row-container section-footer__row-container--with-localization">
+  <div class="section-footer__row section-footer__row-lower">
+    <div class="section-footer__row__col">
+      
+        <div class="section-footer__payment-icons">
+          
+            <svg class="section-footer__payment-icon" xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 38 24" width="38" height="24" fill="none" aria-labelledby="pi-american_express"><title id="pi-american_express">American Express</title><rect x=".5" y=".5" width="37" height="23" rx="2.5" stroke="#000" stroke-opacity=".07" fill="none"/><path d="M35 0H3C1.3 0 0 1.3 0 3V21C0 22.7 1.4 24 3 24H35C36.7 24 38 22.7 38 21V3C38 1.3 36.6 0 35 0Z" fill="#0071CE" style="fill:#0071CE;fill:color(display-p3 0.0000 0.4431 0.8078);fill-opacity:1;"/><path d="M3 0.5H35C36.3348 0.5 37.5 1.58692 37.5 3V21C37.5 22.4239 36.4239 23.5 35 23.5H3C1.66524 23.5 0.5 22.4131 0.5 21V3C0.5 1.57614 1.57614 0.5 3 0.5Z" stroke="black" stroke-opacity="0.07" style="stroke:black;stroke-opacity:0.07;"/><path d="M25.8662 6.33203V3H31L31.8662 5.5332L32.7334 3H37V14.2002H36.7998L34.8672 16.2656L36.7998 18.3594H37V21.2666H33.5996L31.9336 19.3994L30.2002 21.2666H19.4668V12.666H16L20.2666 3H24.4004L25.8662 6.33203ZM20.5996 20.2656H27V18.5322H22.666V17.3994H26.8662V15.666H22.666V14.5322H27V12.7988H20.5996V20.2656ZM30.5332 16.5322L27 20.2656H29.5996L31.8662 17.8662L34.0664 20.2656H36.7324L33.1992 16.4658L36.7324 12.7988H34.1328L31.8662 15.1992L29.7324 12.7988H27L30.5332 16.5322ZM17.666 11.7324H19.9326L20.5332 10.1992H23.999L24.666 11.7324H26.999L23.666 4.19922H20.999L17.666 11.7324ZM33.5996 4.19922L31.9326 8.86621L30.1992 4.19922H27V11.666H29.0664V6.39941L31 11.666H32.7998L34.7324 6.39941V11.666H36.7324V4.13281L33.5996 4.19922ZM23.2656 8.46582H21.2656L22.2656 5.99902L23.2656 8.46582Z" fill="white" style="fill:white;fill-opacity:1;"/></svg>
+
+          
+            <svg class="section-footer__payment-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" role="img" x="0" y="0" width="38" height="24" viewBox="0 0 165.521 105.965" xml:space="preserve" aria-labelledby="pi-apple_pay"><title id="pi-apple_pay">Apple Pay</title><path fill="#000" d="M150.698 0H14.823c-.566 0-1.133 0-1.698.003-.477.004-.953.009-1.43.022-1.039.028-2.087.09-3.113.274a10.51 10.51 0 0 0-2.958.975 9.932 9.932 0 0 0-4.35 4.35 10.463 10.463 0 0 0-.975 2.96C.113 9.611.052 10.658.024 11.696a70.22 70.22 0 0 0-.022 1.43C0 13.69 0 14.256 0 14.823v76.318c0 .567 0 1.132.002 1.699.003.476.009.953.022 1.43.028 1.036.09 2.084.275 3.11a10.46 10.46 0 0 0 .974 2.96 9.897 9.897 0 0 0 1.83 2.52 9.874 9.874 0 0 0 2.52 1.83c.947.483 1.917.79 2.96.977 1.025.183 2.073.245 3.112.273.477.011.953.017 1.43.02.565.004 1.132.004 1.698.004h135.875c.565 0 1.132 0 1.697-.004.476-.002.952-.009 1.431-.02 1.037-.028 2.085-.09 3.113-.273a10.478 10.478 0 0 0 2.958-.977 9.955 9.955 0 0 0 4.35-4.35c.483-.947.789-1.917.974-2.96.186-1.026.246-2.074.274-3.11.013-.477.02-.954.022-1.43.004-.567.004-1.132.004-1.699V14.824c0-.567 0-1.133-.004-1.699a63.067 63.067 0 0 0-.022-1.429c-.028-1.038-.088-2.085-.274-3.112a10.4 10.4 0 0 0-.974-2.96 9.94 9.94 0 0 0-4.35-4.35A10.52 10.52 0 0 0 156.939.3c-1.028-.185-2.076-.246-3.113-.274a71.417 71.417 0 0 0-1.431-.022C151.83 0 151.263 0 150.698 0z" /><path fill="#FFF" d="M150.698 3.532l1.672.003c.452.003.905.008 1.36.02.793.022 1.719.065 2.583.22.75.135 1.38.34 1.984.648a6.392 6.392 0 0 1 2.804 2.807c.306.6.51 1.226.645 1.983.154.854.197 1.783.218 2.58.013.45.019.9.02 1.36.005.557.005 1.113.005 1.671v76.318c0 .558 0 1.114-.004 1.682-.002.45-.008.9-.02 1.35-.022.796-.065 1.725-.221 2.589a6.855 6.855 0 0 1-.645 1.975 6.397 6.397 0 0 1-2.808 2.807c-.6.306-1.228.511-1.971.645-.881.157-1.847.2-2.574.22-.457.01-.912.017-1.379.019-.555.004-1.113.004-1.669.004H14.801c-.55 0-1.1 0-1.66-.004a74.993 74.993 0 0 1-1.35-.018c-.744-.02-1.71-.064-2.584-.22a6.938 6.938 0 0 1-1.986-.65 6.337 6.337 0 0 1-1.622-1.18 6.355 6.355 0 0 1-1.178-1.623 6.935 6.935 0 0 1-.646-1.985c-.156-.863-.2-1.788-.22-2.578a66.088 66.088 0 0 1-.02-1.355l-.003-1.327V14.474l.002-1.325a66.7 66.7 0 0 1 .02-1.357c.022-.792.065-1.717.222-2.587a6.924 6.924 0 0 1 .646-1.981c.304-.598.7-1.144 1.18-1.623a6.386 6.386 0 0 1 1.624-1.18 6.96 6.96 0 0 1 1.98-.646c.865-.155 1.792-.198 2.586-.22.452-.012.905-.017 1.354-.02l1.677-.003h135.875" /><g><g><path fill="#000" d="M43.508 35.77c1.404-1.755 2.356-4.112 2.105-6.52-2.054.102-4.56 1.355-6.012 3.112-1.303 1.504-2.456 3.959-2.156 6.266 2.306.2 4.61-1.152 6.063-2.858" /><path fill="#000" d="M45.587 39.079c-3.35-.2-6.196 1.9-7.795 1.9-1.6 0-4.049-1.8-6.698-1.751-3.447.05-6.645 2-8.395 5.1-3.598 6.2-.95 15.4 2.55 20.45 1.699 2.5 3.747 5.25 6.445 5.151 2.55-.1 3.549-1.65 6.647-1.65 3.097 0 3.997 1.65 6.696 1.6 2.798-.05 4.548-2.5 6.247-5 1.95-2.85 2.747-5.6 2.797-5.75-.05-.05-5.396-2.101-5.446-8.251-.05-5.15 4.198-7.6 4.398-7.751-2.399-3.548-6.147-3.948-7.447-4.048" /></g><g><path fill="#000" d="M78.973 32.11c7.278 0 12.347 5.017 12.347 12.321 0 7.33-5.173 12.373-12.529 12.373h-8.058V69.62h-5.822V32.11h14.062zm-8.24 19.807h6.68c5.07 0 7.954-2.729 7.954-7.46 0-4.73-2.885-7.434-7.928-7.434h-6.706v14.894z" /><path fill="#000" d="M92.764 61.847c0-4.809 3.665-7.564 10.423-7.98l7.252-.442v-2.08c0-3.04-2.001-4.704-5.562-4.704-2.938 0-5.07 1.507-5.51 3.82h-5.252c.157-4.86 4.731-8.395 10.918-8.395 6.654 0 10.995 3.483 10.995 8.89v18.663h-5.38v-4.497h-.13c-1.534 2.937-4.914 4.782-8.579 4.782-5.406 0-9.175-3.222-9.175-8.057zm17.675-2.417v-2.106l-6.472.416c-3.64.234-5.536 1.585-5.536 3.95 0 2.288 1.975 3.77 5.068 3.77 3.95 0 6.94-2.522 6.94-6.03z" /><path fill="#000" d="M120.975 79.652v-4.496c.364.051 1.247.103 1.715.103 2.573 0 4.029-1.09 4.913-3.899l.52-1.663-9.852-27.293h6.082l6.863 22.146h.13l6.862-22.146h5.927l-10.216 28.67c-2.34 6.577-5.017 8.735-10.683 8.735-.442 0-1.872-.052-2.261-.157z" /></g></g></svg>
+
+          
+            <svg class="section-footer__payment-icon" viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" role="img" width="38" height="24" aria-labelledby="pi-diners_club"><title id="pi-diners_club">Diners Club</title><path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z"/><path fill="#fff" d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32"/><path d="M12 12v3.7c0 .3-.2.3-.5.2-1.9-.8-3-3.3-2.3-5.4.4-1.1 1.2-2 2.3-2.4.4-.2.5-.1.5.2V12zm2 0V8.3c0-.3 0-.3.3-.2 2.1.8 3.2 3.3 2.4 5.4-.4 1.1-1.2 2-2.3 2.4-.4.2-.4.1-.4-.2V12zm7.2-7H13c3.8 0 6.8 3.1 6.8 7s-3 7-6.8 7h8.2c3.8 0 6.8-3.1 6.8-7s-3-7-6.8-7z" fill="#3086C8"/></svg>
+          
+            <svg class="section-footer__payment-icon" viewBox="0 0 38 24" width="38" height="24" role="img" aria-labelledby="pi-discover" fill="none" xmlns="http://www.w3.org/2000/svg"><title id="pi-discover">Discover</title><path fill="#000" opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z"/><path d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32z" fill="#fff"/><path d="M3.57 7.16H2v5.5h1.57c.83 0 1.43-.2 1.96-.63.63-.52 1-1.3 1-2.11-.01-1.63-1.22-2.76-2.96-2.76zm1.26 4.14c-.34.3-.77.44-1.47.44h-.29V8.1h.29c.69 0 1.11.12 1.47.44.37.33.59.84.59 1.37 0 .53-.22 1.06-.59 1.39zm2.19-4.14h1.07v5.5H7.02v-5.5zm3.69 2.11c-.64-.24-.83-.4-.83-.69 0-.35.34-.61.8-.61.32 0 .59.13.86.45l.56-.73c-.46-.4-1.01-.61-1.62-.61-.97 0-1.72.68-1.72 1.58 0 .76.35 1.15 1.35 1.51.42.15.63.25.74.31.21.14.32.34.32.57 0 .45-.35.78-.83.78-.51 0-.92-.26-1.17-.73l-.69.67c.49.73 1.09 1.05 1.9 1.05 1.11 0 1.9-.74 1.9-1.81.02-.89-.35-1.29-1.57-1.74zm1.92.65c0 1.62 1.27 2.87 2.9 2.87.46 0 .86-.09 1.34-.32v-1.26c-.43.43-.81.6-1.29.6-1.08 0-1.85-.78-1.85-1.9 0-1.06.79-1.89 1.8-1.89.51 0 .9.18 1.34.62V7.38c-.47-.24-.86-.34-1.32-.34-1.61 0-2.92 1.28-2.92 2.88zm12.76.94l-1.47-3.7h-1.17l2.33 5.64h.58l2.37-5.64h-1.16l-1.48 3.7zm3.13 1.8h3.04v-.93h-1.97v-1.48h1.9v-.93h-1.9V8.1h1.97v-.94h-3.04v5.5zm7.29-3.87c0-1.03-.71-1.62-1.95-1.62h-1.59v5.5h1.07v-2.21h.14l1.48 2.21h1.32l-1.73-2.32c.81-.17 1.26-.72 1.26-1.56zm-2.16.91h-.31V8.03h.33c.67 0 1.03.28 1.03.82 0 .55-.36.85-1.05.85z" fill="#231F20"/><path d="M20.16 12.86a2.931 2.931 0 100-5.862 2.931 2.931 0 000 5.862z" fill="url(#pi-paint0_linear)"/><path opacity=".65" d="M20.16 12.86a2.931 2.931 0 100-5.862 2.931 2.931 0 000 5.862z" fill="url(#pi-paint1_linear)"/><path d="M36.57 7.506c0-.1-.07-.15-.18-.15h-.16v.48h.12v-.19l.14.19h.14l-.16-.2c.06-.01.1-.06.1-.13zm-.2.07h-.02v-.13h.02c.06 0 .09.02.09.06 0 .05-.03.07-.09.07z" fill="#231F20"/><path d="M36.41 7.176c-.23 0-.42.19-.42.42 0 .23.19.42.42.42.23 0 .42-.19.42-.42 0-.23-.19-.42-.42-.42zm0 .77c-.18 0-.34-.15-.34-.35 0-.19.15-.35.34-.35.18 0 .33.16.33.35 0 .19-.15.35-.33.35z" fill="#231F20"/><path d="M37 12.984S27.09 19.873 8.976 23h26.023a2 2 0 002-1.984l.024-3.02L37 12.985z" fill="#F48120"/><defs><linearGradient id="pi-paint0_linear" x1="21.657" y1="12.275" x2="19.632" y2="9.104" gradientUnits="userSpaceOnUse"><stop stop-color="#F89F20"/><stop offset=".25" stop-color="#F79A20"/><stop offset=".533" stop-color="#F68D20"/><stop offset=".62" stop-color="#F58720"/><stop offset=".723" stop-color="#F48120"/><stop offset="1" stop-color="#F37521"/></linearGradient><linearGradient id="pi-paint1_linear" x1="21.338" y1="12.232" x2="18.378" y2="6.446" gradientUnits="userSpaceOnUse"><stop stop-color="#F58720"/><stop offset=".359" stop-color="#E16F27"/><stop offset=".703" stop-color="#D4602C"/><stop offset=".982" stop-color="#D05B2E"/></linearGradient></defs></svg>
+          
+            <svg class="section-footer__payment-icon" xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 38 24" width="38" height="24" aria-labelledby="pi-google_pay"><title id="pi-google_pay">Google Pay</title><path d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z" fill="#000" opacity=".07"/><path d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32" fill="#FFF"/><path d="M18.093 11.976v3.2h-1.018v-7.9h2.691a2.447 2.447 0 0 1 1.747.692 2.28 2.28 0 0 1 .11 3.224l-.11.116c-.47.447-1.098.69-1.747.674l-1.673-.006zm0-3.732v2.788h1.698c.377.012.741-.135 1.005-.404a1.391 1.391 0 0 0-1.005-2.354l-1.698-.03zm6.484 1.348c.65-.03 1.286.188 1.778.613.445.43.682 1.03.65 1.649v3.334h-.969v-.766h-.049a1.93 1.93 0 0 1-1.673.931 2.17 2.17 0 0 1-1.496-.533 1.667 1.667 0 0 1-.613-1.324 1.606 1.606 0 0 1 .613-1.336 2.746 2.746 0 0 1 1.698-.515c.517-.02 1.03.093 1.49.331v-.208a1.134 1.134 0 0 0-.417-.901 1.416 1.416 0 0 0-.98-.368 1.545 1.545 0 0 0-1.319.717l-.895-.564a2.488 2.488 0 0 1 2.182-1.06zM23.29 13.52a.79.79 0 0 0 .337.662c.223.176.5.269.785.263.429-.001.84-.17 1.146-.472.305-.286.478-.685.478-1.103a2.047 2.047 0 0 0-1.324-.374 1.716 1.716 0 0 0-1.03.294.883.883 0 0 0-.392.73zm9.286-3.75l-3.39 7.79h-1.048l1.281-2.728-2.224-5.062h1.103l1.612 3.885 1.569-3.885h1.097z" fill="#5F6368"/><path d="M13.986 11.284c0-.308-.024-.616-.073-.92h-4.29v1.747h2.451a2.096 2.096 0 0 1-.9 1.373v1.134h1.464a4.433 4.433 0 0 0 1.348-3.334z" fill="#4285F4"/><path d="M9.629 15.721a4.352 4.352 0 0 0 3.01-1.097l-1.466-1.14a2.752 2.752 0 0 1-4.094-1.44H5.577v1.17a4.53 4.53 0 0 0 4.052 2.507z" fill="#34A853"/><path d="M7.079 12.05a2.709 2.709 0 0 1 0-1.735v-1.17H5.577a4.505 4.505 0 0 0 0 4.075l1.502-1.17z" fill="#FBBC04"/><path d="M9.629 8.44a2.452 2.452 0 0 1 1.74.68l1.3-1.293a4.37 4.37 0 0 0-3.065-1.183 4.53 4.53 0 0 0-4.027 2.5l1.502 1.171a2.715 2.715 0 0 1 2.55-1.875z" fill="#EA4335"/></svg>
+
+          
+            <svg class="section-footer__payment-icon" xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 38 24" width="38" height="24" fill="none" aria-labelledby="pi-master"><title id="pi-master">Mastercard</title><rect x=".5" y=".5" width="37" height="23" rx="2.5" stroke="#000" stroke-opacity=".07" fill="none"/><path d="M35 0H3C1.3 0 0 1.3 0 3V21C0 22.7 1.4 24 3 24H35C36.7 24 38 22.7 38 21V3C38 1.3 36.6 0 35 0Z" fill="#1C1C1C" style="fill:#1C1C1C;fill:color(display-p3 0.1098 0.1098 0.1098);fill-opacity:1;"/><path d="M35 1C36.1 1 37 1.9 37 3V21C37 22.1 36.1 23 35 23H3C1.9 23 1 22.1 1 21V3C1 1.9 1.9 1 3 1H35Z" fill="#232323" style="fill:#232323;fill:color(display-p3 0.1373 0.1373 0.1373);fill-opacity:1;"/><path d="M14.6364 19.2727C18.8538 19.2727 22.2727 15.8538 22.2727 11.6364C22.2727 7.41892 18.8538 4 14.6364 4C10.4189 4 7 7.41892 7 11.6364C7 15.8538 10.4189 19.2727 14.6364 19.2727Z" fill="#EB001B" style="fill:#EB001B;fill:color(display-p3 0.9216 0.0000 0.1059);fill-opacity:1;"/><path d="M23.3637 19.2727C27.5811 19.2727 31 15.8538 31 11.6364C31 7.41892 27.5811 4 23.3637 4C19.1462 4 15.7273 7.41892 15.7273 11.6364C15.7273 15.8538 19.1462 19.2727 23.3637 19.2727Z" fill="#F79E1B" style="fill:#F79E1B;fill:color(display-p3 0.9686 0.6196 0.1059);fill-opacity:1;"/><path d="M22.2727 11.6362C22.2727 9.01797 20.9637 6.72706 19 5.41797C17.0364 6.83615 15.7273 9.12706 15.7273 11.6362C15.7273 14.1452 17.0364 16.5452 19 17.8543C20.9637 16.5452 22.2727 14.2543 22.2727 11.6362Z" fill="#FF5F00" style="fill:#FF5F00;fill:color(display-p3 1.0000 0.3725 0.0000);fill-opacity:1;"/></svg>
+
+          
+            <svg class="section-footer__payment-icon" xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 38 24" width="38" height="24" aria-labelledby="pi-shopify_pay"><title id="pi-shopify_pay">Shop Pay</title><path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z" fill="#000"/><path d="M35.889 0C37.05 0 38 .982 38 2.182v19.636c0 1.2-.95 2.182-2.111 2.182H2.11C.95 24 0 23.018 0 21.818V2.182C0 .982.95 0 2.111 0H35.89z" fill="#5A31F4"/><path d="M9.35 11.368c-1.017-.223-1.47-.31-1.47-.705 0-.372.306-.558.92-.558.54 0 .934.238 1.225.704a.079.079 0 00.104.03l1.146-.584a.082.082 0 00.032-.114c-.475-.831-1.353-1.286-2.51-1.286-1.52 0-2.464.755-2.464 1.956 0 1.275 1.15 1.597 2.17 1.82 1.02.222 1.474.31 1.474.705 0 .396-.332.582-.993.582-.612 0-1.065-.282-1.34-.83a.08.08 0 00-.107-.035l-1.143.57a.083.083 0 00-.036.111c.454.92 1.384 1.437 2.627 1.437 1.583 0 2.539-.742 2.539-1.98s-1.155-1.598-2.173-1.82v-.003zM15.49 8.855c-.65 0-1.224.232-1.636.646a.04.04 0 01-.069-.03v-2.64a.08.08 0 00-.08-.081H12.27a.08.08 0 00-.08.082v8.194a.08.08 0 00.08.082h1.433a.08.08 0 00.081-.082v-3.594c0-.695.528-1.227 1.239-1.227.71 0 1.226.521 1.226 1.227v3.594a.08.08 0 00.081.082h1.433a.08.08 0 00.081-.082v-3.594c0-1.51-.981-2.577-2.355-2.577zM20.753 8.62c-.778 0-1.507.24-2.03.588a.082.082 0 00-.027.109l.632 1.088a.08.08 0 00.11.03 2.5 2.5 0 011.318-.366c1.25 0 2.17.891 2.17 2.068 0 1.003-.736 1.745-1.669 1.745-.76 0-1.288-.446-1.288-1.077 0-.361.152-.657.548-.866a.08.08 0 00.032-.113l-.596-1.018a.08.08 0 00-.098-.035c-.799.299-1.359 1.018-1.359 1.984 0 1.46 1.152 2.55 2.76 2.55 1.877 0 3.227-1.313 3.227-3.195 0-2.018-1.57-3.492-3.73-3.492zM28.675 8.843c-.724 0-1.373.27-1.845.746-.026.027-.069.007-.069-.029v-.572a.08.08 0 00-.08-.082h-1.397a.08.08 0 00-.08.082v8.182a.08.08 0 00.08.081h1.433a.08.08 0 00.081-.081v-2.683c0-.036.043-.054.069-.03a2.6 2.6 0 001.808.7c1.682 0 2.993-1.373 2.993-3.157s-1.313-3.157-2.993-3.157zm-.271 4.929c-.956 0-1.681-.768-1.681-1.783s.723-1.783 1.681-1.783c.958 0 1.68.755 1.68 1.783 0 1.027-.713 1.783-1.681 1.783h.001z" fill="#fff"/></svg>
+
+          
+            <svg class="section-footer__payment-icon" xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 38 24" width="38" height="24" fill="none" aria-labelledby="pi-visa"><title id="pi-visa">Visa</title><rect x=".5" y=".5" width="37" height="23" rx="2.5" stroke="#000" stroke-opacity=".07" fill="none"/><path d="M35 0H3C1.3 0 0 1.3 0 3V21C0 22.7 1.4 24 3 24H35C36.7 24 38 22.7 38 21V3C38 1.3 36.6 0 35 0Z" fill="#142FBD" style="fill:#142FBD;fill:color(display-p3 0.0784 0.1843 0.7412);fill-opacity:1;"/><path d="M35 1C36.1 1 37 1.9 37 3V21C37 22.1 36.1 23 35 23H3C1.9 23 1 22.1 1 21V3C1 1.9 1.9 1 3 1H35Z" fill="#1532CB" style="fill:#1532CB;fill:color(display-p3 0.0824 0.1961 0.7961);fill-opacity:1;"/><path d="M29.5944 10.2167H29.2778C28.8556 11.2722 28.5389 11.8 28.2222 13.3833H30.2278C29.9111 11.8 29.9111 11.0611 29.5944 10.2167V10.2167ZM32.6556 16.4444H30.8611C30.7556 16.4444 30.7556 16.4444 30.65 16.3389L30.4389 15.3889L30.3333 15.1778H27.8C27.6944 15.1778 27.5889 15.1778 27.5889 15.3889L27.2722 16.3389C27.2722 16.4444 27.1667 16.4444 27.1667 16.4444H24.95L25.1611 15.9167L28.2222 8.73889C28.2222 8.21111 28.5389 8 29.0667 8H30.65C30.7556 8 30.8611 8 30.8611 8.21111L32.3389 15.0722C32.4444 15.4944 32.55 15.8111 32.55 16.2333C32.6556 16.3389 32.6556 16.3389 32.6556 16.4444V16.4444ZM18.5111 16.1278L18.9333 14.2278C19.0389 14.2278 19.1444 14.3333 19.1444 14.3333C19.8833 14.65 20.6222 14.8611 21.3611 14.7556C21.5722 14.7556 21.8889 14.65 22.1 14.5444C22.6278 14.3333 22.6278 13.8056 22.2056 13.3833C21.9944 13.1722 21.6778 13.0667 21.3611 12.8556C20.9389 12.6444 20.5167 12.4333 20.2 12.1167C18.9333 11.0611 19.3556 9.58333 20.0944 8.84444C20.7278 8.42222 21.0444 8 21.8889 8C23.1556 8 24.5278 8 25.1611 8.21111H25.2667C25.1611 8.84444 25.0556 9.37222 24.8444 10.0056C24.3167 9.79444 23.7889 9.58333 23.2611 9.58333C22.9444 9.58333 22.6278 9.58333 22.3111 9.68889C22.1 9.68889 21.9944 9.79444 21.8889 9.9C21.6778 10.1111 21.6778 10.4278 21.8889 10.6389L22.4167 11.0611C22.8389 11.2722 23.2611 11.4833 23.5778 11.6944C24.1056 12.0111 24.6333 12.5389 24.7389 13.1722C24.95 14.1222 24.6333 14.9667 23.7889 15.6C23.2611 16.0222 23.05 16.2333 22.3111 16.2333C20.8333 16.2333 19.6722 16.3389 18.7222 16.0222C18.6167 16.2333 18.6167 16.2333 18.5111 16.1278V16.1278ZM14.8167 16.4444C14.9222 15.7056 14.9222 15.7056 15.0278 15.3889C15.5556 13.0667 16.0833 10.6389 16.5056 8.31667C16.6111 8.10556 16.6111 8 16.8222 8H18.7222C18.5111 9.26667 18.3 10.2167 17.9833 11.3778C17.6667 12.9611 17.35 14.5444 16.9278 16.1278C16.9278 16.3389 16.8222 16.3389 16.6111 16.3389L14.8167 16.4444ZM5 8.21111C5 8.10556 5.21111 8 5.31667 8H8.90556C9.43333 8 9.85556 8.31667 9.96111 8.84444L10.9111 13.4889C10.9111 13.5944 10.9111 13.5944 11.0167 13.7C11.0167 13.5944 11.1222 13.5944 11.1222 13.5944L13.3389 8.21111C13.2333 8.10556 13.3389 8 13.4444 8H15.6611C15.6611 8.10556 15.6611 8.10556 15.5556 8.21111L12.2833 15.9167C12.1778 16.1278 12.1778 16.2333 12.0722 16.3389C11.9667 16.4444 11.7556 16.3389 11.5444 16.3389H9.96111C9.85556 16.3389 9.75 16.3389 9.75 16.1278L8.06111 9.58333C7.85 9.37222 7.53333 9.05556 7.11111 8.95C6.47778 8.63333 5.31667 8.42222 5.10556 8.42222L5 8.21111Z" fill="white" style="fill:white;fill-opacity:1;"/></svg>
+
+          
+        </div>
+
+      
+      
+    </div>
+    <div class="section-footer__row__col">
+      
+        <div class="section-footer__localization">
+          
+
+<script src="/assets/js/custom-select.js" defer="defer"></script><form method="post" action="/localization" id="footer-localization" accept-charset="UTF-8" class="form localization no-js-hidden" enctype="multipart/form-data"><input type="hidden" name="form_type" value="localization" /><input type="hidden" name="utf8" value="✓" /><input type="hidden" name="_method" value="put" /><input type="hidden" name="return_to" value="/" /><div class="localization__grid"><div class="localization__selector">
+        <input type="hidden" name="country_code" value="US">
+<country-selector><label class="label visually-hidden no-js-hidden" for="footer-localization-country-button">Country/Region</label><div class="custom-select relative w-full no-js-hidden"><button class="custom-select__btn input items-center" type="button"
+            aria-expanded="false" aria-haspopup="listbox" id="footer-localization-country-button">
+      <span class="text-start">United States (USD&nbsp;$)</span>
+      <svg width="20" height="20" viewBox="0 0 24 24" class="icon" role="presentation" focusable="false" aria-hidden="true">
+        <path d="M20 8.5 12.5 16 5 8.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
+      </svg>
+    </button>
+    <ul class="custom-select__listbox absolute invisible" role="listbox" tabindex="-1"
+        aria-hidden="true" hidden aria-activedescendant="footer-localization-country-opt-0"><li class="custom-select__option flex items-center js-option" id="footer-localization-country-opt-0" role="option"
+            data-value="US"
+ aria-selected="true">
+          <span class="pointer-events-none">United States (USD&nbsp;$)</span>
+        </li></ul>
+  </div></country-selector></div></div><script>
+      customElements.whenDefined('custom-select').then(() => {
+        if (!customElements.get('country-selector')) {
+          class CountrySelector extends customElements.get('custom-select') {
+            constructor() {
+              super();
+              this.loaded = false;
+            }
+
+            async showListbox() {
+              if (this.loaded) {
+                super.showListbox();
+                return;
+              }
+
+              this.button.classList.add('is-loading');
+              this.button.setAttribute('aria-disabled', 'true');
+
+              try {
+                const response = await fetch('?section_id=country-selector');
+                if (!response.ok) throw new Error(response.status);
+
+                const tmpl = document.createElement('template');
+                tmpl.innerHTML = await response.text();
+
+                const el = tmpl.content.querySelector('.custom-select__listbox');
+                this.listbox.innerHTML = el.innerHTML;
+
+                this.options = this.querySelectorAll('.custom-select__option');
+
+                this.popular = this.querySelectorAll('[data-popular]');
+                if (this.popular.length) {
+                  this.popular[this.popular.length - 1].closest('.custom-select__option')
+                    .classList.add('custom-select__option--visual-group-end');
+                }
+
+                this.selectedOption = this.querySelector('[aria-selected="true"]');
+                if (!this.selectedOption) {
+                  this.selectedOption = this.listbox.firstElementChild;
+                }
+
+                this.loaded = true;
+              } catch {
+                this.listbox.innerHTML = '<li>Error fetching countries, please try again.</li>';
+              } finally {
+                super.showListbox();
+                this.button.classList.remove('is-loading');
+                this.button.setAttribute('aria-disabled', 'false');
+              }
+            }
+
+            setButtonWidth() {
+              return;
+            }
+          }
+
+          customElements.define('country-selector', CountrySelector);
+        }
+      });
+    </script><script>
+    document.getElementById('footer-localization').addEventListener('change', (evt) => {
+      const input = evt.target.closest('.localization__selector').firstElementChild;
+      if (input && input.tagName === 'INPUT') {
+        input.value = evt.detail ? evt.detail.selectedValue : evt.target.value;
+        evt.currentTarget.submit();
+      }
+    });
+  </script></form>
+        </div>
+      
+
+      <div class="copyright"><span class="copy">&copy; 2026 <a href="/">Ready Homes</a>.</span>
+
+        
+          <a target="_blank" rel="nofollow" href="https://www.shopify.com?utm_campaign=poweredby&amp;utm_medium=shopify&amp;utm_source=onlinestore">Powered by Shopify</a>
+        
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+<!-- END sections: footer-group --></div><!-- BEGIN sections: overlay-group -->
+<div id="shopify-section-sections--24392110342418__cart-drawer" class="shopify-section shopify-section-group-overlay-group section-cart-drawer"><script src="/assets/js/cart-drawer.js" defer></script><script src="/assets/js/cart-note.js" defer="defer"></script><cart-drawer class="drawer fixed top-0 right-0 flex flex-col w-full has-motion js-cart-drawer" role="dialog" tabindex="-1" aria-labelledby="CartDrawerModal-Title" aria-modal="true" aria-hidden="true" data-name="cart-drawer" data-section-id="sections--24392110342418__cart-drawer">
+  <cart-form data-section-id="sections--24392110342418__cart-drawer" class="cart-drawer" data-ajax-update="true">
+    <div class="cart-drawer__content cart-drawer__content--hidden" data-merge-attributes="content-container">
+      <div class="cart-drawer__content-upper">
+        <header class="cart-drawer__header cart-drawer__content-item">
+          <div id="CartDrawerModal-Title" class="cart-drawer__title h4 heading-font" data-merge="header-title">
+            Your cart
+            
+          </div>
+
+          <button type="button" class="drawer__close-btn js-close-drawer">
+            <span class="visually-hidden">Close</span>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon feather feather-x" aria-hidden="true" focusable="false" role="presentation"><path d="M18 6 6 18M6 6l12 12"/></svg>
+          </button>
+        </header><div class="cart-item-list cart-drawer__content-item">
+          <div class="cart-item-list__body" data-merge-list="cart-items">
+            
+          </div>
+        </div><div class="cart-drawer__content-item">
+            <div class="cart-info-block cart-info-block--lmtb">
+<div class=" with-icon text-box text-box--wide" style="--box-color: #f3f0ec; --box-text-color: 132, 92, 41">
+          <svg class="icon icon--small icon--type-box" stroke-width="1" aria-hidden="true" focusable="false" role="presentation" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="currentColor" d="M14.41 3.37L8.27 1.41a1 1 0 00-.61 0L1.52 3.37a1 1 0 00-.7.95v7.86c0 .41.25.78.63.93l6.14 2.46c.24.1.5.1.75 0l6.14-2.46a1 1 0 00.62-.93V4.32a1 1 0 00-.69-.95zM7.96 2.36l6.05 1.93-2.7.9L5.35 3.2l2.63-.84zm-.46 12.1l-5.68-2.28V5.3L7.5 7.2v7.26zM8 6.3L1.96 4.28l2.58-.82 5.99 2L8 6.3zm6.1 5.89l-5.6 2.24V7.19l5.6-1.87v6.87z"/></svg>
+        
+        <span class="with-icon__beside">Please remember to<strong> </strong>familiarise yourself with our <a href="/policies/refund-policy" target="_blank" title="Refund Policy">Refund</a> and <a href="/policies/shipping-policy" target="_blank" title="Shipping Policy">Shipping</a> policies.</span></div>
+  
+</div>
+          </div></div>
+
+      <div data-merge="cross-sells" data-merge-cache="blank"><div class="cart-item-upsells">
+            <cc-cart-cross-sell>
+              <carousel-slider class="carousel block collection-slider cart-drawer__content-item use-color-scheme use-color-scheme--1">
+                <div class="opposing-items opposing-items--valign-base very-lightly-spaced-row">
+                  <div class="opposing-items__left product-info-label">Did you know we offer design consultations?</div>
+                  <div class="no-wrap slider-nav">
+                    <button name="prev" class="slider-nav__btn has-ltr-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon feather feather-chevron-left" aria-hidden="true" focusable="false" role="presentation"><path d="m15 18-6-6 6-6"/></svg></button>
+                    <button name="next" class="slider-nav__btn has-ltr-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon feather feather-chevron-right" aria-hidden="true" focusable="false" role="presentation"><path d="m9 18 6-6-6-6"/></svg></button>
+                  </div>
+                </div>
+                <div class="slider slider--no-scrollbar slider--edge-peek">
+                  <ul class="slider__grid product-grid product-grid--carousel product-grid--per-row-2 product-grid--per-row-mob-2"><li class="slider__item"><product-block class="product-block" data-product-id="8275593789714">
+  <div class="block-inner">
+    <div class="block-inner-inner">
+      
+<div class="image-cont ">
+          <a class="product-link" href="/products/kitchen-design-consultation-45-min-video-call" aria-hidden="true" tabindex="-1">
+            <div class="image-label-wrap">
+              <div><div class="product-block__image product-block__image--primary product-block__image--active" data-media-id="42908872048914"><div class="img-ar img-ar--cover" style="--aspect-ratio: 0.8">
+<img data-manual-src="/tour/tour_community.webp" alt="" width="640" height="800" loading="lazy" sizes="100vw" data-manual-srcset="/tour/house_address.webp" class="theme-img"></div>
+</div></div></div>
+          </a></div>
+      
+
+      <div class="product-block__detail align-ltr-left">
+        <div class="inner">
+          <div class="innerer">
+            <a class="product-link" href="/products/kitchen-design-consultation-45-min-video-call"><div class="product-block__title">KITCHEN DESIGN CONSULTATION</div><div class="product-price product-price--block">
+<div class="price">
+  <div class="price__default">
+    <span class="price__current">$250.00
+</span>
+    </div>
+
+  
+    
+  
+
+  
+
+  
+</div>
+</div></a></div>
+        </div>
+      </div>
+    </div>
+  </div></product-block>
+</li><li class="slider__item"><product-block class="product-block" data-product-id="8625018929426">
+  <div class="block-inner">
+    <div class="block-inner-inner">
+      
+<div class="image-cont image-cont--with-secondary-image ">
+          <a class="product-link" href="/products/wardrobe-design-consultation" aria-hidden="true" tabindex="-1">
+            <div class="image-label-wrap">
+              <div><div class="product-block__image product-block__image--primary product-block__image--active" data-media-id="38512935338258"><div class="img-ar img-ar--cover" style="--aspect-ratio: 0.8">
+<img data-manual-src="/tour/tour_bedrooms.webp" alt="" width="640" height="800" loading="lazy" sizes="100vw" data-manual-srcset="/tour/tour_area.webp" class="theme-img"></div>
+</div><div class="product-block__image product-block__image--secondary product-block__image--show-on-hover product-block__image--inactivated"
+                        data-media-id="41016990040338"
+                        data-image-index="1"><div class="img-ar img-ar--cover" style="--aspect-ratio: 0.8">
+<img data-manual-src="/tour/tour_kitchen.webp" alt="" width="625" height="781" loading="lazy" sizes="100vw" data-manual-srcset="/tour/house_aerial.webp" class="theme-img"></div>
+</div></div></div>
+          </a><a class="image-page-button image-page-button--previous has-ltr-icon" href="#" aria-label="Previous" tabindex="-1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" class="icon feather feather-chevron-left" aria-hidden="true" focusable="false" role="presentation"><path d="m15 18-6-6 6-6"/></svg></a>
+            <a class="image-page-button image-page-button--next has-ltr-icon" href="#" aria-label="Next" tabindex="-1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" class="icon feather feather-chevron-right" aria-hidden="true" focusable="false" role="presentation"><path d="m9 18 6-6-6-6"/></svg></a></div>
+      
+
+      <div class="product-block__detail align-ltr-left">
+        <div class="inner">
+          <div class="innerer">
+            <a class="product-link" href="/products/wardrobe-design-consultation"><div class="product-block__title">WARDROBE DESIGN CONSULTATION</div><div class="product-price product-price--block">
+<div class="price">
+  <div class="price__default">
+    <span class="price__current">$150.00
+</span>
+    </div>
+
+  
+    
+  
+
+  
+
+  
+</div>
+</div></a></div>
+        </div>
+      </div>
+    </div>
+  </div></product-block>
+</li><li class="slider__item"><product-block class="product-block" data-product-id="8625021059346">
+  <div class="block-inner">
+    <div class="block-inner-inner">
+      
+<div class="image-cont image-cont--with-secondary-image ">
+          <a class="product-link" href="/products/bathroom-design-consultation" aria-hidden="true" tabindex="-1">
+            <div class="image-label-wrap">
+              <div><div class="product-block__image product-block__image--primary product-block__image--active" data-media-id="37066850959634"><div class="img-ar img-ar--cover" style="--aspect-ratio: 0.8">
+<img data-manual-src="/tour/tour_sauna.webp" alt="" width="640" height="800" loading="lazy" sizes="100vw" data-manual-srcset="/portfolio/service_packaging.webp" class="theme-img"></div>
+</div><div class="product-block__image product-block__image--secondary product-block__image--show-on-hover product-block__image--inactivated"
+                        data-media-id="35230672912658"
+                        data-image-index="1"><div class="img-ar img-ar--cover" style="--aspect-ratio: 0.8">
+<img data-manual-src="/portfolio/work4.webp" alt="" width="616" height="771" loading="lazy" sizes="100vw" data-manual-srcset="/portfolio/work3.webp" class="theme-img"></div>
+</div></div></div>
+          </a><a class="image-page-button image-page-button--previous has-ltr-icon" href="#" aria-label="Previous" tabindex="-1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" class="icon feather feather-chevron-left" aria-hidden="true" focusable="false" role="presentation"><path d="m15 18-6-6 6-6"/></svg></a>
+            <a class="image-page-button image-page-button--next has-ltr-icon" href="#" aria-label="Next" tabindex="-1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" class="icon feather feather-chevron-right" aria-hidden="true" focusable="false" role="presentation"><path d="m9 18 6-6-6-6"/></svg></a></div>
+      
+
+      <div class="product-block__detail align-ltr-left">
+        <div class="inner">
+          <div class="innerer">
+            <a class="product-link" href="/products/bathroom-design-consultation"><div class="product-block__title">BATHROOM DESIGN CONSULTATION</div><div class="product-price product-price--block">
+<div class="price">
+  <div class="price__default">
+    <span class="price__current">$150.00
+</span>
+    </div>
+
+  
+    
+  
+
+  
+
+  
+</div>
+</div></a></div>
+        </div>
+      </div>
+    </div>
+  </div></product-block>
+</li><li class="slider__item"><product-block class="product-block" data-product-id="8625023058194">
+  <div class="block-inner">
+    <div class="block-inner-inner">
+      
+<div class="image-cont ">
+          <a class="product-link" href="/products/storage-cabinets-design-consultation" aria-hidden="true" tabindex="-1">
+            <div class="image-label-wrap">
+              <div><div class="product-block__image product-block__image--primary product-block__image--active" data-media-id="35230685364498"><div class="img-ar img-ar--cover" style="--aspect-ratio: 0.8">
+<img data-manual-src="/portfolio/work2.webp" alt="" width="616" height="771" loading="lazy" sizes="100vw" data-manual-srcset="/portfolio/work1.webp" class="theme-img"></div>
+</div></div></div>
+          </a></div>
+      
+
+      <div class="product-block__detail align-ltr-left">
+        <div class="inner">
+          <div class="innerer">
+            <a class="product-link" href="/products/storage-cabinets-design-consultation"><div class="product-block__title">STORAGE CABINETS DESIGN CONSULTATION</div><div class="product-price product-price--block">
+<div class="price">
+  <div class="price__default">
+    <span class="price__current">$150.00
+</span>
+    </div>
+
+  
+    
+  
+
+  
+
+  
+</div>
+</div></a></div>
+        </div>
+      </div>
+    </div>
+  </div></product-block>
+</li></ul>
+                </div>
+              </carousel-slider>
+            </cross-sell-products>
+          </div></div>
+    </div>
+
+    <div class="cart-drawer__footer cart-drawer__footer--hidden" data-merge-attributes="footer-container"><div data-merge="footer">
+        
+      </div>
+
+      
+        <terms-agreement class="terms-agreement rte">
+          <input type="checkbox" id="terms" />
+          <label for="terms">I agree to the <a href="/policies/terms-of-service" target="_blank">terms and refund policy</a></label>
+        </terms-agreement>
+      
+
+      <div class="checkout-buttons hidden" data-merge-attributes="checkout-buttons">
+        
+          <a href="/checkout" class="btn btn--large btn--wide">Checkout</a>
+        
+      </div></div>
+
+    <div
+      class="cart-drawer__empty-content"
+      data-merge-attributes="empty-container"
+      >
+      <button type="button" class="drawer__close-btn js-close-drawer">
+        <span class="visually-hidden">Close</span>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon feather feather-x" aria-hidden="true" focusable="false" role="presentation"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+      <div class="align-center"><div class="lightly-spaced-row"><span class="icon--large"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false" role="presentation"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-width="1.5"><path d="M2 9.25h20l-4 12H6z"/><path stroke-linecap="square" d="M12 9V3"/></g></svg></span></div><div class="majortitle h1">Your cart is empty</div><div class="button-row">
+            <a class="btn btn--primary button-row__btn" href="/collections/all">Start shopping</a>
+          </div></div>
+    </div>
+  </cart-form>
+</side-drawer></div><section id="shopify-section-sections--24392110342418__pop-up" class="shopify-section shopify-section-group-overlay-group cc-pop-up"><link rel="stylesheet" href="/assets/css/modal.css" media="print" onload="this.media='all'">
+      <link rel="stylesheet" href="/assets/css/pop-up.css" media="print" onload="this.media='all'"><script src="/assets/js/pop-up.js" defer></script><style data-shopify>#sections--24392110342418__pop-up .modal__window {
+        --bg-color: 234 230 225;
+        --heading-color: 72 72 72;
+        --text-color: 72 72 72;
+        --link-color: 72 72 72;
+        background: #eae6e1;
+        color: #484848;
+      }#sections--24392110342418__pop-up .modal__image {
+            padding-top: min(100.0%, 45vh);
+          }@media (min-width: 768px) {
+          #sections--24392110342418__pop-up .modal__image {
+              padding-top: min(100.0%, 45vh);
+            }
+          }@media (max-width: 767.98px) {
+          #sections--24392110342418__pop-up .modal__content {
+            padding-top: 32px;
+          }
+        }</style><pop-up class="modal popup-section invisible fixed top-0 left-0 w-full h-full flex justify-center items-center"
+            id="sections--24392110342418__pop-up"
+            data-trigger="delay"
+            data-delay="8"
+            data-dismiss-days="16"
+            data-mode=""
+            data-show-on-mobile="true">
+      <div class="modal__window flex relative text-start has-motion flex flex-col" role="dialog" aria-labelledby="sections--24392110342418__pop-up-heading" aria-modal="true" tabindex="-1">
+        <button type="button" class="modal__close-btn absolute js-close-modal">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon feather feather-x" aria-hidden="true" focusable="false" role="presentation"><path d="M18 6 6 18M6 6l12 12"/></svg>
+          <span class="visually-hidden">Close</span>
+        </button><div class="modal__image img-fill top ">
+<img src="/portfolio/service_branding.webp" alt="" width="1080" height="1080" loading="lazy" sizes="(min-width: 768px) 640px, (max-width: 767.98px) 95vw" srcset="/portfolio/service_illustration.webp" class="theme-img">
+
+</div><div class="flex-auto modal__content relative text-center"><div class="section__block rte " >
+                    <p><strong>SIGN UP & SAVE.</strong><br/>Enjoy 5% OFF your first order when you subscribe to our newsletter.</p>
+                  </div><div class="section__block form-width mx-auto" ><div class="signup-form">
+  <form method="post" action="/contact#contact_form" id="contact_form" accept-charset="UTF-8" class="contact-form"><input type="hidden" name="form_type" value="customer" /><input type="hidden" name="utf8" value="✓" />
+    
+<input type="hidden" name="contact[tags]" value="prospect,newsletter"/>
+      <p>
+        <input type="email"
+          placeholder="Your email"
+          class="signup-form__email"
+          value=""
+          name="contact[email]"
+          aria-label="Email"
+          
+          required />
+      </p>
+      <button class="btn btn--primary signup-form__button" type="submit">Subscribe</button>
+    
+  </form>
+</div>
+
+                </div><div class="section__block lightly-spaced-row-above" ><ul class="social inline-flex flex-wrap justify-center"><li>
+      <a class="social__link flex items-center justify-center" href="https://www.facebook.com/Ready Homes/" target="_blank" rel="noopener" title="Ready Homes on Facebook"><svg aria-hidden="true" class="icon icon-facebook" viewBox="2 2 16 16" focusable="false" role="presentation"><path fill="currentColor" d="M18 10.049C18 5.603 14.419 2 10 2c-4.419 0-8 3.603-8 8.049C2 14.067 4.925 17.396 8.75 18v-5.624H6.719v-2.328h2.03V8.275c0-2.017 1.195-3.132 3.023-3.132.874 0 1.79.158 1.79.158v1.98h-1.009c-.994 0-1.303.621-1.303 1.258v1.51h2.219l-.355 2.326H11.25V18c3.825-.604 6.75-3.933 6.75-7.951Z"/></svg><span class="visually-hidden">Facebook</span>
+      </a>
+    </li><li>
+      <a class="social__link flex items-center justify-center" href="https://www.youtube.com/channel/UCPmSzEYWoaBH8klO-fRh8ug" target="_blank" rel="noopener" title="Ready Homes on YouTube"><svg class="icon" width="48" height="34" viewBox="0 0 48 34" aria-hidden="true" focusable="false" role="presentation"><path d="m19.044 23.27-.001-13.582 12.968 6.814-12.967 6.768ZM47.52 7.334s-.47-3.33-1.908-4.798C43.787.61 41.74.601 40.803.49 34.086 0 24.01 0 24.01 0h-.02S13.914 0 7.197.49C6.258.6 4.213.61 2.387 2.535.947 4.003.48 7.334.48 7.334S0 11.247 0 15.158v3.668c0 3.912.48 7.823.48 7.823s.468 3.331 1.906 4.798c1.827 1.926 4.226 1.866 5.294 2.067C11.52 33.885 24 34 24 34s10.086-.015 16.803-.505c.938-.113 2.984-.122 4.809-2.048 1.439-1.467 1.908-4.798 1.908-4.798s.48-3.91.48-7.823v-3.668c0-3.911-.48-7.824-.48-7.824Z" fill="currentColor" fill-rule="evenodd"/></svg><span class="visually-hidden">YouTube</span>
+      </a>
+    </li><li>
+      <a class="social__link flex items-center justify-center" href="https://www.instagram.com/fronteriors/" target="_blank" rel="noopener" title="Ready Homes on Instagram"><svg class="icon" width="48" height="48" viewBox="0 0 48 48" aria-hidden="true" focusable="false" role="presentation"><path d="M24 0c-6.518 0-7.335.028-9.895.144-2.555.117-4.3.523-5.826 1.116-1.578.613-2.917 1.434-4.25 2.768C2.693 5.362 1.872 6.701 1.26 8.28.667 9.806.26 11.55.144 14.105.028 16.665 0 17.482 0 24s.028 7.335.144 9.895c.117 2.555.523 4.3 1.116 5.826.613 1.578 1.434 2.917 2.768 4.25 1.334 1.335 2.673 2.156 4.251 2.77 1.527.592 3.271.998 5.826 1.115 2.56.116 3.377.144 9.895.144s7.335-.028 9.895-.144c2.555-.117 4.3-.523 5.826-1.116 1.578-.613 2.917-1.434 4.25-2.768 1.335-1.334 2.156-2.673 2.77-4.251.592-1.527.998-3.271 1.115-5.826.116-2.56.144-3.377.144-9.895s-.028-7.335-.144-9.895c-.117-2.555-.523-4.3-1.116-5.826-.613-1.578-1.434-2.917-2.768-4.25-1.334-1.335-2.673-2.156-4.251-2.769-1.527-.593-3.271-1-5.826-1.116C31.335.028 30.518 0 24 0Zm0 4.324c6.408 0 7.167.025 9.698.14 2.34.107 3.61.498 4.457.827 1.12.435 1.92.955 2.759 1.795.84.84 1.36 1.64 1.795 2.76.33.845.72 2.116.827 4.456.115 2.53.14 3.29.14 9.698s-.025 7.167-.14 9.698c-.107 2.34-.498 3.61-.827 4.457-.435 1.12-.955 1.92-1.795 2.759-.84.84-1.64 1.36-2.76 1.795-.845.33-2.116.72-4.456.827-2.53.115-3.29.14-9.698.14-6.409 0-7.168-.025-9.698-.14-2.34-.107-3.61-.498-4.457-.827-1.12-.435-1.92-.955-2.759-1.795-.84-.84-1.36-1.64-1.795-2.76-.33-.845-.72-2.116-.827-4.456-.115-2.53-.14-3.29-.14-9.698s.025-7.167.14-9.698c.107-2.34.498-3.61.827-4.457.435-1.12.955-1.92 1.795-2.759.84-.84 1.64-1.36 2.76-1.795.845-.33 2.116-.72 4.456-.827 2.53-.115 3.29-.14 9.698-.14Zm0 7.352c-6.807 0-12.324 5.517-12.324 12.324 0 6.807 5.517 12.324 12.324 12.324 6.807 0 12.324-5.517 12.324-12.324 0-6.807-5.517-12.324-12.324-12.324ZM24 32a8 8 0 1 1 0-16 8 8 0 0 1 0 16Zm15.691-20.811a2.88 2.88 0 1 1-5.76 0 2.88 2.88 0 0 1 5.76 0Z" fill="currentColor" fill-rule="evenodd"/></svg><span class="visually-hidden">Instagram</span>
+      </a>
+    </li><li>
+      <a class="social__link flex items-center justify-center" href="https://www.pinterest.com/fronteriors/" target="_blank" rel="noopener" title="Ready Homes on Pinterest"><svg class="icon" width="48" height="48" viewBox="0 0 48 48" aria-hidden="true" focusable="false" role="presentation"><path d="M24.001 0C10.748 0 0 10.745 0 24.001c0 9.825 5.91 18.27 14.369 21.981-.068-1.674-.012-3.689.415-5.512.462-1.948 3.087-13.076 3.087-13.076s-.765-1.533-.765-3.799c0-3.556 2.064-6.212 4.629-6.212 2.182 0 3.237 1.64 3.237 3.604 0 2.193-1.4 5.476-2.12 8.515-.6 2.549 1.276 4.623 3.788 4.623 4.547 0 7.61-5.84 7.61-12.76 0-5.258-3.543-9.195-9.986-9.195-7.279 0-11.815 5.427-11.815 11.49 0 2.094.616 3.567 1.581 4.708.446.527.505.736.344 1.34-.113.438-.378 1.505-.488 1.925-.16.607-.652.827-1.2.601-3.355-1.369-4.916-5.04-4.916-9.17 0-6.816 5.75-14.995 17.152-14.995 9.164 0 15.195 6.636 15.195 13.75 0 9.416-5.233 16.45-12.952 16.45-2.588 0-5.026-1.4-5.862-2.99 0 0-1.394 5.53-1.688 6.596-.508 1.85-1.504 3.7-2.415 5.14 2.159.638 4.44.985 6.801.985C37.255 48 48 37.255 48 24.001 48 10.745 37.255 0 24.001 0" fill="currentColor" fill-rule="evenodd"/></svg><span class="visually-hidden">Pinterest</span>
+      </a>
+    </li></ul>
+
+                </div></div>
+      </div>
+    </pop-up>
+</section>
+<!-- END sections: overlay-group --><a href="#" class="page-shade" aria-label="Close"></a>
+  <div class="overlay fixed top-0 right-0 bottom-0 left-0 js-overlay"></div><script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous" defer="defer"></script>
+   <script src="/assets/js/landing-sektion-script.js" defer="defer"></script>
+<style> .meety-block-buttons{min-width: 180px;} </style>
+<div id="shopify-block-ASXdsU3FvSGZXRXBxN__18384125943788576634" class="shopify-block shopify-app-block"><!-- BEGIN app snippet: meety-script --><script>
+  (function () {
+    const shopId = '73710829842';
+    const shopUrl = "https:\/\/us.fronteriors.co";
+    const shopDomain = "us.fronteriors.co";
+    const template = 'index'
+    const firstVariantId = '';
+    const product = null;
+    const cartItems = [];
+    const customer =null;
+
+    const locales = {
+        'button.schedule_text': 'Schedule your time',
+        'button.bundle_text':  'Schedule your bundle',
+    };
+    const assetUrl = "https://cdn.shopify.com/extensions/019f8422-a6eb-7c7f-abc1-f83c32ec3b26/meety-appointment-booking-1125/assets/meety_asset_placeholder.css";
+    const isAppBlock = false;
+    const isGiftCard = false;
+    const useAddToCartStyle = false;
+    const themeSettings =[{"id":1,"data":{"variant":"input[name=\"id\"],select[name=\"id\"],#formVariantId","buyButton":".shopify-payment-button,div.instant-buy","container":"product-form","submitForm":"form[action*=\"/cart/add\"]:not(.installment):not([id*=installment]):not(.js-instalments-form)","hideElements":null,"hideQuantity":false,"addToCartText":"span","quantityInput":"input[name=\"quantity\"]","addToCartButton":"button[name=\"add\"]:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),input[type=\"submit\"]:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),button[type=\"submit\"]:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),button[type=\"submit\"]:not(.shopify-payment-button__more-options):not(.shopify-payment-button__button):not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),input[type=\"button\"]:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),.button_add_to_cart:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),.button--addToCart:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),.btn-add-to-cart:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),.btn-addtocart:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),.add-to-cart:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),.add-to-cart-button:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),.addtocart:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),.add_to_cart_btn:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),.addToCart:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),.AddToCart:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),.qsc-btn--add-to-cart:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),#AddToCart:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),#add-to-cart-btn:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),#shopify_add_to_cart:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),#btn-add-to-cart:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),#addToCartButton:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),#add-to-cart:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),#btnAddToCart:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),.add-to-cart-btn:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),.button-add-to-cart:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),.add_to_cart_button:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),.AddtoCart:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),.btn--sticky_addtocart:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),.add_to_cart:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),#addToCartBtn:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),.btn_add_to_cart:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),.hs-btn-add-to-cart-2:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),.product-atc__button:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),.g-stickybar-buynow:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),.btn--add-to-cart:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),#new-form-atc:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),.cart__checkout-btn:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),.product-atc-btn:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),.product-form--atc-button:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),.shg-btn:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),.product_buttonContainer-addToCart a:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),#mwAddToCart:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),.complete-design-a:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),#button-cart:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),.add-to-cart input.button:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),#addtc-sticky-bar .addtc-sticky-btn:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),.lh-external:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),.lh-buy-now:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),.product-form--add-to-cart:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),.product-buy-buttons--cta:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),.tt-btn-addtocart:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),#main-atc-btn:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),[data-product-menu-button-addtocart]:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),.shopify-payment-btn:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),.product-submit:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone)","buttonContainer":".meety-block-buttons,button[name=\"add\"],input[type=\"submit\"],button[type=\"submit\"],button[type=\"submit\"]:not(.shopify-payment-button__more-options):not(.shopify-payment-button__button),input[type=\"button\"],.button_add_to_cart,.button--addToCart,.btn-add-to-cart,.btn-addtocart,.add-to-cart,.add-to-cart-button,.addtocart,.add_to_cart_btn,.addToCart,.AddToCart,.qsc-btn--add-to-cart,#AddToCart,#add-to-cart-btn,#shopify_add_to_cart,#btn-add-to-cart,#addToCartButton,#add-to-cart,#btnAddToCart,.add-to-cart-btn,.button-add-to-cart,.add_to_cart_button,.AddtoCart,.btn--sticky_addtocart,.add_to_cart,#addToCartBtn,.btn_add_to_cart,.hs-btn-add-to-cart-2,.product-atc__button,.g-stickybar-buynow,.btn--add-to-cart,#new-form-atc,.cart__checkout-btn,.product-atc-btn,.product-form--atc-button,.shg-btn,.product_buttonContainer-addToCart a,#mwAddToCart,.complete-design-a,#button-cart,.add-to-cart input.button,#addtc-sticky-bar .addtc-sticky-btn,.lh-external,.lh-buy-now,.product-form--add-to-cart,.product-buy-buttons--cta,.tt-btn-addtocart,#main-atc-btn,[data-product-menu-button-addtocart],.shopify-payment-btn,.product-submit,.shopify-payment-button,div.instant-buy","quantityContainer":".product-form__quantity","showAddToCartButton":false,"addToCartExcludeClassnames":null}},{"id":2,"data":{"variant":"input[type=\"hidden\"][name=\"id\"],select[name=\"id\"]","buyButton":"button[type=\"submit\"]","container":".prod_sticky","addToCartText":"span","addToCartButton":"button[type=\"submit\"]:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone)","buttonContainer":"button[type=\"submit\"]","addToCartExcludeClassnames":null}},{"id":3,"data":{"cartItems":".cart-item","container":"cart-drawer","plusButton":"button[name=\"plus\"]","minusButton":"button[name=\"minus\"]","removeButton":"cart-remove-button","productOption":"div.product-option","quantityInput":"input[name=\"updates[]\"]","buttonCheckout":"button[name=\"checkout\"]","checkoutButton":"button[name=\"checkout\"]","elementRemoved":1,"productOptionTitle":"dt","productOptionValue":"dd"}},{"id":4,"data":{"cartItems":".cart-item","container":"cart-items","plusButton":"button[name=\"plus\"]","minusButton":"button[name=\"minus\"]","removeButton":"cart-remove-button","productOption":"div.product-option","quantityInput":"input[name=\"updates[]\"]","buttonCheckout":"button#checkout","checkoutButton":"button#checkout","elementRemoved":1,"productOptionTitle":"dt","productOptionValue":"dd"}},{"id":5,"data":{"container":"#ProductGridContainer"}},{"id":6,"data":{"variant":"input[type=\"hidden\"][name=\"id\"],select[name=\"id\"]","buyButton":".shopify-payment-button,div.instant-buy","container":"form[action*=\"/cart/add\"]","addToCartText":"span","addToCartButton":"button[name=\"add\"]:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),button[type=\"submit\"]:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),button.product-form--atc-button:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone),button#AddToCart:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone)","buttonContainer":".meety-block-buttons,button[name=\"add\"],button[type=\"submit\"],button.product-form--atc-button,button#AddToCart,.shopify-payment-button","addToCartExcludeClassnames":null}},{"id":7,"data":{"section":"div.core__column--wrapper div.core__blocks--body","sections":"section.ecom-section > div.core__row--columns","productLink":"a.ecom__element--button[href^=\"/products/\"]"}},{"id":8,"data":{"buyButton":"a.ecom__element--button[href^=\"/products/\"]","variantElement":"a.ecom__element--button[href^=\"/products/\"]"}},{"id":9,"data":{"container":"slider-component"}},{"id":10,"data":{"variant":"input[name=\"id\"],select[name=\"id\"],#formVariantId","container":"form[action*=\"/cart/add\"]","addToCartText":"span","addToCartButton":"button[name=\"add\"]:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone)","buttonContainer":"button[name=\"add\"]","addToCartExcludeClassnames":null}},{"id":11,"data":{"featuredProducts":"div.featured-product"}},{"id":12,"data":{"forms":"form[action*=\"/cart/add\"]","variant":"input[name=\"id\"],select[name=\"id\"]","buyButton":"div.shopify-payment-button","addToCartText":"span","formAddButton":"button[name=\"add\"]","addToCartButton":"button[name=\"add\"]:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone)","buttonContainer":"div.shopify-payment-button","addToCartExcludeClassnames":null}},{"id":15,"data":{"container":"body"}},{"id":16,"data":{"variant":"select[name=\"id\"],input[name=\"id\"]","buyButton":"button[name=\"add\"]","container":"sticky-atc,quick-add-modal,.quick-product-modal","hideQuantity":false,"addToCartText":"span","quantityInput":"input[name=\"quantity\"],input[name=\"updates[]\"]","addToCartButton":"button[name=\"add\"]:not(.meety-block-schedule-button-clone):not(.meety-block-bundle-button-clone)","buttonContainer":"button[name=\"add\"]","quantityContainer":".product-form__quantity","showAddToCartButton":false,"_deprecated_addButton":"button[name=\"add\"]","_deprecated_openModalForm":"form[action*=\"/cart/add\"]","_deprecated_triggerElement":null,"addToCartExcludeClassnames":null,"_deprecated_triggerAttribute":"open"}},{"id":17,"data":{"textLink":"Manage bookings","container":".customer__title","showManageBooking":true}}];
+    const compactServices =[["id","status","allowMultipleSlots","sProductId","totalVariant","bookingTypeId","durationSeconds","subsBookingTypeId","minDurationDays","maxDurationDays","dayOrNight","isFixedPrice","sVariantId","sHandle","minCapacity","timezoneId","lockTimezone","enabledServiceBundle"],[153414,1,0,"10111519392018",1,1,"2700",1,1,1,0,0,"51189992358162","prime-projects-design-consultation",1,40,0,0,153411,1,0,"10230563307794",1,1,"2700",1,1,1,0,0,"51651485761810","avenue-design-consultation",1,40,0,0,154358,1,0,"10286199341330",1,1,"1800",1,1,1,0,0,"51871707824402","discovery-call",1,40,0,0,153413,1,0,"8275593789714",1,1,"2700",1,1,1,0,0,"45001422602514","kitchen-design-consultation-45-min-video-call",1,40,0,0,153416,1,0,"8625018929426",1,1,"1800",1,1,1,0,0,"46667936760082","wardrobe-design-consultation",1,40,0,0,153412,1,0,"8625021059346",1,1,"1800",1,1,1,0,0,"46667946033426","bathroom-design-consultation",1,40,0,0,153415,1,0,"8625023058194",1,1,"1800",1,1,1,0,0,"46667951833362","storage-cabinets-design-consultation",1,40,0,0]];
+    const shopData =[["version","shop","timezone","appFeatures","timezoneInfos"],[[["time"],["2026-05-21T18:25:44.547+07:00"]],[["useShopifyFunction","isShopifyPlus","shopifyCartTransformerId","domain","name","email","timeFormat","timezoneId","lockTimezone","applyBusinessHr","currencyCode","shopifyPlan","createdAt","applyDst","dstShiftSchedule","dstLength","dstTimezoneId","smsCredit","useServiceTimezone","useCartTransform","enableSendingAnalytics","masterdataHash"],[1,0,"gid://shopify/CartTransform/104825106","fronteriors-us.myshopify.com","Ready Homes","info@readyhomes.com",0,40,0,0,"USD","Advanced","2025-12-09T05:53:56.000Z",1,0,3600,726,0,0,0,0,"220f9a0d30075790e2e586402c2f2055"]],[["timezone","gmtOffset"],["America/New_York",-18000]],[["appFeatureId","expiredAt"],[7,0,29,0,30,0,33,0,35,0,41,0,50,0,53,0,54,0,56,0,60,0,57,0,75,0,2,0,34,0,4,0,5,0,6,0,8,0,13,0,18,0,20,0,22,0,26,0,28,0,32,0,36,0,38,0,39,0,40,0,43,0,19,0,55,0,16,0,9,0,65,0,68,0,71,0,1,0,3,0,11,0,12,0,21,0,25,0,37,0,27,0,59,0,10,0]],[["countryCode","zoneName","gmtOffset","timeStart","dst","abbreviation"],["US","America/New_York",-14400,"1710054000","1","EDT","US","America/New_York",-18000,"1730613600","0","EST","US","America/New_York",-14400,"1741503600","1","EDT","US","America/New_York",-18000,"1762063200","0","EST","US","America/New_York",-14400,"1772953200","1","EDT","US","America/New_York",-18000,"1793512800","0","EST","US","America/New_York",-14400,"1805007600","1","EDT","US","America/New_York",-18000,"1825567200","0","EST","US","America/New_York",-14400,"1836457200","1","EDT","US","America/New_York",-18000,"1857016800","0","EST"]]]];
+    const widgets ={"version":1779958110,"widgets":[{"id":25053,"shopId":53476,"name":"Product page","type":1,"applyType":1,"handle":"product_page","textSettings":{"skipCart":0,"textColor":"#181c32","fontFamily":"Poppins","timeFormat":0,"buttonColor":null,"hideOldPrice":false,"showCapacity":true,"showTotalPrice":false,"showTzSelector":1,"titleTextColor":null,"backgroundColor":"#ffffff","buttonTextColor":null,"isSellingPlanV2":false,"hideVariantTitle":false,"sortAddOnProduct":0,"textColorSubdued":null,"confirmActionData":null,"confirmActionType":0,"dateRangeDisabled":false,"alertInfoIconColor":"#008dff","alertInfoTextColor":"#002661","buttonColorPrimary":"#000000","multiMonthDisabled":false,"showStaffInConfirm":false,"widgetBorderRadius":"12px","defaultProductImage":null,"enableAddonDropdown":false,"showUseAnotherBundle":true,"alertWarningIconColor":"#b97502","alertWarningTextColor":"#392300","enableChoosingVariant":false,"alertCriticalIconColor":"#8e1f0b","alertCriticalTextColor":"#8e1f0b","buttonTextColorPrimary":"#f2efec","datePickerColorSelected":null,"hidePreviewSubsBookings":false,"alertInfoBackgroundColor":"#def0fe","hideAvailableSelectStaff":false,"inlineWidgetBorderRadius":"12px","datePickerBackgroundColor":null,"datePickerHeaderTextColor":null,"shopifyGeneralButtonWidth":"100%","sortServicesWebsiteWidget":0,"shopifyGeneralButtonHeight":"48px","alertWarningBackgroundColor":"#fbe5b6","datePickerTextColorSelected":null,"enableDateRangeCalendarPage":true,"instantBookingContactMethod":2,"shopifyGeneralButtonMargins":"0px 0px 0px 0px","alertCriticalBackgroundColor":"#fee9e8","bypassBtnConfirmSubscription":false,"enableSearchBarWebsiteWidget":true,"showAddonsUnderQuestionField":false,"showPriceSellingPlanSelector":true,"timeslotHeaderTitleTextColor":null,"timeslotSelectionMsgTextColor":"#ca2912","instantBookingCustomerNameType":2,"shopifyBundleButtonBorderColor":"#000001","shopifyBundleButtonBorderWidth":"0px","datePickerSelectionMsgTextColor":"#ca2912","hideBookingDefaultWebsiteWidget":false,"enableFullSelectTypeInlineWidget":false,"shopifyGeneralButtonBorderRadius":"10px","shopifyScheduleButtonBorderColor":"#000001","shopifyScheduleButtonBorderWidth":"0px","urlRedirectCancelBookingFromEmail":null,"urlRedirectSubsPauseBookingFromEmail":null,"urlRedirectRescheduleBookingFromEmail":null,"urlRedirectSubsCancelBookingFromEmail":null,"urlRedirectManageBundleBookingFromEmail":null,"instantBookingCountryCodeSelectorEnabled":1}}],"widgetLocalizations":[{"id":25718,"shopId":53476,"shopWidgetId":25053,"locale":"en","text":{"general":{"slot_left":null,"staff_text":"Staff","book_now_text":"Book now","capacity_text":"Capacity","not_available":null,"num_slots_desc":"Number of consecutive slots to book","num_slots_title":"Number of slots","view_next_month":null,"time_not_found_msg":"No times available","confirm_button_text":"Confirm","date_not_selected_msg":"Please select a date","no_available_in_month":null,"time_not_found_subtitle":"Please select another date","timeslot_not_selected_msg":"Please select a time slot"},"bundle_booking":{"info_2":"You have","email_title":"Your email/phone","manage_title":"Manage your purchased bundle","manage_warning":"To manage your bundle, we need to verify <b>bundle code</b> that was sent to your email and <b>your email address</b> for secure access.","confirmed_title":"Booking confirmed","info_1_duration":"This bundle will be ended on <b>{end_date}</b>.","info_1_quantity":"This bundle has a total of <b>{quantity} bookings</b>.","booking_info_msg":"This is your <b>{booking_num}</b> from this bundle. After purchasing, you have <b>{remaining} bookings</b> remaining.","add_booking_title":"Add new booking to","bundle_code_title":"Bundle code","confirmed_message":"You will received an email confirmation with appointment details.","email_placeholder":"Enter your email or phone number","use_another_button":"Use another bundle","view_bundle_button":"View bundle","checkout_warning_msg":"Booking will be confirmed after checkout.","manage_bundle_button":"Manage bundle","checkout_warning_desc":"You will receive an email on how to book your bundle bookings after checking out.","bundle_confirmed_title":"Bundle confirmed","bundle_code_placeholder":"Enter your bundle code","make_new_booking_button":"Make new booking","no_booking_left_warning":"You have <b>no bookings</b> left for this bundle. Make new purchase to </b>renew your bundle</b>.","bundle_confirmed_message":"You will received an email confirmation with bundle code.","info_1_quantity_unlimited":"This bundle has <b>unlimited bookings</b>."},"website_widget":{"select_a_date":"Select date(s)","select_button":"Select a service","no_results_found":"No results found for \"{search_text}\"","select_a_service":"Select a service","search_placeholder":"Search"},"deposit_booking":{"checkout_warning_msg":"Booking will be confirmed after checkout.","checkout_warning_desc":"You will receive an email confirmation with appointment details after checking out. Please note that you are only paying a deposit amount now. The remaining amount will be charged after the appointment."},"instant_booking":{"confirmed_title":"Booking confirmed","confirmed_message":"You will receive an email confirmation with appointment details.","confirmed_email_title":"Almost Done! Confirm Your Email to Complete Booking","confirmed_email_message":"You will receive an email with appointment details and a confirmation link.","no_payment_checkout_warning_msg":"Booking is not requiring payment at checkout.","no_payment_checkout_warning_desc":"You will receive an email confirmation with appointment details after booking. Please make sure to check your inbox and spam folder. If you have any questions, please contact the store directly."},"regular_booking":{"quantity_desc":"Minimum of 1 attendee is required.","quantity_title":"How many people will be attending?","checkout_warning_msg":"Booking will be confirmed after checkout.","checkout_warning_desc":"You will receive an email confirmation with appointment details after checking out.","confirm_booking_title":"Confirm booking","choose_a_staff_member_title":"Choose a staff member","automatically_assign_staff_label":"Automatically assign for me","choose_a_staff_member_placeholder":"Choose a staff member"},"subscription_booking":{"subscription_desc":"This is a subscription with booking repeats:","prepaid_policy_msg":"You will be billed:","checkout_warning_msg":"Subscription will be confirmed after checkout.","repeat_booking_title":"Repeat booking","upcoming_bundles_msg":"Your upcoming charging bundles are:","checkout_warning_desc":"You will received an email confirmation with subscription details and how to manage your subscription after checking out.","upcoming_bookings_msg":"Your upcoming bookings are:","cancel_subs_policy_msg":"You can cancel your subscription:","subs_expire_policy_msg":"Subscription will expire:","subscription_bundle_desc":"This is a subscription with bundle repeats:"}}}],"calendarPages":[]};
+    const calendarPages =undefined;
+    window.MeetyInitData = window.MeetyInitData || {
+      shopId,
+      shopUrl,
+      shopDomain,
+      template,
+      firstVariantId,
+      product,
+      cartItems,
+      locales,
+      assetUrl,
+      isAppBlock,
+      useAddToCartStyle,
+      isGiftCard,
+      customer,
+      themeSettings,
+      compactServices,
+      shop: shopData,
+      widgets,
+      calendarPages,
+    };
+  })();
+</script>
+<!-- END app snippet --><!-- BEGIN app snippet: meety-style --><style>
+  
+   
+   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+  
+   
+  @font-face {
+  font-family: Poppins;
+  font-weight: 400;
+  font-style: normal;
+  src: url("//us.fronteriors.co/cdn/fonts/poppins/poppins_n4.0ba78fa5af9b0e1a374041b3ceaadf0a43b41362.woff2") format("woff2"),
+       url("//us.fronteriors.co/cdn/fonts/poppins/poppins_n4.214741a72ff2596839fc9760ee7a770386cf16ca.woff") format("woff");
+}
+
+
+  
+  :root {
+  
+    --meety-block-button-horizontal-alignment: center;
+    --meety-block-button-font-family:Poppins,-apple-system, "system-ui", sans-serif, Poppins;
+    --meety-block-button-font-style: normal;
+    --meety-block-button-font-weight: 400;
+    --meety-block-button-font-size: 15px;
+    --meety-block-button-border-radius: px;
+    --meety-block-button-border-style: solid;
+    --meety-block-button-width: px;
+    --meety-block-button-height: px;
+    --meety-block-button-margin: ;
+    --meety-block-button-schedule-background-color:#ffffff;
+    --meety-block-button-schedule-text-color: #000000;
+    --meety-block-button-schedule-border-color: ;
+    --meety-block-button-schedule-border-width: px;
+    --meety-block-button-subs-book-background-color:#000001;
+    --meety-block-button-subs-book-text-color: #fffffd;
+    --meety-block-button-subs-book-border-color: ;
+    --meety-block-button-subs-book-border-width: px;
+    --meety-block-loading-background-color: #000000;
+    --meety-block-loading-foreground-color: #ffffff;
+  }
+
+  @keyframes meety-spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .meety-block-buttons {
+    align-items: var(--meety-block-button-horizontal-alignment, center);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+  }
+  .meety-block-buttons * {
+    box-sizing: border-box;
+  }
+  button.meety-block-button, a.meety-block-button {
+    border-radius: var(--meety-block-button-border-radius, 10px);
+    border-style: var(--meety-block-button-border-style, solid);
+    font-family: var(--meety-block-button-font-family);
+    font-style: var(--meety-block-button-font-style, normal);
+    font-weight: var(--meety-block-button-font-weight, 400);
+    font-size: var(--meety-block-button-font-size, 14px);
+    width: var(--meety-block-button-width, 400px);
+    min-height: var(--meety-block-button-height, 48px);
+    margin: var(--meety-block-button-margin, auto);
+    text-align: center !important;
+    line-height: 150%;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  button.meety-block-schedule-button, a.meety-block-schedule-button {
+    background: var(
+      --meety-block-button-schedule-background-color,
+      #000001
+    ) !important;
+    color: var(--meety-block-button-schedule-text-color, #fffffd) !important;
+    border-color: var(--meety-block-button-schedule-border-color, #000001) !important;
+    border-width: var(--meety-block-button-schedule-border-width, 0px) !important;
+  }
+  button.meety-block-bundle-button, a.meety-block-bundle-button,
+  button.meety-block-bundle-button-book, a.meety-block-bundle-button-book,
+  button.meety-block-bundle-button-manage, a.meety-block-bundle-button-manage 
+  {
+    background: var(
+      --meety-block-button-subs-book-background-color,
+      #000001
+    ) !important;
+    color: var(--meety-block-button-subs-book-text-color, #fffffd) !important;
+    border-color: var(--meety-block-button-subs-book-border-color, #000001) !important;
+    border-width: var(--meety-block-button-subs-book-border-width, 0px) !important;
+    display: none;
+  }
+
+  a.meety-block-button, a.meety-block-schedule-button, a.meety-block-bundle-button,
+  a.meety-block-bundle-button-book, a.meety-block-bundle-button-manage {
+    text-decoration: none;
+  }
+
+  .meety-button-disabled {
+    pointer-events: none !important;
+  }
+
+  .meety-block-loading-indicator {
+    border: 4px solid var(--meety-block-loading-background-color, #f5f8fa);
+    border-top: 4px solid
+      var(--meety-block-loading-foreground-color, #000001);
+    border-radius: 50%;
+    width: 30px !important;
+    height: 30px !important;
+    animation: meety-spin 1s linear infinite;
+    margin: auto;
+  }
+
+  .meety-loading-indicator {
+    border: 4px solid var(--meety-background-subdued, #f5f8fa);
+    border-top: 4px solid var(--meety-button-color-primary, #000001);
+    border-radius: 50%;
+    width: 30px !important;
+    height: 30px !important;
+    animation: meety-spin 1s linear infinite;
+    margin: auto;
+    display: flex !important;
+  }
+  .meety-loading-indicator-small {
+    border: 3px solid var(--meety-background-subdued, #f5f8fa);
+    border-top: 3px solid var(--meety-button-color-primary, #000001);
+    border-radius: 50%;
+    width: 20px !important;
+    height: 20px !important;
+    animation: meety-spin 1s linear infinite;
+    margin: auto;
+    display: flex !important;
+  }
+
+  .meety-skeleton {
+    background-color: #dfdfdf;
+  }
+
+  .meety-visible {
+    --meety-visible-display: initial;
+    display: var(--meety-visible-display) !important;
+  }
+
+  
+</style>
+<!-- END app snippet -->
+
+<bookings-element>
+  <meety-template>
+    <template id='meety-block-buttons'>
+      <!-- BEGIN app snippet: meety-block-buttons -->
+
+
+
+<div class='meety-block-buttons ' style='--meety-block-button-border-radius: 2px;
+--meety-block-button-width: 100%;
+--meety-block-button-height: 48px;
+--meety-block-button-margin: 0px 0px 0px 0px;
+--meety-block-button-schedule-border-color:#000001;
+--meety-block-button-schedule-border-width: 1px;
+--meety-block-button-subs-book-border-color:#000001;
+--meety-block-button-subs-book-border-width: 0px;'>
+  <button class='meety-block-button meety-block-schedule-button'>
+    Schedule your time
+  </button>
+  
+    <button class='meety-block-button meety-block-bundle-button'>
+      Schedule your bundle
+    </button>
+  
+</div><!-- END app snippet -->
+    </template>
+  </meety-template>
+</bookings-element>
+
+<style>
+  :root {
+    --meety-block-button-border-radius: 2px;
+--meety-block-button-width: 100%;
+--meety-block-button-height: 48px;
+--meety-block-button-margin: 0px 0px 0px 0px;
+--meety-block-button-schedule-border-color:#000001;
+--meety-block-button-schedule-border-width: 1px;
+--meety-block-button-subs-book-border-color:#000001;
+--meety-block-button-subs-book-border-width: 0px;
+  }
+</style>
+
+
+</div><script src="https://cdn.shopify.com/storefront/standard-actions.js" type="module" data-source-attribution="shopify.standard_actions"></script>
+
+<style>
+  /* Styles for transparent header */
+  .header-is-transparent .navigation__link,
+  .header-is-transparent .header-account-link__icon svg,
+  .header-is-transparent .show-search-link__icon svg,
+  .header-is-transparent .cart-link__icon svg,
+  .header-is-transparent .cart-link__count {
+    color: white !important;
+  }
+  .header-is-transparent .logo__image {
+    filter: brightness(0) invert(1);
+    transition: filter 0.3s ease;
+  }
+  .section-header:not(.header-is-transparent) .logo__image {
+    filter: brightness(0);
+  }
+  .section-header .logo__image {
+    transition: filter 0.3s ease;
+  }
+  /* Optional: Make the Schedule Call button transparent with white border when header is transparent */
+  .header-is-transparent .btn--secondary {
+    background-color: transparent !important;
+    color: white !important;
+    border: 1px solid white !important;
+  }
+  /* Default button transition */
+  .section-header .btn--secondary {
+    transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
+  }
+</style>
+<script>
+  function updateHeader() {
+    var header = document.getElementById('shopify-section-sections--24392109293842__header');
+    var headerHeight = header.offsetHeight || 80;
+    var scrubIds = ['react-hero-root', 'react-horizontal-scrub-root', 'react-transformation-root'];
+    
+    var isOverScrubSection = false;
+    
+    if (window.scrollY <= 10) {
+      isOverScrubSection = true;
+    } else {
+      for (var i = 0; i < scrubIds.length; i++) {
+        var el = document.getElementById(scrubIds[i]);
+        if (el && el.offsetHeight > 0) {
+          var rect = el.getBoundingClientRect();
+          if (rect.top <= headerHeight && rect.bottom > 10) {
+            isOverScrubSection = true;
+            break;
+          }
+        }
+      }
+    }
+
+    if (!isOverScrubSection) {
+      header.style.backgroundColor = 'white';
+      header.classList.remove('header-is-transparent');
+    } else {
+      header.style.backgroundColor = 'transparent';
+      header.classList.add('header-is-transparent');
+    }
+  }
+  window.addEventListener('scroll', updateHeader);
+  updateHeader(); // Run on load
+</script>
+</body>
 </html>

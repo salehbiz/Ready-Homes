@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
-import { registerAnimation, gsap, lenis } from '../lib/scroll';
+import { registerAnimation, gsap } from '../lib/scroll';
 import FrameScrub from '../components/FrameScrub';
-import { ArrowRight } from 'lucide-react';
 import { getFrameTier, type FrameTier } from '../lib/frameTier';
 
 export const Hero: React.FC = () => {
@@ -75,34 +74,20 @@ export const Hero: React.FC = () => {
           pathKey={tier ? tier.dir : ''}
           zoomOnMobile
         >
-          {/* Center Overlay contents (visible on both desktop and mobile) */}
-          <div className="flex w-full h-full flex-col justify-center items-center py-16 px-6 md:px-12 relative z-20 pointer-events-none hero-content">
-            <div className="w-full px-6 md:px-12 lg:px-16 flex flex-col justify-end md:justify-center items-center flex-1 pb-20 md:pb-0">
-              <div
-                ref={subHeadingRef}
-                className="flex flex-col items-center justify-center w-full text-center gap-6 md:gap-8 select-none"
-              >
-                <div className="text-white text-[32px] sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.2] md:leading-[1.15] max-w-3xl hero-text-font">
-                  Bespoke architecture.<br className="md:hidden" /> Crafted for the life you love.
-                </div>
-                
-                <div className="pointer-events-auto">
-                  <a
-                    href="#featured-work"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      const element = document.getElementById('featured-work');
-                      if (element) {
-                        lenis.scrollTo(element, { offset: -64 });
-                      }
-                    }}
-                    className="btn-pill-white cursor-pointer hero-text-font"
-                  >
-                    <span>Explore the Residence</span>
-                    <span className="arrow-circle-blue">
-                      <ArrowRight className="w-4 h-4 text-white" />
-                    </span>
-                  </a>
+          {/* Bottom Left Overlay contents exactly as original slider */}
+          <div ref={subHeadingRef} className="absolute inset-0 z-20 pointer-events-none w-full h-full">
+            <div className="text-overlay text-overlay--with-reveal text-overlay--for-banner text-overlay--v-bottom text-overlay--h-left image-overlay__over has-motion w-full h-full" style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}>
+              <div className="text-overlay__inner" style={{ "--heading-max-width": "15em" } as React.CSSProperties}>
+                <div className="text-overlay__text slideshow__motion-overlay has-motion pointer-events-none">
+                  <div className="text-overlay__reveal">
+                    <div className="text-overlay__subheading subheading subheading--over has-motion" style={{ color: 'white' }}>NEW IN HARDWARE</div>
+                  </div>
+                  <div className="text-overlay__reveal">
+                    <h2 className="text-overlay__title h1 has-motion" style={{ color: 'white' }}>The Finishing Touch</h2>
+                  </div>
+                  <div className="text-overlay__button-row pointer-events-auto">
+                    <a className="text-overlay__button btn btn--secondary" href="/collections/hardware">Shop Hardware</a>
+                  </div>
                 </div>
               </div>
             </div>

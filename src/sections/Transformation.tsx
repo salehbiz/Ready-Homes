@@ -36,22 +36,29 @@ export const Transformation: React.FC = () => {
         tierResolved={!!tier}
         pathKey={tier ? tier.dir : ''}
       >
-        {/* Mobile Info Overlay */}
-        <div className="block md:hidden absolute bottom-0 left-0 w-full z-30 text-left pointer-events-none"
-             style={{
-               padding: '2rem clamp(1.25rem, 5vw, 3rem) calc(env(safe-area-inset-bottom) + 2rem)',
-               background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%)'
-             }}
-        >
-          <span className="text-[10px] font-bold tracking-widest text-white/50 uppercase block mb-1">
-            Before & After
-          </span>
-          <h3 className="text-[2rem] font-bold text-white tracking-tight leading-tight hero-text-font mb-2 uppercase">
-            Space Transformation
-          </h3>
-          <p className="text-base text-white/70 font-medium leading-relaxed max-w-sm">
-            Witness the complete evolution of the space.
-          </p>
+        {/* Fronteriors-style Bottom-Left Typography Overlay */}
+        <div className="absolute inset-0 z-30 pointer-events-none w-full h-full">
+          <div className="text-overlay text-overlay--for-banner text-overlay--v-bottom text-overlay--h-left image-overlay__over w-full h-full" style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}>
+            <div className="text-overlay__inner" style={{ "--heading-max-width": "25em" } as React.CSSProperties}>
+              <div className="text-overlay__text pointer-events-none">
+                <div className="text-overlay__reveal">
+                  <div className="text-overlay__subheading subheading subheading--over" style={{ color: 'white' }}>
+                    THE FINISHING TOUCH
+                  </div>
+                </div>
+                <div className="text-overlay__reveal">
+                  <h2 className="text-overlay__title h1" style={{ color: 'white' }}>
+                    Spaces Within joins our hardware curation.
+                  </h2>
+                </div>
+                <div className="text-overlay__button-row pointer-events-auto mt-6">
+                  <a className="text-overlay__button btn btn--secondary" style={{ backgroundColor: 'transparent', color: 'white', borderColor: 'white' }} href="/collections/hardware">
+                    Shop Hardware
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </FrameScrub>
     </section>
