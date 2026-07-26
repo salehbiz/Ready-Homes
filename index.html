@@ -467,8 +467,11 @@
       height: 28px;
       stroke: currentColor;
     }
-    .pageheader--transparent .mobile-nav-toggle svg {
+    .header-is-transparent .mobile-nav-toggle svg {
       stroke: #ffffff !important;
+    }
+    .section-header:not(.header-is-transparent) .mobile-nav-toggle svg {
+      stroke: #000000 !important;
     }
   }
   @media (min-width: 768px) {
@@ -479,7 +482,7 @@
   @media (max-width: 767.98px) {
     .schedule-call-btn {
       font-size: 8px !important;
-      padding: 5px 8px !important;
+      padding: 5px 4px !important;
       margin-left: 10px !important;
       margin-right: 16px !important;
       min-width: unset;
@@ -872,7 +875,7 @@
   <div class="container container--not-mobile">
     <div class="flexible-layout">
       <div class="column column--half ">
-        <carousel-slider class="carousel block" data-dispatch-events="true">
+        <div class="carousel block" data-dispatch-events="true">
           <div class="slider slider--no-scrollbar fade-in-up" data-cc-animate data-cc-animate-delay="0.1s">
             <div class="slider__grid md:block max-md:flex max-md:overflow-x-auto max-md:snap-x max-md:snap-mandatory max-md:gap-4 max-md:pb-4 max-md:-mx-4 max-md:px-4 hide-scrollbar">
               
@@ -973,7 +976,7 @@
           </div>
 
           <div class="scrolling-image-list-dots flex justify-center mobile-only js" role="presentation"><div class="scrolling-image-list-dots__dot" data-index="1"></div><div class="scrolling-image-list-dots__dot" data-index="2"></div><div class="scrolling-image-list-dots__dot" data-index="3"></div></div>
-        </carousel-slider>
+        </div>
       </div>
 
       <div class="column column--half desktop-only scrolling-image-list__content-column" data-cc-animate>
