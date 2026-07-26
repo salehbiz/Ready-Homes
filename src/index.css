@@ -1,36 +1,22 @@
 @import "tailwindcss/utilities";
 
 @media (max-width: 767.98px) {
-  /* Enforce native horizontal scroll container */
-  .scrolling-image-list .slider {
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
-    scroll-snap-type: x mandatory !important;
-    -webkit-overflow-scrolling: touch !important;
-    display: block !important;
-    padding-bottom: 24px !important;
-    position: relative !important;
-  }
-  
-  /* Lay items out in a row */
-  .scrolling-image-list .slider__grid {
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    flex-direction: row !important;
-    gap: 16px !important;
-    width: max-content !important; 
-  }
-  
-  /* Size items to 85% of screen to show peek of next slide */
+  /* Show only the active slide, hide the rest */
   .scrolling-image-list .slider__item {
-    flex: 0 0 85vw !important;
-    width: 85vw !important;
-    max-width: 85vw !important;
-    scroll-snap-align: center !important;
+    display: none !important;
+  }
+  .scrolling-image-list .slider__item.why-active-slide {
     display: block !important;
   }
 
-  /* Force text to ALWAYS be visible, positioned correctly, and CENTER ALIGNED */
+  /* Make the grid a simple block container, no flex/scroll needed */
+  .scrolling-image-list .slider__grid {
+    display: block !important;
+    width: 100% !important;
+    overflow: hidden !important;
+  }
+
+  /* Force text visible and centered */
   .scrolling-image-list .scrolling-image-list__content--mobile {
     visibility: visible !important;
     opacity: 1 !important;
@@ -40,6 +26,7 @@
     align-items: center !important;
     text-align: center !important;
     width: 100% !important;
+    padding: 16px 20px !important;
   }
 
   /* Center the rating bars */
@@ -49,36 +36,54 @@
     width: 100% !important;
   }
 
-  /* Hide the dot navigation on mobile since we use native scroll now */
+  /* Hide the legacy dot navigation */
   .scrolling-image-list .scrolling-image-list-dots {
     display: none !important;
   }
 
-  /* Slider Navigation Arrows */
-  .why-slider-nav {
-    position: absolute;
-    top: 35%;
-    transform: translateY(-50%);
-    z-index: 20;
-    background: rgba(255, 255, 255, 0.85);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    color: #333;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    cursor: pointer;
+  /* Navigation wrapper */
+  .why-nav-wrapper {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 16px !important;
+    padding: 12px 0 !important;
   }
-  .why-slider-nav:active {
-    transform: translateY(-50%) scale(0.95);
+
+  /* Navigation arrows */
+  .why-nav-btn {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 50% !important;
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid rgba(0, 0, 0, 0.15) !important;
+    color: #333 !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+    cursor: pointer !important;
+    -webkit-tap-highlight-color: transparent !important;
   }
-  .why-slider-prev {
-    left: 8px;
+  .why-nav-btn:active {
+    transform: scale(0.92) !important;
+    background: rgba(240, 240, 240, 1) !important;
   }
-  .why-slider-next {
-    right: 8px;
+
+  /* Page indicator between arrows */
+  .why-nav-indicator {
+    font-size: 14px !important;
+    color: #666 !important;
+    font-weight: 500 !important;
+    min-width: 40px !important;
+    text-align: center !important;
   }
 }
+
+/* Hide nav on desktop */
+@media (min-width: 768px) {
+  .why-nav-wrapper {
+    display: none !important;
+  }
+}
+
