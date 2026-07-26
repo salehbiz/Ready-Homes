@@ -1,1 +1,45 @@
 @import "tailwindcss/utilities";
+
+@media (max-width: 767.98px) {
+  /* Enforce native horizontal scroll container */
+  .scrolling-image-list .slider {
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    display: block !important;
+    padding-bottom: 24px !important;
+  }
+  
+  /* Lay items out in a row */
+  .scrolling-image-list .slider__grid {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    flex-direction: row !important;
+    gap: 16px !important;
+    width: max-content !important; 
+  }
+  
+  /* Size items to 85% of screen to show peek of next slide */
+  .scrolling-image-list .slider__item {
+    flex: 0 0 85vw !important;
+    width: 85vw !important;
+    max-width: 85vw !important;
+    scroll-snap-align: center !important;
+    display: block !important;
+  }
+
+  /* Force text to ALWAYS be visible and positioned correctly, overriding JS hiding */
+  .scrolling-image-list .scrolling-image-list__content--mobile {
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: static !important;
+    display: block !important;
+    width: 100% !important;
+  }
+
+  /* Hide the dot navigation on mobile since we use native scroll now */
+  .scrolling-image-list .scrolling-image-list-dots {
+    display: none !important;
+  }
+}
