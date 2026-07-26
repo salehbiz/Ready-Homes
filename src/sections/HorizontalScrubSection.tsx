@@ -39,22 +39,19 @@ export const HorizontalScrubSection: React.FC = () => {
   } else if (currentFrame <= 80) {
     heading = 'Spa and Sauna';
     subtext = 'Traditional Finnish sauna with custom cedar paneling.';
-  } else if (currentFrame <= 100) {
+  } else {
     heading = 'Cinema Room';
     subtext = 'Acoustically treated private viewing rooms.';
-  } else {
-    heading = 'Backyard';
-    subtext = 'Expansive outdoor living spaces surrounded by nature.';
   }
 
   return (
     <section id="horizontal-scrub" className="w-full bg-[#141316] relative select-none max-md:w-screen">
       <FrameScrub
-        frameCount={120}
+        frameCount={100}
         framePath={framePath}
         fallbackFramePath={tier && tier.dir === 'desktop-hq' ? fallbackFramePath : undefined}
         poster="/frames/section3-poster.webp"
-        scrollLengthVh={650}
+        scrollLengthVh={550}
         animationEndProgress={0.77}
         className="w-full max-md:w-screen"
         containOnMobile={false}
