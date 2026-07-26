@@ -8,15 +8,17 @@ export const HorizontalScrubSection: React.FC = () => {
 
   const framePath = useCallback(
     (i: number) => {
-      return tier ? `/frames/section3/${tier.dir}/${String(i).padStart(4, '0')}.${tier.ext}` : '';
+      const offsetFrame = i + 20;
+      return tier ? `/frames/section3/${tier.dir}/${String(offsetFrame).padStart(4, '0')}.${tier.ext}` : '';
     },
     [tier]
   );
 
   const fallbackFramePath = useCallback(
     (i: number) => {
+      const offsetFrame = i + 20;
       return tier && tier.dir === 'desktop-hq'
-        ? `/frames/section3/desktop/${String(i).padStart(4, '0')}.webp`
+        ? `/frames/section3/desktop/${String(offsetFrame).padStart(4, '0')}.webp`
         : '';
     },
     [tier]
