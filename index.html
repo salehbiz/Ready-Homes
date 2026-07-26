@@ -860,6 +860,59 @@
   
 </style>
 
+<style>
+  /* Mobile-only overrides for Why section - must be inline to beat legacy main.css load order */
+  @media (max-width: 767.98px) {
+    /* Override legacy .mobile-only { display: none !important } */
+    .scrolling-image-list .mobile-only.scrolling-image-list__content--mobile {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      text-align: center !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      position: static !important;
+      width: 100% !important;
+      padding: 16px 20px !important;
+    }
+
+    /* Override the .js .scrolling-image-list__content hidden rule */
+    .js .scrolling-image-list__content.scrolling-image-list__content--mobile {
+      visibility: visible !important;
+      opacity: 1 !important;
+      position: static !important;
+      width: 100% !important;
+    }
+
+    /* Center the rating bars */
+    .scrolling-image-list .feature-rating-row {
+      display: flex !important;
+      justify-content: center !important;
+      width: 100% !important;
+    }
+
+    /* Show only the active slide */
+    .scrolling-image-list .slider__item {
+      display: none !important;
+    }
+    .scrolling-image-list .slider__item.why-active-slide {
+      display: block !important;
+    }
+
+    /* Make grid a simple block */
+    .scrolling-image-list .slider__grid {
+      display: block !important;
+      width: 100% !important;
+      overflow: hidden !important;
+    }
+
+    /* Hide legacy dots */
+    .scrolling-image-list .scrolling-image-list-dots {
+      display: none !important;
+    }
+  }
+</style>
+
 <scrolling-image-list
     id="template--24392116044050__key_features_XHCKgr"
     data-current-index="1"
