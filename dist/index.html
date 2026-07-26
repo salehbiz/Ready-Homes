@@ -434,6 +434,8 @@
       if (theme.inlineNavigationCheck) theme.inlineNavigationCheck();
     });
   </script>
+  <script type="module" crossorigin src="/assets/main-DJcPLvpu.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-76FgjCsH.css">
 </head>
 <body  class="template-index
  swatch-source-native swatch-method-swatches swatch-style-icon_circle
@@ -656,7 +658,6 @@
     <div class="container cf">
 
       <div id="react-hero-root"></div>
-<script type="module" src="/src/hero-mount.tsx"></script>
 
 
 
@@ -685,7 +686,6 @@
 
 
 </div><div id="gallery"><div id="react-horizontal-scrub-root"></div></div>
-<script type="module" src="/src/horizontal-mount.tsx"></script>
 </div><div id="shopify-section-template--24392116044050__cross_page_promos_bCknXf" class="shopify-section">
   <div id="section-id-template--24392116044050__cross_page_promos_bCknXf" class="cross-page-promos">
     <div class="container">
@@ -1186,7 +1186,6 @@
 </div>
   <!-- React Transformation Island -->
   <div id="react-transformation-root"></div>
-  <script type="module" src="/src/transformation-mount.tsx"></script>
   </div><div id="shopify-section-template--24392116044050__163592870141219e2f" class="shopify-section section-featured-blog"><div class="fully-spaced-row--medium">
   <div class="container blog-row">
     
@@ -2243,34 +2242,6 @@
   window.addEventListener('scroll', updateHeader);
   window.addEventListener('resize', updateHeader);
   updateHeader(); // Run on load
-</script>
-<script type="module">
-  document.addEventListener('click', (e) => {
-    var link = e.target.closest('a');
-    if (link) {
-      var href = link.getAttribute('href');
-      if (href && href.startsWith('#') && href.length > 1) {
-        var target = document.querySelector(href);
-        if (target) {
-          e.preventDefault();
-          var header = document.getElementById('shopify-section-sections--24392109293842__header');
-          var offset = header ? -header.offsetHeight : -80;
-          
-          import('/src/lib/scroll.ts').then(({ lenis }) => {
-            lenis.scrollTo(target, { offset: offset });
-          });
-
-          // Close mobile nav drawer if open
-          if (link.closest('.mobile-navigation-drawer')) {
-            var closeBtn = document.querySelector('.mobile-navigation-drawer .mobile-nav-toggle');
-            if (closeBtn) {
-              closeBtn.click();
-            }
-          }
-        }
-      }
-    }
-  });
 </script>
 </body>
 </html>
