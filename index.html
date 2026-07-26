@@ -877,6 +877,12 @@
       <div class="column column--half ">
         <div class="carousel block" data-dispatch-events="true">
           <div class="slider slider--no-scrollbar fade-in-up" data-cc-animate data-cc-animate-delay="0.1s">
+            <button type="button" id="why-prev-btn" class="why-slider-nav why-slider-prev max-md:flex hidden" aria-label="Previous slide">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <button type="button" id="why-next-btn" class="why-slider-nav why-slider-next max-md:flex hidden" aria-label="Next slide">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
             <div class="slider__grid md:block max-md:flex max-md:overflow-x-auto max-md:snap-x max-md:snap-mandatory max-md:gap-4 max-md:pb-4 max-md:-mx-4 max-md:px-4 hide-scrollbar">
               
                 <div class="slider__item flex-none basis-full max-md:basis-[85vw] max-md:w-[85vw] max-md:snap-center max-md:shrink-0" >
@@ -1067,6 +1073,22 @@
       </div>
     </div>
   </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const prevBtn = document.getElementById('why-prev-btn');
+      const nextBtn = document.getElementById('why-next-btn');
+      const sliderGrid = document.querySelector('.scrolling-image-list .slider');
+      
+      if (prevBtn && nextBtn && sliderGrid) {
+        prevBtn.addEventListener('click', () => {
+          sliderGrid.scrollBy({ left: -(window.innerWidth * 0.85), behavior: 'smooth' });
+        });
+        nextBtn.addEventListener('click', () => {
+          sliderGrid.scrollBy({ left: window.innerWidth * 0.85, behavior: 'smooth' });
+        });
+      }
+    });
+  </script>
 </scrolling-image-list>
 
 
