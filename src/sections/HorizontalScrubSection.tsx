@@ -8,17 +8,15 @@ export const HorizontalScrubSection: React.FC = () => {
 
   const framePath = useCallback(
     (i: number) => {
-      const offsetFrame = i + 20;
-      return tier ? `/frames/section3/${tier.dir}/${String(offsetFrame).padStart(4, '0')}.${tier.ext}` : '';
+      return tier ? `/frames/section3/${tier.dir}/${String(i).padStart(4, '0')}.${tier.ext}` : '';
     },
     [tier]
   );
 
   const fallbackFramePath = useCallback(
     (i: number) => {
-      const offsetFrame = i + 20;
       return tier && tier.dir === 'desktop-hq'
-        ? `/frames/section3/desktop/${String(offsetFrame).padStart(4, '0')}.webp`
+        ? `/frames/section3/desktop/${String(i).padStart(4, '0')}.webp`
         : '';
     },
     [tier]
@@ -41,19 +39,22 @@ export const HorizontalScrubSection: React.FC = () => {
   } else if (currentFrame <= 80) {
     heading = 'Spa and Sauna';
     subtext = 'Traditional Finnish sauna with custom cedar paneling.';
-  } else {
+  } else if (currentFrame <= 100) {
     heading = 'Cinema Room';
     subtext = 'Acoustically treated private viewing rooms.';
+  } else {
+    heading = 'Backyard';
+    subtext = 'Expansive outdoor living spaces surrounded by nature.';
   }
 
   return (
     <section id="horizontal-scrub" className="w-full bg-[#141316] relative select-none max-md:w-screen">
       <FrameScrub
-        frameCount={100}
+        frameCount={120}
         framePath={framePath}
         fallbackFramePath={tier && tier.dir === 'desktop-hq' ? fallbackFramePath : undefined}
         poster="/frames/section3-poster.webp"
-        scrollLengthVh={550}
+        scrollLengthVh={650}
         animationEndProgress={0.77}
         className="w-full max-md:w-screen"
         containOnMobile={false}
