@@ -495,26 +495,111 @@
     }
   }
 
-  .logo img {
-    width: 140px !important;
-  }
-  .logo-area__middle--logo-image {
-    max-width: 140px !important;
-  }
+  /* Header layout overrides for perfect vertical alignment */
   .logo-area {
+    display: flex !important;
+    align-items: center !important;
     padding-top: 8px !important;
     padding-bottom: 8px !important;
   }
-  .pageheader--layout-inline-permitted .logo-area__left {
+  .logo-area__left,
+  .logo-area__middle,
+  .logo-area__right {
+    display: flex !important;
+    align-items: center !important;
     min-height: unset !important;
   }
+  .logo-area__middle {
+    justify-content: center !important;
+  }
+  .logo {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+  }
+  .logo__h1 {
+    display: flex !important;
+    align-items: center !important;
+    margin: 0 !important;
+  }
+  .logo__link {
+    display: flex !important;
+    align-items: center !important;
+  }
+  
+  /* Logo image adjustments: 220px width and visual vertical baseline adjustment */
+  .logo img {
+    width: 220px !important;
+    height: auto !important;
+    display: block !important;
+    transform: translateY(-2px) !important; /* Visual optical alignment shift */
+  }
+  .logo-area__middle--logo-image {
+    max-width: 220px !important;
+  }
+
+  /* Navigation vertical alignment */
+  .logo-area__left__inner {
+    position: relative !important;
+    top: auto !important;
+    transform: none !important;
+    left: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    width: auto !important;
+    min-height: unset !important;
+  }
+  .navigation--left {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+  .navigation--left .navigation__tier-1-container {
+    position: relative !important;
+    top: auto !important;
+    margin-top: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+  .navigation--left .navigation__tier-1 {
+    display: flex !important;
+    align-items: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .navigation--left .navigation__tier-1-container .navigation__tier-1 > .navigation__item > .navigation__link {
+    padding: 8px 18px !important;
+    font-weight: 600 !important;
+  }
+  
   @media (max-width: 767.98px) {
+    .logo-area__middle {
+      position: absolute !important;
+      left: 50% !important;
+      top: 50% !important;
+      transform: translate(-50%, -50%) !important;
+      margin: 0 !important;
+      z-index: 10 !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+    }
     .logo img {
-      width: 105px !important;
+      width: 130px !important;
+      height: auto !important;
+      display: block !important;
+      transform: translateY(-1px) !important;
     }
     .logo-area {
-      padding-top: 5px !important;
-      padding-bottom: 5px !important;
+      padding-top: 6px !important;
+      padding-bottom: 6px !important;
+    }
+    .logo-area__left__inner {
+      position: relative !important;
+      display: flex !important;
+      align-items: center !important;
+      width: auto !important;
     }
   }.section-header {
     position: -webkit-sticky;
@@ -685,7 +770,186 @@
 
 
 
-</div><div id="gallery"><div id="react-horizontal-scrub-root"></div></div>
+</div>
+<!-- Custom Frames Section -->
+<div id="shopify-section-custom-frames" class="shopify-section section-custom-frames">
+  <div class="custom-frames-container">
+    <h2 class="custom-frames-title">Your frames. Our...</h2>
+    
+    <div class="custom-frames-grid">
+      <!-- Doors Column -->
+      <div class="custom-frames-col">
+        <div class="col-header">
+          <h3 class="col-title">DOORS</h3>
+          <p class="col-desc">Choose from our selection of door designs</p>
+        </div>
+        <div class="col-graphic">
+          <svg viewBox="0 0 120 120" class="col-svg">
+            <!-- Background frame -->
+            <rect x="20" y="25" width="60" height="60" rx="1" fill="var(--color-scheme-2, #f2efec)" stroke="var(--header-text-col, #2b2b2a)" stroke-width="1.8"/>
+            <!-- Foreground frame -->
+            <rect x="35" y="40" width="60" height="60" rx="1" fill="#2f3240" stroke="var(--header-text-col, #2b2b2a)" stroke-width="1.8"/>
+          </svg>
+        </div>
+      </div>
+      
+      <!-- Sides Column -->
+      <div class="custom-frames-col">
+        <div class="col-header">
+          <h3 class="col-title">SIDES</h3>
+          <p class="col-desc">To match your doors and top</p>
+        </div>
+        <div class="col-graphic">
+          <svg viewBox="0 0 120 120" class="col-svg">
+            <!-- Main frame -->
+            <rect x="30" y="30" width="60" height="60" rx="1" fill="var(--color-scheme-2, #f2efec)" stroke="var(--header-text-col, #2b2b2a)" stroke-width="1.8"/>
+            <!-- Left Side panel -->
+            <line x1="20" y1="20" x2="20" y2="100" stroke="var(--header-text-col, #2b2b2a)" stroke-width="2.5" stroke-linecap="round"/>
+            <!-- Right Side panel -->
+            <line x1="100" y1="20" x2="100" y2="100" stroke="var(--header-text-col, #2b2b2a)" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+      
+      <!-- Top Column -->
+      <div class="custom-frames-col">
+        <div class="col-header">
+          <h3 class="col-title">TOP</h3>
+          <p class="col-desc">To match your doors and sides</p>
+        </div>
+        <div class="col-graphic">
+          <svg viewBox="0 0 120 120" class="col-svg">
+            <!-- Main frame -->
+            <rect x="30" y="40" width="60" height="60" rx="1" fill="var(--color-scheme-2, #f2efec)" stroke="var(--header-text-col, #2b2b2a)" stroke-width="1.8"/>
+            <!-- Top panel line -->
+            <line x1="20" y1="26" x2="100" y2="26" stroke="var(--header-text-col, #2b2b2a)" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+      
+      <!-- Hardware Column -->
+      <div class="custom-frames-col">
+        <div class="col-header">
+          <h3 class="col-title">HARDWARE</h3>
+          <p class="col-desc">Knobs, handles and legs</p>
+        </div>
+        <div class="col-graphic">
+          <svg viewBox="0 0 120 120" class="col-svg">
+            <!-- Knob Stem -->
+            <path d="M40 50 L65 75" stroke="var(--header-text-col, #2b2b2a)" stroke-width="4.5" stroke-linecap="round"/>
+            <path d="M37 47 L43 53" stroke="var(--header-text-col, #2b2b2a)" stroke-width="2.5"/>
+            <!-- Knob head rotated -->
+            <ellipse cx="74" cy="84" rx="20" ry="15" fill="#2f3240" stroke="var(--header-text-col, #2b2b2a)" stroke-width="1.8" transform="rotate(-40 74 84)"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .section-custom-frames {
+    background-color: var(--color-scheme-1, #fbf5e8);
+    padding: var(--largest-section-padding, 110px) 0;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: var(--base-font-family), sans-serif;
+  }
+  .custom-frames-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--gutter-large, 30px);
+  }
+  .custom-frames-title {
+    font-size: clamp(2rem, 3.2vw, 2.5rem);
+    font-weight: 500;
+    color: var(--header-text-col, #2b2b2a);
+    margin-bottom: 50px;
+    letter-spacing: -0.01em;
+    font-family: var(--heading-font-family), sans-serif;
+  }
+  .custom-frames-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px;
+  }
+  .custom-frames-col {
+    flex: 1 1 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .col-header {
+    border-left: 1.5px solid var(--header-text-col, #2b2b2a);
+    padding-left: 15px;
+    min-height: 105px;
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .col-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--header-text-col, #2b2b2a);
+    letter-spacing: 0.1em;
+    margin: 0 0 8px 0;
+    line-height: 1.2;
+    font-family: var(--base-font-family), sans-serif;
+  }
+  .col-desc {
+    font-size: 13px;
+    line-height: 1.4;
+    color: #706f6c;
+    margin: 0;
+  }
+  .col-graphic {
+    width: 110px;
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .col-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  @media (max-width: 767.98px) {
+    .section-custom-frames {
+      padding: var(--larger-section-padding-mobile, 60px) 0;
+    }
+    .custom-frames-container {
+      padding: 0 var(--gutter-mobile, 16px);
+    }
+    .custom-frames-title {
+      margin-bottom: 30px;
+    }
+    .custom-frames-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px 20px;
+    }
+    .col-header {
+      min-height: 85px;
+      margin-bottom: 15px;
+    }
+    .col-title {
+      font-size: 12px;
+    }
+    .col-desc {
+      font-size: 12px;
+    }
+    .col-graphic {
+      width: 90px;
+      height: 90px;
+    }
+  }
+</style>
+
+<div id="gallery"><div id="react-horizontal-scrub-root"></div></div>
 </div><div id="shopify-section-template--24392116044050__cross_page_promos_bCknXf" class="shopify-section">
   <div id="section-id-template--24392116044050__cross_page_promos_bCknXf" class="cross-page-promos">
     <div class="container">
