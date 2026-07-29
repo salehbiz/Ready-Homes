@@ -3,8 +3,12 @@ import FrameScrub from '../components/FrameScrub';
 import { getFrameTier, type FrameTier } from '../lib/frameTier';
 
 export const HorizontalScrubSection: React.FC = () => {
-  const [tier] = useState<FrameTier>(getFrameTier);
+  const [tier, setTier] = useState<FrameTier | null>(null);
   const [currentFrame, setCurrentFrame] = useState(1);
+
+  useEffect(() => {
+    setTier(getFrameTier());
+  }, []);
 
   const framePath = useCallback(
     (i: number) => {

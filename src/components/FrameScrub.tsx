@@ -81,6 +81,47 @@ export default function FrameScrub({
 
   const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth < 768);
 
+  const [pageLoaded, setPageLoaded] = useState(false);
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    let idleId: number;
+
+    const triggerLoad = () => {
+      setPageLoaded(true);
+      cleanup();
+    };
+
+    const cleanup = () => {
+      window.removeEventListener('load', triggerLoad);
+      window.removeEventListener('scroll', triggerLoad);
+      clearTimeout(timer);
+      if (typeof cancelIdleCallback !== 'undefined' && idleId) {
+        cancelIdleCallback(idleId);
+      }
+    };
+
+    if (document.readyState === 'complete') {
+      if (typeof requestIdleCallback !== 'undefined') {
+        idleId = requestIdleCallback(() => triggerLoad());
+      } else {
+        timer = setTimeout(triggerLoad, 200);
+      }
+    } else {
+      window.addEventListener('load', () => {
+        if (typeof requestIdleCallback !== 'undefined') {
+          idleId = requestIdleCallback(() => triggerLoad());
+        } else {
+          timer = setTimeout(triggerLoad, 200);
+        }
+      });
+    }
+
+    window.addEventListener('scroll', triggerLoad, { passive: true });
+
+    return cleanup;
+  }, []);
+
   const activePoster = (isMobile && posterMobile) ? posterMobile : poster;
 
   const [pumpAllowed, setPumpAllowed] = useState(false);
@@ -202,7 +243,7 @@ export default function FrameScrub({
 
   // Highly optimized HTTP/2 Image Preloader using Blob fetching
   useEffect(() => {
-    if (!visible || !tierResolved || reduced || !pumpAllowed) return;
+    if (!visible || !tierResolved || reduced || !pumpAllowed || !pageLoaded) return;
     
     let cancelled = false;
     let loadedCount = 0;
@@ -290,9 +331,22 @@ export default function FrameScrub({
             if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
             return res.blob();
           })
-          .then(blob => {
+          .then(async blob => {
             if (cancelled) return;
             compressedBlobs.current.set(currentFrame, blob);
+            
+            // Pre-decode frame 1 immediately for instant paint
+            if (currentFrame === 1) {
+              try {
+                const bmp = await createImageBitmap(blob);
+                if (!cancelled) {
+                  decodedBitmaps.current.set(1, bmp);
+                }
+              } catch (e) {
+                // ignore
+              }
+            }
+
             loadedCount++;
             if (loadedCount === requiredForReady) {
               setReady(true);
@@ -320,7 +374,7 @@ export default function FrameScrub({
       cancelled = true; 
       pumpRef.current = undefined;
     };
-  }, [visible, frameCount, isMobile, tierResolved, reduced, isFallenBack, pumpAllowed, isHero]);
+  }, [visible, frameCount, isMobile, tierResolved, reduced, isFallenBack, pumpAllowed, isHero, pageLoaded]);
 
   // GSAP ScrollTrigger pin — unified for all viewports (desktop and mobile pin identically)
   useEffect(() => {

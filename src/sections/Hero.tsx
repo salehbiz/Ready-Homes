@@ -7,7 +7,11 @@ export const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const subHeadingRef = useRef<HTMLDivElement>(null);
 
-  const [tier] = useState<FrameTier>(getFrameTier);
+  const [tier, setTier] = useState<FrameTier | null>(null);
+
+  useEffect(() => {
+    setTier(getFrameTier());
+  }, []);
 
   // 2. Animations trigger setup
   useEffect(() => {

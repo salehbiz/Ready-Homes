@@ -1,10 +1,14 @@
-import React, { useRef, useState, useCallback } from 'react';
+import React, { useRef, useState, useCallback, useEffect } from 'react';
 import FrameScrub from '../components/FrameScrub';
 import { getFrameTier, type FrameTier } from '../lib/frameTier';
 
 export const Transformation: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [tier] = useState<FrameTier>(getFrameTier);
+  const [tier, setTier] = useState<FrameTier | null>(null);
+
+  useEffect(() => {
+    setTier(getFrameTier());
+  }, []);
 
 
   const framePath = useCallback(

@@ -4,13 +4,16 @@ export type FrameTier = {
 };
 
 export function getFrameTier(): FrameTier {
-  const w = window.innerWidth;
-  const dpr = window.devicePixelRatio || 1;
-  const conn = (navigator as any).connection;
+  const isMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches;
+  const dpr = typeof window !== 'undefined' ? (window.devicePixelRatio || 1) : 1;
+  const conn = typeof navigator !== 'undefined' ? (navigator as any).connection : null;
   const slowConn =
-    conn?.effectiveType === '3g' || (conn?.downlink && conn.downlink < 3);
+    conn?.effectiveType === 'slow-2g' ||
+    conn?.effectiveType === '2g' ||
+    conn?.effectiveType === '3g' ||
+    (conn?.downlink !== undefined && conn.downlink < 3);
 
-  if (w < 768) return { dir: 'mobile', ext: 'avif' };
+  if (isMobile) return { dir: 'mobile', ext: 'avif' };
 
   if (dpr >= 1.25 && !slowConn) {
     return { dir: 'desktop-hq', ext: 'avif' };
