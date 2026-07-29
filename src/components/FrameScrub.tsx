@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { gsap, ScrollTrigger } from '../lib/scroll';
+import { gsap, ScrollTrigger, safeRefresh } from '../lib/scroll';
 
 type Props = {
   frameCount: number;
@@ -401,7 +401,7 @@ export default function FrameScrub({
       });
     }, track);
 
-    const timer = setTimeout(() => ScrollTrigger.refresh(), 300);
+    const timer = setTimeout(() => safeRefresh(), 300);
     return () => { 
       clearTimeout(timer); 
       ctx.revert(); 
@@ -411,7 +411,7 @@ export default function FrameScrub({
   // ScrollTrigger refresh after the first frame has successfully rendered
   useEffect(() => {
     if (firstFrameDrawn) {
-      ScrollTrigger.refresh();
+      safeRefresh();
     }
   }, [firstFrameDrawn]);
 
@@ -421,7 +421,7 @@ export default function FrameScrub({
     const handleResizeOrOrientation = () => {
       clearTimeout(debounceTimer);
       debounceTimer = window.setTimeout(() => {
-        ScrollTrigger.refresh();
+        safeRefresh();
       }, 250);
     };
 
@@ -653,6 +653,8 @@ export default function FrameScrub({
               fetchPriority="high"
               decoding="async"
               alt=""
+              width={isMobile ? 750 : 1280}
+              height={isMobile ? 1334 : 720}
               style={{ width: '100%', height: '100%', objectFit: 'cover', transform: (zoomOnMobile && isMobile) ? 'scale(1.1) translateZ(0)' : 'translateZ(0)', filter: 'contrast(1.04) saturate(1.06) brightness(1.01)' }}
             />
           : <>
@@ -681,6 +683,8 @@ export default function FrameScrub({
                 fetchPriority="high"
                 decoding="async"
                 alt="" 
+                width={isMobile ? 750 : 1280}
+                height={isMobile ? 1334 : 720}
                 style={{ 
                   position: 'absolute', 
                   inset: 0, 

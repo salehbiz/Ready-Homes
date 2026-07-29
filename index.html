@@ -7,7 +7,10 @@
   <title>Ready Homes</title>
   
   <link rel="preload" href="/fonts/montserrat-n4.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/src/index.css">
+  <link rel="preload" href="/fonts/trirong-n7.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/poppins-n4.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/src/index.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/src/index.css"></noscript>
   
   <!-- Provide dummy Shopify object to prevent theme JS errors -->
   <script>
@@ -69,6 +72,34 @@
   ascent-override: 95%;
   descent-override: 25%;
   line-gap-override: 0%;
+}
+@font-face {
+  font-family: Poppins;
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/poppins-n4.woff2") format("woff2");
+}
+@font-face {
+  font-family: Poppins;
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/poppins-n5.woff2") format("woff2");
+}
+@font-face {
+  font-family: Poppins;
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/poppins-n6.woff2") format("woff2");
+}
+@font-face {
+  font-family: Trirong;
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/trirong-n7.woff2") format("woff2");
 }
 :root {
   --page-container-width:          1600px;
@@ -284,6 +315,12 @@
   min-height: 100vh;
   display: block;
   background-color: #141316;
+}
+.text-overlay__reveal div,
+.text-overlay__title,
+.text-overlay__subheading,
+.text-overlay__button-row {
+  will-change: transform, opacity;
 }</style>
 
   <script>
@@ -921,7 +958,6 @@
 </style>
 
 <div id="gallery"><div id="react-horizontal-scrub-root"></div></div>
-<script type="module" src="/src/horizontal-mount.tsx"></script>
 </div><div id="shopify-section-template--24392116044050__cross_page_promos_bCknXf" class="shopify-section">
   <div id="section-id-template--24392116044050__cross_page_promos_bCknXf" class="cross-page-promos">
     <div class="container">
@@ -1391,9 +1427,7 @@
 
 
 </div>
-  <!-- React Transformation Island -->
   <div id="react-transformation-root"></div>
-  <script type="module" src="/src/transformation-mount.tsx"></script>
   </div><div id="shopify-section-template--24392116044050__163592870141219e2f" class="shopify-section section-featured-blog"><div class="fully-spaced-row--medium">
   <div class="container blog-row">
     
@@ -2019,14 +2053,8 @@
       calendarPages,
     };
   })();
-</script>
 <!-- END app snippet --><!-- BEGIN app snippet: meety-style --><style>
-  
-   
-   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
-  
-  
-  /* Poppins loaded via standard google fonts snippet in line 2026 */
+  /* Poppins loaded locally */
 
 
   
@@ -2284,22 +2312,34 @@
   }
 </style>
 <script>
-  function updateHeader() {
-    var header = document.getElementById('shopify-section-sections--24392109293842__header');
-    var pageheader = document.getElementById('pageheader');
-    var hero = document.getElementById('hero');
+  var cachedHeroBottomLimit = 50; // default fallback
+  var header = null;
+  var pageheader = null;
+  var hero = null;
+
+  function measureHeaderAndHero() {
+    header = document.getElementById('shopify-section-sections--24392109293842__header');
+    pageheader = document.getElementById('pageheader');
+    hero = document.getElementById('hero');
     
-    var isOverHero = false;
     if (hero && hero.offsetHeight > 0) {
+      var headerHeight = header ? (header.offsetHeight || 80) : 80;
       var rect = hero.getBoundingClientRect();
-      var headerHeight = header.offsetHeight || 80;
-      if (rect.bottom > headerHeight) {
-        isOverHero = true;
-      }
+      var absoluteHeroBottom = rect.top + window.scrollY + hero.offsetHeight;
+      cachedHeroBottomLimit = absoluteHeroBottom - headerHeight;
     } else {
-      // Fallback when React is mounting or element not found: assume transparent header at the very top of page
-      isOverHero = window.scrollY <= 50;
+      cachedHeroBottomLimit = 50;
     }
+  }
+
+  function updateHeader() {
+    if (!header) {
+      header = document.getElementById('shopify-section-sections--24392109293842__header');
+      pageheader = document.getElementById('pageheader');
+    }
+    if (!header) return;
+
+    var isOverHero = window.scrollY <= cachedHeroBottomLimit;
 
     if (isOverHero) {
       header.classList.add('header-is-transparent');
@@ -2315,9 +2355,25 @@
       }
     }
   }
-  window.addEventListener('scroll', updateHeader);
-  window.addEventListener('resize', updateHeader);
-  updateHeader(); // Run on load
+
+  window.addEventListener('scroll', updateHeader, { passive: true });
+  window.addEventListener('resize', function() {
+    measureHeaderAndHero();
+    updateHeader();
+  });
+  
+  // Set intervals to check dimensions when React finishes loading
+  measureHeaderAndHero();
+  updateHeader();
+  var initAttempts = 0;
+  var initInterval = setInterval(function() {
+    measureHeaderAndHero();
+    updateHeader();
+    initAttempts++;
+    if (initAttempts > 15 || (hero && hero.offsetHeight > 0)) {
+      clearInterval(initInterval);
+    }
+  }, 200);
 </script>
 <script type="module">
   document.addEventListener('click', (e) => {

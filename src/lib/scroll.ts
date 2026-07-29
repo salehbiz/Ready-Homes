@@ -32,4 +32,16 @@ export const registerAnimation = (animationFn: () => void | (() => void)) => {
   gsapCtx.add(animationFn);
 };
 
+// Debounced ScrollTrigger refresh to prevent layout thrashing from multiple components
+let refreshTimeout: number | undefined;
+export const safeRefresh = () => {
+  if (typeof window === 'undefined') return;
+  if (refreshTimeout) {
+    clearTimeout(refreshTimeout);
+  }
+  refreshTimeout = window.setTimeout(() => {
+    ScrollTrigger.refresh();
+  }, 100);
+};
+
 export { gsap, ScrollTrigger };
