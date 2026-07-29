@@ -591,6 +591,8 @@ export default function FrameScrub({
           : <>
               <canvas 
                 ref={canvasRef} 
+                role="img"
+                aria-label="Interactive 3D property showcase scroll visualizer"
                 style={{ 
                   position: 'absolute', 
                   inset: 0, 
