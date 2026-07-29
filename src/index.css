@@ -1,1 +1,8 @@
-@import "tailwindcss/utilities";
+@import "../public/assets/css/main.css";
+@import "../public/assets/css/page-sektion-template.css";
+@import "../public/assets/css/animate-on-scroll.css";
+@import "../public/assets/css/video.css";
+@import "../public/assets/css/feature-rating.css";
+@import "../public/assets/css/scrolling-image-list.css";
+@import "../public/assets/css/modal.css";
+@import "../public/assets/css/pop-up.css";

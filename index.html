@@ -2,16 +2,12 @@
 <html lang="en" class="no-js">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ready Homes offers premium designer-crafted custom cabinet fronts and architectural hardware collections to elevate your home.">
   <title>Ready Homes</title>
   
-  <!-- Preconnect to Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Mulish:ital,wght@0,400;0,600;0,700;1,400&family=Trirong:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-
-  <!-- Core Theme Stylesheet -->
-  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="preload" href="/fonts/montserrat-n4.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/src/index.css">
   
   <!-- Provide dummy Shopify object to prevent theme JS errors -->
   <script>
@@ -20,89 +16,59 @@
     window.Shopify.designMode = false;
   </script>
 
-  <!-- Additional Section/Component Stylesheets -->
-  <link rel="stylesheet" href="/assets/css/page-sektion-template.css">
   <!-- Main interactive javascript bundle (must load first) -->
   <script src="/assets/js/main.js" defer></script>
-  <link rel="stylesheet" href="/assets/css/animate-on-scroll.css">
   <script src="/assets/js/animate-on-scroll.js" defer></script>
-  <link rel="stylesheet" href="/assets/css/video.css">
-  <link rel="stylesheet" href="/assets/css/feature-rating.css">
-  <link rel="stylesheet" href="/assets/css/scrolling-image-list.css">
-  <link rel="stylesheet" href="/assets/css/modal.css">
-  <link rel="stylesheet" href="/assets/css/pop-up.css">
 
   <style>@font-face {
   font-family: Montserrat;
   font-weight: 400;
   font-style: normal;
-  font-display: fallback;
-  src: url("//us.fronteriors.co/cdn/fonts/montserrat/montserrat_n4.81949fa0ac9fd2021e16436151e8eaa539321637.woff2") format("woff2"),
-       url("//us.fronteriors.co/cdn/fonts/montserrat/montserrat_n4.a6c632ca7b62da89c3594789ba828388aac693fe.woff") format("woff");
-}
-@font-face {
-  font-family: Montserrat;
-  font-weight: 700;
-  font-style: normal;
-  font-display: fallback;
-  src: url("//us.fronteriors.co/cdn/fonts/montserrat/montserrat_n7.3c434e22befd5c18a6b4afadb1e3d77c128c7939.woff2") format("woff2"),
-       url("//us.fronteriors.co/cdn/fonts/montserrat/montserrat_n7.5d9fa6e2cae713c8fb539a9876489d86207fe957.woff") format("woff");
+  font-display: swap;
+  src: url("/fonts/montserrat-n4.woff2") format("woff2");
+  ascent-override: 95%;
+  descent-override: 25%;
+  line-gap-override: 0%;
 }
 @font-face {
   font-family: Montserrat;
   font-weight: 500;
   font-style: normal;
-  font-display: fallback;
-  src: url("//us.fronteriors.co/cdn/fonts/montserrat/montserrat_n5.07ef3781d9c78c8b93c98419da7ad4fbeebb6635.woff2") format("woff2"),
-       url("//us.fronteriors.co/cdn/fonts/montserrat/montserrat_n5.adf9b4bd8b0e4f55a0b203cdd84512667e0d5e4d.woff") format("woff");
+  font-display: swap;
+  src: url("/fonts/montserrat-n5.woff2") format("woff2");
+  ascent-override: 95%;
+  descent-override: 25%;
+  line-gap-override: 0%;
 }
 @font-face {
   font-family: Montserrat;
-  font-weight: 400;
-  font-style: italic;
-  font-display: fallback;
-  src: url("//us.fronteriors.co/cdn/fonts/montserrat/montserrat_i4.5a4ea298b4789e064f62a29aafc18d41f09ae59b.woff2") format("woff2"),
-       url("//us.fronteriors.co/cdn/fonts/montserrat/montserrat_i4.072b5869c5e0ed5b9d2021e4c2af132e16681ad2.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/montserrat-n6.woff2") format("woff2");
+  ascent-override: 95%;
+  descent-override: 25%;
+  line-gap-override: 0%;
 }
 @font-face {
   font-family: Montserrat;
   font-weight: 700;
-  font-style: italic;
-  font-display: fallback;
-  src: url("//us.fronteriors.co/cdn/fonts/montserrat/montserrat_i7.a0d4a463df4f146567d871890ffb3c80408e7732.woff2") format("woff2"),
-       url("//us.fronteriors.co/cdn/fonts/montserrat/montserrat_i7.f6ec9f2a0681acc6f8152c40921d2a4d2e1a2c78.woff") format("woff");
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/montserrat-n7.woff2") format("woff2");
+  ascent-override: 95%;
+  descent-override: 25%;
+  line-gap-override: 0%;
 }
 @font-face {
   font-family: Muli;
   font-weight: 600;
   font-style: normal;
-  font-display: fallback;
-  src: url("//us.fronteriors.co/cdn/fonts/muli/muli_n6.cc1d2d4222c93c9ee9f6de4489226d2e1332d85b.woff2") format("woff2"),
-       url("//us.fronteriors.co/cdn/fonts/muli/muli_n6.2bb79714f197c09d3f5905925734a3f1166d5d27.woff") format("woff");
-}
-@font-face {
-  font-family: Trirong;
-  font-weight: 700;
-  font-style: normal;
-  font-display: fallback;
-  src: url("//us.fronteriors.co/cdn/fonts/trirong/trirong_n7.a33ed6536f9a7c6d7a9d0b52e1e13fd44f544eff.woff2") format("woff2"),
-       url("//us.fronteriors.co/cdn/fonts/trirong/trirong_n7.cdb88d0f8e5c427b393745c8cdeb8bc085cbacff.woff") format("woff");
-}
-@font-face {
-  font-family: Montserrat;
-  font-weight: 400;
-  font-style: normal;
-  font-display: fallback;
-  src: url("//us.fronteriors.co/cdn/fonts/montserrat/montserrat_n4.81949fa0ac9fd2021e16436151e8eaa539321637.woff2") format("woff2"),
-       url("//us.fronteriors.co/cdn/fonts/montserrat/montserrat_n4.a6c632ca7b62da89c3594789ba828388aac693fe.woff") format("woff");
-}
-@font-face {
-  font-family: Montserrat;
-  font-weight: 600;
-  font-style: normal;
-  font-display: fallback;
-  src: url("//us.fronteriors.co/cdn/fonts/montserrat/montserrat_n6.1326b3e84230700ef15b3a29fb520639977513e0.woff2") format("woff2"),
-       url("//us.fronteriors.co/cdn/fonts/montserrat/montserrat_n6.652f051080eb14192330daceed8cd53dfdc5ead9.woff") format("woff");
+  font-display: swap;
+  src: url("/fonts/muli-n6.woff2") format("woff2");
+  ascent-override: 95%;
+  descent-override: 25%;
+  line-gap-override: 0%;
 }
 :root {
   --page-container-width:          1600px;
@@ -313,6 +279,11 @@
   --input-border-color:                rgb(176, 172, 162);
   --input-border-color-hover:          rgb(113, 110, 104);
   --input-border-color-active:         rgb(0, 0, 0);
+}
+#react-hero-root, #react-horizontal-scrub-root, #react-transformation-root {
+  min-height: 100vh;
+  display: block;
+  background-color: #141316;
 }</style>
 
   <script>
@@ -639,7 +610,7 @@
 
       <div class="logo-area__middle logo-area__middle--logo-image">
         <div class="logo-area__middle__inner">
-          <div class="logo"><h1 class="logo__h1"><a class="logo__link" href="/" title="Ready Homes"><img class="logo__image" src="/assets/logo.png" alt="Ready Homes" itemprop="logo" style="width: 180px; height: auto; display: block;" loading="eager" /></a></h1></div>
+          <div class="logo"><h1 class="logo__h1"><a class="logo__link" href="/" title="Ready Homes"><img class="logo__image" src="/assets/logo.webp" alt="Ready Homes" itemprop="logo" style="width: 180px; height: auto; display: block;" loading="eager" width="180" height="38" /></a></h1></div>
         </div>
       </div>
 
@@ -1063,8 +1034,7 @@
 
 
 
-</div><div id="shopify-section-template--24392116044050__key_features_XHCKgr" class="shopify-section section-key-features"><div id="amenities"></div><link rel="stylesheet" href="/assets/css/feature-rating.css" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="/assets/css/scrolling-image-list.css" media="print" onload="this.media='all'">
+</div><div id="shopify-section-template--24392116044050__key_features_XHCKgr" class="shopify-section section-key-features"><div id="amenities"></div>
 <script src="/assets/js/scrolling-image-list.js" defer></script><style data-shopify>
   
     #template--24392116044050__key_features_XHCKgr[data-current-index="1"] {
@@ -1150,7 +1120,7 @@
               
                 <div class="slider__item flex-none basis-full max-md:w-[90vw] max-md:snap-center max-md:shrink-0" >
                   <div class="scrolling-image-list__image" data-index="1" tabindex="0"><div class="img-ar img-ar--cover" style="--aspect-ratio: 1">
-<img src="/tour/house_aerial.webp" alt="" width="1920" height="1920" loading="lazy" sizes="(min-width: 1600px) 800px, (min-width: 768px) 50vw, 100vw" srcset="/tour/house_aerial.webp" class="theme-img"></div>
+<img src="/tour/house_aerial.webp" alt="Aerial view of Ready Homes architecture and surrounding landscape" width="1920" height="1920" loading="lazy" sizes="(min-width: 1600px) 800px, (min-width: 768px) 50vw, 100vw" srcset="/tour/house_aerial-480w.webp 480w, /tour/house_aerial-800w.webp 800w, /tour/house_aerial-1200w.webp 1200w" class="theme-img"></div>
 <div class="mobile-only fully-spaced-row scrolling-image-list__content scrolling-image-list__content--mobile" data-index="1"><div class="subheading spaced-row" role="heading" aria-level="2">WHY 1159 DIAMOND</div><div class="feature-rating-row">
                           <div class="feature-rating">
   <div class="visually-hidden">
@@ -1181,7 +1151,7 @@
               
                   <div class="slider__item flex-none basis-full max-md:w-[90vw] max-md:snap-center max-md:shrink-0" >
                   <div class="scrolling-image-list__image" data-index="2" tabindex="0"><div class="img-ar img-ar--cover" style="--aspect-ratio: 1">
-<img src="/tour/house_address.webp" alt="" width="800" height="800" loading="lazy" sizes="(min-width: 1600px) 800px, (min-width: 768px) 50vw, 100vw" srcset="/tour/house_address.webp" class="theme-img"></div>
+<img src="/tour/house_address.webp" alt="Close up of street number address plaque on concrete walls" width="800" height="800" loading="lazy" sizes="(min-width: 1600px) 800px, (min-width: 768px) 50vw, 100vw" srcset="/tour/house_address-480w.webp 480w, /tour/house_address-800w.webp 800w, /tour/house_address-1200w.webp 1200w" class="theme-img"></div>
 <div class="mobile-only fully-spaced-row scrolling-image-list__content scrolling-image-list__content--mobile" data-index="2"><div class="subheading spaced-row" role="heading" aria-level="2">WHY 1159 DIAMOND</div><div class="feature-rating-row">
                           <div class="feature-rating">
   <div class="visually-hidden">
@@ -1212,7 +1182,7 @@
               
                   <div class="slider__item flex-none basis-full max-md:w-[90vw] max-md:snap-center max-md:shrink-0" >
                   <div class="scrolling-image-list__image" data-index="3" tabindex="0"><div class="img-ar img-ar--cover" style="--aspect-ratio: 1">
-<img src="/tour/tour_community.webp" alt="" width="1282" height="1282" loading="lazy" sizes="(min-width: 1600px) 800px, (min-width: 768px) 50vw, 100vw" srcset="/tour/tour_community.webp" class="theme-img"></div>
+<img src="/tour/tour_community.webp" alt="Ready Homes residential neighborhood and community layout" width="1282" height="1282" loading="lazy" sizes="(min-width: 1600px) 800px, (min-width: 768px) 50vw, 100vw" srcset="/tour/tour_community-480w.webp 480w, /tour/tour_community-800w.webp 800w, /tour/tour_community-1200w.webp 1200w" class="theme-img"></div>
 <div class="mobile-only fully-spaced-row scrolling-image-list__content scrolling-image-list__content--mobile" data-index="3"><div class="subheading spaced-row" role="heading" aria-level="2">WHY 1159 DIAMOND</div><div class="feature-rating-row">
                           <div class="feature-rating">
   <div class="visually-hidden">
@@ -1375,7 +1345,7 @@
     <a class="product-link" href="/collections/besta">
       <div class="image-cont">
           <div class="product-block__image image-overlay__image img-stretch product-block__image--primary product-block__image--active"><div class="img-ar img-ar--cover" style="--aspect-ratio: 1.0">
-<img src="/featured/featured_bedroom.webp" alt="" width="1200" height="1200" loading="lazy" sizes="(min-width: 1600px) 800px, (min-width: 768px) 50vw, 50vw" srcset="/featured/featured_bedroom.webp" class="theme-img"></div>
+<img src="/featured/featured_bedroom.webp" alt="Modern minimalist bedroom design showcase" width="1200" height="1200" loading="lazy" sizes="(min-width: 1600px) 800px, (min-width: 768px) 50vw, 50vw" srcset="/featured/featured_bedroom-480w.webp 480w, /featured/featured_bedroom-800w.webp 800w, /featured/featured_bedroom-1200w.webp 1200w" class="theme-img"></div>
 </div>
         
 </div><div class="product-block__detail align-left"><div class="product-block__title">BESTA</div></div></a>
@@ -1386,7 +1356,7 @@
     <a class="product-link" href="/collections/pax">
       <div class="image-cont">
           <div class="product-block__image image-overlay__image img-stretch product-block__image--primary product-block__image--active"><div class="img-ar img-ar--cover" style="--aspect-ratio: 1.0">
-<img src="/featured/featured_living.webp" alt="" width="800" height="800" loading="lazy" sizes="(min-width: 1600px) 800px, (min-width: 768px) 50vw, 50vw" srcset="/featured/featured_living.webp" class="theme-img"></div>
+<img src="/featured/featured_living.webp" alt="Custom oak wood storage system in a bright living room" width="800" height="800" loading="lazy" sizes="(min-width: 1600px) 800px, (min-width: 768px) 50vw, 50vw" srcset="/featured/featured_living-480w.webp 480w, /featured/featured_living-800w.webp 800w, /featured/featured_living-1200w.webp 1200w" class="theme-img"></div>
 </div>
         
 </div><div class="product-block__detail align-left"><div class="product-block__title">PAX</div></div></a>
@@ -1397,7 +1367,7 @@
     <a class="product-link" href="/collections/sektion">
       <div class="image-cont">
           <div class="product-block__image image-overlay__image img-stretch product-block__image--primary product-block__image--active"><div class="img-ar img-ar--cover" style="--aspect-ratio: 1.0">
-<img src="/tour/tour_bedrooms.png" alt="" width="1200" height="1200" loading="lazy" sizes="(min-width: 1600px) 800px, (min-width: 768px) 50vw, 50vw" srcset="/tour/tour_bedrooms.png" class="theme-img"></div>
+<img src="/tour/tour_bedrooms.webp" alt="Custom designer wardrobe installation in bedroom" width="1200" height="1200" loading="lazy" sizes="(min-width: 1600px) 800px, (min-width: 768px) 50vw, 50vw" srcset="/tour/tour_bedrooms-480w.webp 480w, /tour/tour_bedrooms-800w.webp 800w, /tour/tour_bedrooms-1200w.webp 1200w" class="theme-img"></div>
 </div>
         
 </div><div class="product-block__detail align-left"><div class="product-block__title">SEKTION</div></div></a>
@@ -1408,7 +1378,7 @@
     <a class="product-link" href="/collections/hardware">
       <div class="image-cont">
           <div class="product-block__image image-overlay__image img-stretch product-block__image--primary product-block__image--active"><div class="img-ar img-ar--cover" style="--aspect-ratio: 1.0">
-<img src="/tour/tour_pool.webp" alt="" width="1663" height="1663" loading="lazy" sizes="(min-width: 1600px) 800px, (min-width: 768px) 50vw, 50vw" srcset="/tour/tour_pool.webp" class="theme-img"></div>
+<img src="/tour/tour_pool.webp" alt="Luxury swimming pool and outdoor lounge area at Ready Homes" width="1663" height="1663" loading="lazy" sizes="(min-width: 1600px) 800px, (min-width: 768px) 50vw, 50vw" srcset="/tour/tour_pool-480w.webp 480w, /tour/tour_pool-800w.webp 800w, /tour/tour_pool-1200w.webp 1200w" class="theme-img"></div>
 </div>
         
 </div><div class="product-block__detail align-left"><div class="product-block__title">HARDWARE</div></div></a>
@@ -1439,7 +1409,7 @@
               
                 <div class="article-image">
                   <a href="/blogs/features/new-oak-veneer-finishes"><div class="img-ar img-ar--cover" style="--aspect-ratio: 1.0">
-<img src="/tour/tour_outdoor_kitchen.webp" alt="The Oak Collection, Expanded." width="1024" height="1024" loading="lazy" sizes="(min-width: 1024px) 440px, (min-width: 768px) 50vw, 100vw" srcset="/tour/tour_outdoor_kitchen.webp" class="theme-img"></div>
+<img src="/tour/tour_outdoor_kitchen.webp" alt="Modern oak wood design outdoor kitchen layout" width="1024" height="1024" loading="lazy" sizes="(min-width: 1024px) 440px, (min-width: 768px) 50vw, 100vw" srcset="/tour/tour_outdoor_kitchen-480w.webp 480w, /tour/tour_outdoor_kitchen-800w.webp 800w, /tour/tour_outdoor_kitchen-1200w.webp 1200w" class="theme-img"></div>
 </a>
                 </div>
               
@@ -1458,7 +1428,7 @@
               
                 <div class="article-image">
                   <a href="/blogs/features/reimagining-ikea-a-curated-retail-space-in-kauai-hawaii"><div class="img-ar img-ar--cover" style="--aspect-ratio: 1.0">
-<img src="/tour/tour_kitchen.webp" alt="Reimagining IKEA: A Curated Retail Space in Kauai, Hawaii" width="1420" height="1420" loading="lazy" sizes="(min-width: 1024px) 440px, (min-width: 768px) 50vw, 100vw" srcset="/tour/tour_kitchen.webp" class="theme-img"></div>
+<img src="/tour/tour_kitchen.webp" alt="Modern custom kitchen layout by Ready Homes" width="1420" height="1420" loading="lazy" sizes="(min-width: 1024px) 440px, (min-width: 768px) 50vw, 100vw" srcset="/tour/tour_kitchen-480w.webp 480w, /tour/tour_kitchen-800w.webp 800w, /tour/tour_kitchen-1200w.webp 1200w" class="theme-img"></div>
 </a>
                 </div>
               
@@ -1477,7 +1447,7 @@
               
                 <div class="article-image">
                   <a href="/blogs/features/a-calm-country-side-retreat-in-ceres-uk"><div class="img-ar img-ar--cover" style="--aspect-ratio: 1.0">
-<img src="/featured/featured_living.webp" alt="Contemporary Countryside Retreat in Ceres, UK with Custom IKEA Besta Cabinet Fronts" width="1025" height="1025" loading="lazy" sizes="(min-width: 1024px) 440px, (min-width: 768px) 50vw, 100vw" srcset="/featured/featured_living.webp" class="theme-img"></div>
+<img src="/featured/featured_living.webp" alt="Contemporary custom wood storage cabinet design in living room" width="1025" height="1025" loading="lazy" sizes="(min-width: 1024px) 440px, (min-width: 768px) 50vw, 100vw" srcset="/featured/featured_living-480w.webp 480w, /featured/featured_living-800w.webp 800w, /featured/featured_living-1200w.webp 1200w" class="theme-img"></div>
 </a>
                 </div>
               
@@ -1521,7 +1491,7 @@
             
             <div class="image-cont" style="overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
               <div class="img-ar img-ar--cover" style="--aspect-ratio: 1.25;">
-                <img src="/tour/tour_kitchen.webp" alt="Kitchen at 1159 Diamond" loading="lazy" class="theme-img" style="object-fit: cover;">
+                <img src="/tour/tour_kitchen.webp" alt="Kitchen at 1159 Diamond" width="640" height="512" loading="lazy" sizes="(min-width: 1024px) 520px, (min-width: 768px) 50vw, 100vw" srcset="/tour/tour_kitchen-480w.webp 480w, /tour/tour_kitchen-800w.webp 800w, /tour/tour_kitchen-1200w.webp 1200w" class="theme-img" style="object-fit: cover;">
               </div>
             </div>
           </div>
@@ -1944,7 +1914,7 @@
           <a class="product-link" href="/products/kitchen-design-consultation-45-min-video-call" aria-hidden="true" tabindex="-1">
             <div class="image-label-wrap">
               <div><div class="product-block__image product-block__image--primary product-block__image--active" data-media-id="42908872048914"><div class="img-ar img-ar--cover" style="--aspect-ratio: 0.8">
-<img data-manual-src="/tour/tour_community.webp" alt="" width="640" height="800" loading="lazy" sizes="100vw" data-manual-srcset="/tour/house_address.webp" class="theme-img"></div>
+<img data-manual-src="/tour/tour_community-480w.webp" alt="Ready Homes community residential block layout" width="640" height="800" loading="lazy" sizes="100vw" data-manual-srcset="/tour/house_address-480w.webp" class="theme-img"></div>
 </div></div></div>
           </a></div>
       
@@ -1980,11 +1950,11 @@
           <a class="product-link" href="/products/wardrobe-design-consultation" aria-hidden="true" tabindex="-1">
             <div class="image-label-wrap">
               <div><div class="product-block__image product-block__image--primary product-block__image--active" data-media-id="38512935338258"><div class="img-ar img-ar--cover" style="--aspect-ratio: 0.8">
-<img data-manual-src="/tour/tour_bedrooms.webp" alt="" width="640" height="800" loading="lazy" sizes="100vw" data-manual-srcset="/tour/tour_area.webp" class="theme-img"></div>
+<img data-manual-src="/tour/tour_bedrooms-480w.webp" alt="Modern wardrobe and bedroom interior design showcase" width="640" height="800" loading="lazy" sizes="100vw" data-manual-srcset="/tour/tour_area-480w.webp" class="theme-img"></div>
 </div><div class="product-block__image product-block__image--secondary product-block__image--show-on-hover product-block__image--inactivated"
                         data-media-id="41016990040338"
                         data-image-index="1"><div class="img-ar img-ar--cover" style="--aspect-ratio: 0.8">
-<img data-manual-src="/tour/tour_kitchen.webp" alt="" width="625" height="781" loading="lazy" sizes="100vw" data-manual-srcset="/tour/house_aerial.webp" class="theme-img"></div>
+<img data-manual-src="/tour/tour_kitchen-480w.webp" alt="Custom modern kitchen with wooden cabinets" width="625" height="781" loading="lazy" sizes="100vw" data-manual-srcset="/tour/house_aerial-480w.webp" class="theme-img"></div>
 </div></div></div>
           </a><a class="image-page-button image-page-button--previous has-ltr-icon" href="#" aria-label="Previous" tabindex="-1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" class="icon feather feather-chevron-left" aria-hidden="true" focusable="false" role="presentation"><path d="m15 18-6-6 6-6"/></svg></a>
             <a class="image-page-button image-page-button--next has-ltr-icon" href="#" aria-label="Next" tabindex="-1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" class="icon feather feather-chevron-right" aria-hidden="true" focusable="false" role="presentation"><path d="m9 18 6-6-6-6"/></svg></a></div>
@@ -2021,7 +1991,7 @@
           <a class="product-link" href="/products/bathroom-design-consultation" aria-hidden="true" tabindex="-1">
             <div class="image-label-wrap">
               <div><div class="product-block__image product-block__image--primary product-block__image--active" data-media-id="37066850959634"><div class="img-ar img-ar--cover" style="--aspect-ratio: 0.8">
-<img data-manual-src="/tour/tour_sauna.webp" alt="" width="640" height="800" loading="lazy" sizes="100vw" data-manual-srcset="/portfolio/service_packaging.webp" class="theme-img"></div>
+<img data-manual-src="/tour/tour_sauna-480w.webp" alt="Finnish wood sauna and spa wellness showroom" width="640" height="800" loading="lazy" sizes="100vw" data-manual-srcset="/portfolio/service_packaging.webp" class="theme-img"></div>
 </div><div class="product-block__image product-block__image--secondary product-block__image--show-on-hover product-block__image--inactivated"
                         data-media-id="35230672912658"
                         data-image-index="1"><div class="img-ar img-ar--cover" style="--aspect-ratio: 0.8">
@@ -2129,8 +2099,7 @@
   </cart-form>
 </side-drawer></div>
 <!-- END sections: overlay-group --><a href="#" class="page-shade" aria-label="Close"></a>
-  <div class="overlay fixed top-0 right-0 bottom-0 left-0 js-overlay"></div><script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous" defer="defer"></script>
-   <script src="/assets/js/landing-sektion-script.js" defer="defer"></script>
+  <div class="overlay fixed top-0 right-0 bottom-0 left-0 js-overlay"></div>
 <style> .meety-block-buttons{min-width: 180px;} </style>
 <div id="shopify-block-ASXdsU3FvSGZXRXBxN__18384125943788576634" class="shopify-block shopify-app-block"><!-- BEGIN app snippet: meety-script --><script>
   (function () {
@@ -2375,7 +2344,7 @@
 </style>
 
 
-</div><script src="https://cdn.shopify.com/storefront/standard-actions.js" type="module" data-source-attribution="shopify.standard_actions"></script>
+</div>
 
 <style>
   #shopify-section-sections--24392109293842__header {
