@@ -40,7 +40,7 @@ export const Transformation: React.FC = () => {
         tierResolved={!!tier}
         pathKey={tier ? tier.dir : ''}
       >
-        {/* Fronteriors-style Bottom-Left Typography Overlay */}
+        {/* Ready Homes style Bottom-Left Typography Overlay */}
         <div className="absolute inset-0 z-30 pointer-events-none w-full h-full">
           <div className="text-overlay text-overlay--for-banner text-overlay--v-bottom text-overlay--h-left image-overlay__over w-full h-full" style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}>
             <div className="text-overlay__inner" style={{ "--heading-max-width": "25em" } as React.CSSProperties}>
