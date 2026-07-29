@@ -535,12 +535,19 @@ export default function FrameScrub({
     const draw = (frame: number) => {
       const canvas = canvasRef.current;
       const bmp = decodedBitmaps.current.get(frame);
-      if (!canvas || !bmp) return;
+      const posterImg = posterImgRef.current;
+
+      // Draw poster image directly onto canvas as frame 1 fallback if bitmap is not ready yet
+      const source = bmp || (frame === 1 && posterImg && posterImg.complete && posterImg.naturalWidth > 0 ? posterImg : null);
+      if (!canvas || !source) return;
+
       const ctx = canvas.getContext('2d', { alpha: false });
       if (!ctx) return;
       const cr = canvas.width / canvas.height;
       
-      const ir = bmp.width / bmp.height;
+      const sourceWidth = (source as any).width || (source as HTMLImageElement).naturalWidth;
+      const sourceHeight = (source as any).height || (source as HTMLImageElement).naturalHeight;
+      const ratio = sourceWidth / sourceHeight;
       
       let dw, dh, dx, dy;
 
@@ -550,27 +557,27 @@ export default function FrameScrub({
       
       if (containOnMobile && isMobile) {
         // Contain logic: show whole image, letterbox remaining canvas space
-        if (ir > cr) {
+        if (ratio > cr) {
           dw = canvas.width;
-          dh = dw / ir;
+          dh = dw / ratio;
           dx = 0;
           dy = (canvas.height - dh) / 2;
         } else {
           dh = canvas.height;
-          dw = dh * ir;
+          dw = dh * ratio;
           dx = (canvas.width - dw) / 2;
           dy = 0;
         }
       } else {
         // Cover logic: fill canvas, crop overflowing edges
-        if (ir > cr) {
+        if (ratio > cr) {
           dh = canvas.height;
-          dw = dh * ir;
+          dw = dh * ratio;
           dx = (canvas.width - dw) * fx;
           dy = 0;
         } else {
           dw = canvas.width;
-          dh = dw / ir;
+          dh = dw / ratio;
           dx = 0;
           dy = (canvas.height - dh) * fy;
         }
@@ -579,7 +586,7 @@ export default function FrameScrub({
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.imageSmoothingEnabled = true;
       ctx.imageSmoothingQuality = 'high';
-      ctx.drawImage(bmp, dx, dy, dw, dh);
+      ctx.drawImage(source, dx, dy, dw, dh);
 
       setFirstFrameDrawn(true);
     };
@@ -588,7 +595,13 @@ export default function FrameScrub({
       // Very smooth LERP interpolation
       playhead.current += (target.current - playhead.current) * LERP;
       const idealFrame = Math.round(playhead.current);
-      const frame = findNearestFrame(idealFrame);
+      let frame = findNearestFrame(idealFrame);
+
+      // Fallback to frame 1 if no frame is decoded yet and we haven't drawn anything
+      if (frame === null && lastDrawn === -1) {
+        frame = 1;
+      }
+
       if (frame !== null && frame !== lastDrawn) {
         draw(frame);
         lastDrawn = frame;
