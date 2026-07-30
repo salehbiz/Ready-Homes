@@ -321,6 +321,16 @@
 .text-overlay__subheading,
 .text-overlay__button-row {
   will-change: transform, opacity;
+}
+@media (max-width: 767px) {
+  img:not(#react-hero-root img):not(#react-horizontal-scrub-root img):not(#react-transformation-root img) {
+    pointer-events: none;
+  }
+  .product-block .product-link,
+  .scrolling-image-list__image,
+  .collection-block .product-link {
+    pointer-events: none;
+  }
 }</style>
 
   <script>
