@@ -58,6 +58,7 @@ export const HorizontalScrubSection: React.FC = () => {
         framePath={framePath}
         fallbackFramePath={tier && tier.dir === 'desktop-hq' ? fallbackFramePath : undefined}
         poster="/frames/section3-poster.webp"
+        posterMobile="/frames/section3-poster-mobile.webp"
         scrollLengthVh={650}
         animationEndProgress={0.77}
         className="w-full max-md:w-screen"
