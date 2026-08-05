@@ -13,6 +13,7 @@ export const lenis = new Lenis({
   touchMultiplier: 1.2,   // Dampens touch flicks by ~50% to prevent flying past scroll-scrub animations
   infinite: false,
   syncTouch: true,
+  allowNestedScroll: true, // let nested scrollers (e.g. mobile carousels) receive touch gestures
 });
 
 // Update ScrollTrigger on scroll and animate Lenis via GSAP ticker

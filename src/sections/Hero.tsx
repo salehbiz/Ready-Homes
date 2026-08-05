@@ -84,13 +84,16 @@ export const Hero: React.FC = () => {
               <div className="text-overlay__inner" style={{ "--heading-max-width": "15em" } as React.CSSProperties}>
                 <div className="text-overlay__text slideshow__motion-overlay has-motion pointer-events-none">
                   <div className="text-overlay__reveal">
-                    <div className="text-overlay__subheading subheading subheading--over has-motion" style={{ color: 'white' }}>NEW IN HARDWARE</div>
+                    <div className="text-overlay__subheading subheading subheading--over has-motion" style={{ color: 'white' }}>WELCOME TO</div>
                   </div>
                   <div className="text-overlay__reveal">
-                    <h2 className="text-overlay__title h1 has-motion" style={{ color: 'white' }}>The Finishing Touch</h2>
+                    <h2 className="text-overlay__title h1 has-motion" style={{ color: 'white' }}>The Wellness Home.</h2>
+                  </div>
+                  <div className="text-overlay__reveal">
+                    <p className="has-motion" style={{ color: 'white', maxWidth: '42ch' }}>Luxury residences intentionally designed around health, recovery, technology, and effortless living.</p>
                   </div>
                   <div className="text-overlay__button-row pointer-events-auto">
-                    <a className="text-overlay__button btn btn--secondary" href="/collections/hardware">Shop Hardware</a>
+                    <a className="text-overlay__button btn btn--secondary" href="/collections/hardware">Schedule a Private Tour &rarr;</a>
                   </div>
                 </div>
               </div>

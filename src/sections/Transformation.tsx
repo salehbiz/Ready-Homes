@@ -47,13 +47,16 @@ export const Transformation: React.FC = () => {
               <div className="text-overlay__text pointer-events-none">
                 <div className="text-overlay__reveal">
                   <div className="text-overlay__subheading subheading subheading--over" style={{ color: 'white' }}>
-                    THE FINISHING TOUCH
+                    WHAT IF...
                   </div>
                 </div>
                 <div className="text-overlay__reveal">
                   <h2 className="text-overlay__title h1" style={{ color: 'white' }}>
-                    Spaces Within joins our hardware curation.
+                    Your Home Could Do More?
                   </h2>
+                </div>
+                <div className="text-overlay__reveal">
+                  <p style={{ color: 'white', margin: 0 }}>Scroll to find out.</p>
                 </div>
                 <div className="text-overlay__button-row pointer-events-auto mt-6">
                   <a className="text-overlay__button btn btn--secondary" style={{ backgroundColor: 'transparent', color: 'white', borderColor: 'white' }} href="/collections/hardware">
