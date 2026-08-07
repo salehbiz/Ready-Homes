@@ -41,11 +41,11 @@ export const HorizontalScrubSection: React.FC = () => {
     heading = 'Kitchen';
     subtext = 'Gourmet culinary spaces designed for entertaining.';
   } else if (currentFrame <= 80) {
-    heading = 'Spa and Sauna';
-    subtext = 'Traditional Finnish sauna with custom cedar paneling.';
+    heading = 'Spa';
+    subtext = 'Finnish sauna with gym and yoga studio';
   } else if (currentFrame <= 100) {
-    heading = 'Cinema Room';
-    subtext = 'Acoustically treated private viewing rooms.';
+    heading = 'Movie Theater';
+    subtext = 'Stadium seating with surround sound speakers';
   } else {
     heading = 'Backyard';
     subtext = 'Expansive outdoor living spaces surrounded by nature.';

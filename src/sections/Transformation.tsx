@@ -59,8 +59,8 @@ export const Transformation: React.FC = () => {
                   <p style={{ color: 'white', margin: 0 }}>Scroll to find out.</p>
                 </div>
                 <div className="text-overlay__button-row pointer-events-auto mt-6">
-                  <a className="text-overlay__button btn btn--secondary" style={{ backgroundColor: 'transparent', color: 'white', borderColor: 'white' }} href="/collections/hardware">
-                    Shop Hardware
+                  <a className="text-overlay__button btn btn--secondary" style={{ backgroundColor: 'transparent', color: 'white', borderColor: 'white' }} href="https://calendly.com/brad-readyhomes" target="_blank" rel="noopener">
+                    Schedule a Call
                   </a>
                 </div>
               </div>
