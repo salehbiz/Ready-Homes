@@ -5,7 +5,6 @@ import { getFrameTier, type FrameTier } from '../lib/frameTier';
 
 export const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const subHeadingRef = useRef<HTMLDivElement>(null);
 
   const [tier, setTier] = useState<FrameTier | null>(null);
 
@@ -14,29 +13,22 @@ export const Hero: React.FC = () => {
   }, []);
 
   // 2. Animations trigger setup
+  // The hero overlay text lives in static HTML (#hero-static-overlay) so it
+  // paints before the JS bundle loads; its entrance reveal is CSS-driven there.
   useEffect(() => {
-    const isMob = window.innerWidth < 768;
-
-    // Text reveal animation runs immediately
-    gsap.fromTo(
-      subHeadingRef.current ? subHeadingRef.current.querySelectorAll('div') : [],
-      { opacity: 0, y: isMob ? 20 : 30 },
-      { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', stagger: isMob ? 0.12 : 0.15 }
-    );
-
     // Register scroll-driven ScrollTriggers in global context
     registerAnimation(() => {
       if (!containerRef.current) return;
 
       // Fade out all hero overlay components rapidly when user scrolls down
-      gsap.to(subHeadingRef.current, {
+      gsap.to('#hero-static-overlay', {
         scrollTrigger: {
           trigger: containerRef.current,
           start: 'top top',
           end: 'top -40%', // Fades out completely early in scroll
           scrub: true,
         },
-        opacity: 0,
+        autoAlpha: 0,
         y: -40,
         ease: 'none',
       });
@@ -78,27 +70,7 @@ export const Hero: React.FC = () => {
           pathKey={tier ? tier.dir : ''}
           zoomOnMobile
         >
-          {/* Bottom Left Overlay contents exactly as original slider */}
-          <div ref={subHeadingRef} className="absolute inset-0 z-20 pointer-events-none w-full h-full">
-            <div className="text-overlay text-overlay--with-reveal text-overlay--for-banner text-overlay--v-bottom text-overlay--h-left image-overlay__over has-motion w-full h-full" style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}>
-              <div className="text-overlay__inner" style={{ "--heading-max-width": "15em" } as React.CSSProperties}>
-                <div className="text-overlay__text slideshow__motion-overlay has-motion pointer-events-none">
-                  <div className="text-overlay__reveal">
-                    <div className="text-overlay__subheading subheading subheading--over has-motion" style={{ color: 'white' }}>WELCOME TO</div>
-                  </div>
-                  <div className="text-overlay__reveal">
-                    <h2 className="text-overlay__title h1 has-motion" style={{ color: 'white' }}>The Wellness Home.</h2>
-                  </div>
-                  <div className="text-overlay__reveal">
-                    <p className="has-motion" style={{ color: 'white', maxWidth: '42ch' }}>Luxury residences intentionally designed around health, recovery, technology, and effortless living.</p>
-                  </div>
-                  <div className="text-overlay__button-row pointer-events-auto">
-                    <a className="text-overlay__button btn btn--secondary" href="/collections/hardware">Schedule a Private Tour &rarr;</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          {/* Overlay text is rendered statically in index.html (#hero-static-overlay) for instant LCP paint */}
         </FrameScrub>
       </section>
   );

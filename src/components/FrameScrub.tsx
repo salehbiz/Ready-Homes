@@ -650,7 +650,8 @@ export default function FrameScrub({
               src={activePoster}
               onLoad={handlePosterLoad}
               // @ts-ignore
-              fetchPriority="high"
+              fetchPriority={eager ? 'high' : 'low'}
+              loading={eager ? undefined : 'lazy'}
               decoding="async"
               alt=""
               width={isMobile ? 750 : 1280}
@@ -675,12 +676,13 @@ export default function FrameScrub({
                   filter: 'contrast(1.04) saturate(1.06) brightness(1.01)'
                 }} 
               />
-              <img 
+              <img
                 ref={posterImgRef}
                 src={activePoster}
                 onLoad={handlePosterLoad}
                 // @ts-ignore
-                fetchPriority="high"
+                fetchPriority={eager ? 'high' : 'low'}
+                loading={eager ? undefined : 'lazy'}
                 decoding="async"
                 alt="" 
                 width={isMobile ? 750 : 1280}

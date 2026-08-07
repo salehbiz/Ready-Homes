@@ -10,6 +10,8 @@
   <link rel="preload" href="/fonts/montserrat-n4.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/trirong-n7.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/muli-n6.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/frames/hero-poster.webp" as="image" media="(min-width: 768px)" fetchpriority="high">
+  <link rel="preload" href="/frames/hero-poster-mobile.webp" as="image" media="(max-width: 767px)" fetchpriority="high">
   <link rel="stylesheet" href="/src/index.css" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="/src/index.css"></noscript>
   
@@ -760,7 +762,85 @@
 <!-- END sections: header-group --><main id="content" role="main">
     <div class="container cf">
 
-      <div id="react-hero-root"></div>
+      <style>
+  #hero-static-shell {
+    position: relative;
+    background-color: #141316;
+  }
+  #hero-static-shell #react-hero-root {
+    position: relative;
+    z-index: 1;
+    background-color: transparent;
+  }
+  #hero-static-poster {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100svh;
+    object-fit: cover;
+    z-index: 0;
+    filter: contrast(1.04) saturate(1.06) brightness(1.01);
+  }
+  #hero-static-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    pointer-events: none;
+  }
+  @keyframes hero-reveal-d {
+    from { opacity: 0.01; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes hero-reveal-m {
+    from { opacity: 0.01; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  #hero-static-overlay div {
+    animation: hero-reveal-d 0.8s cubic-bezier(0.25, 1, 0.5, 1) backwards;
+    animation-delay: calc(var(--i, 0) * 0.15s);
+  }
+  @media (max-width: 767px) {
+    #hero-static-overlay div {
+      animation-name: hero-reveal-m;
+      animation-delay: calc(var(--i, 0) * 0.12s);
+    }
+    #hero-static-poster {
+      transform: scale(1.1) translateZ(0);
+    }
+  }
+</style>
+<div id="hero-static-shell">
+  <picture>
+    <source media="(max-width: 767px)" srcset="/frames/hero-poster-mobile.webp">
+    <img id="hero-static-poster" src="/frames/hero-poster.webp" alt="" width="1280" height="720" fetchpriority="high" decoding="async">
+  </picture>
+  <div id="react-hero-root"></div>
+  <div id="hero-static-overlay" class="pointer-events-none">
+    <div class="text-overlay text-overlay--with-reveal text-overlay--for-banner text-overlay--v-bottom text-overlay--h-left image-overlay__over has-motion w-full h-full" style="--i:0; position: absolute; top: 0; left: 0; right: 0; bottom: 0;">
+      <div class="text-overlay__inner" style="--i:1; --heading-max-width: 15em;">
+        <div class="text-overlay__text slideshow__motion-overlay has-motion pointer-events-none" style="--i:2;">
+          <div class="text-overlay__reveal" style="--i:3;">
+            <div class="text-overlay__subheading subheading subheading--over has-motion" style="--i:4; color: white;">WELCOME TO</div>
+          </div>
+          <div class="text-overlay__reveal" style="--i:5;">
+            <h2 class="text-overlay__title h1 has-motion" style="color: white;">The Wellness Home.</h2>
+          </div>
+          <div class="text-overlay__reveal" style="--i:6;">
+            <p class="has-motion" style="color: white; max-width: 42ch;">Luxury residences intentionally designed around health, recovery, technology, and effortless living.</p>
+          </div>
+          <div class="text-overlay__button-row pointer-events-auto" style="--i:7;">
+            <a class="text-overlay__button btn btn--secondary" href="/collections/hardware">Schedule a Private Tour &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <script type="module" src="/src/hero-mount.tsx"></script>
 
 
