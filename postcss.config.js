@@ -18,6 +18,11 @@ const purge = purgecss({
       /slider/, /carousel/, /scrolling-image-list/, /segment-bar/, /feature-rating/,
       /nav/, /search/, /cart/, /pageheader/, /logo-area/, /mobile-menu/, /overlay/,
     ],
+    // greedy keeps any rule whose selector merely CONTAINS these — needed for
+    // JS-toggled state selectors like `[data-cc-animate].fade-in-up.cc-animate-in`
+    // that never appear verbatim in markup (purging them froze desktop sections
+    // at the animation's opacity:0 starting state)
+    greedy: [/cc-animate/, /data-cc-animate/, /fade-in/],
   },
 });
 
