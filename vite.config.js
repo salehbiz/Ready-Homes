@@ -18,6 +18,10 @@ export default defineConfig({
     port: Number(process.env.PORT) || 5173,
     host: true,
   },
+  preview: {
+    port: Number(process.env.PORT) || 4173,
+    host: true,
+  },
   build: {
     outDir: 'dist',
     rollupOptions: {
