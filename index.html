@@ -1327,6 +1327,13 @@
     -webkit-mask: url('/assets/logo-r.png') center / contain no-repeat;
     mask: url('/assets/logo-r.png') center / contain no-repeat;
   }
+  /* Desktop: stack the slides vertically so scrolling drives the active image
+     (the markup's md:block class has no CSS behind it — no Tailwind in this build,
+     and the theme default .slider__grid{display:flex} makes a horizontal strip) */
+  @media (min-width: 768px) {
+    .section-key-features .slider__grid { display: block; }
+    .section-key-features .slider .slider__item:last-child { width: auto; border-inline-end: 0; }
+  }
 </style>
 <div class="container">
   <h1 class="h1 ready-start-title" aria-label="Ready to Start"><span class="ready-start-r" aria-hidden="true"></span><span aria-hidden="true">eady to Start</span></h1>
