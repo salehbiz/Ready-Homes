@@ -12,7 +12,9 @@ export const lenis = new Lenis({
   wheelMultiplier: 0.75,  // Dampens mousewheel ticks by 25% for high-resolution scroll control
   touchMultiplier: 1.2,   // Dampens touch flicks by ~50% to prevent flying past scroll-scrub animations
   infinite: false,
-  syncTouch: true,
+  // syncTouch intentionally left off: virtual touch scrolling is janky on iOS and
+  // fights with natively-scrolling regions (mobile carousels), making sections feel
+  // detached from the page. Native touch scroll still drives ScrollTrigger via lenis.on('scroll').
   allowNestedScroll: true, // let nested scrollers (e.g. mobile carousels) receive touch gestures
 });
 
