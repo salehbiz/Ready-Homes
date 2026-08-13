@@ -415,10 +415,20 @@ export default function FrameScrub({
     }
   }, [firstFrameDrawn]);
 
-  // Debounced ScrollTrigger refresh on orientation change or window resize
+  // Debounced ScrollTrigger refresh on orientation change or window resize.
+  // Height-only resizes are ignored: on phones the collapsing URL bar fires
+  // resize continuously while scrolling, and refreshing then makes every
+  // pinned section jump under the user's finger.
   useEffect(() => {
     let debounceTimer: number;
+    let refWidth = window.innerWidth;
+    let refOrientation = window.innerWidth > window.innerHeight ? 'l' : 'p';
     const handleResizeOrOrientation = () => {
+      const w = window.innerWidth;
+      const o = w > window.innerHeight ? 'l' : 'p';
+      if (Math.abs(w - refWidth) <= 10 && o === refOrientation) return;
+      refWidth = w;
+      refOrientation = o;
       clearTimeout(debounceTimer);
       debounceTimer = window.setTimeout(() => {
         safeRefresh();
@@ -620,7 +630,12 @@ export default function FrameScrub({
       // Cap DPR at 1.5 on mobile to save GPU memory on 3x devices, and 2.0 on desktop
       const dpr = Math.min(window.devicePixelRatio || 1, isMob ? 1.5 : 2);
       const r = c.getBoundingClientRect();
-      c.width = r.width * dpr; c.height = r.height * dpr;
+      const w = Math.round(r.width * dpr), h = Math.round(r.height * dpr);
+      // Assigning width/height clears the canvas even when unchanged; mobile
+      // toolbar show/hide fires resize without changing the svh-sized box, and
+      // an unguarded reset blanks the frame for a beat on every scroll reversal.
+      if (c.width === w && c.height === h) return;
+      c.width = w; c.height = h;
       lastDrawn = -1;
     };
     resize();

@@ -5,6 +5,13 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
+// On iPhone/Android the browser toolbar collapses and expands while scrolling,
+// firing window resize events. By default ScrollTrigger refreshes on every one,
+// recomputing all pinned scrub sections mid-scroll — the page visibly jumps and
+// pins snap on every scroll direction change. Only genuine width/orientation
+// changes should refresh.
+ScrollTrigger.config({ ignoreMobileResize: true });
+
 // Initialize single Lenis smooth scrolling instance with luxury slow-scroll physics
 export const lenis = new Lenis({
   duration: 1.8,          // Deliberate, smooth deceleration (takes 1.8s to fully slide)

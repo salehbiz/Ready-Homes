@@ -24,6 +24,18 @@
   <script src="/assets/js/main.js" defer></script>
   <script src="/assets/js/animate-on-scroll.js" defer></script>
 
+  <style>
+  /* The page carries latent horizontal overflow (carousel slides laid out
+     beside the viewport). The theme's body{overflow-x:hidden} clips it on
+     desktop, but iOS lets touch gestures pan the document sideways anyway,
+     leaving the page parked half offscreen with a white void — `clip`
+     forbids horizontal scrolling outright (incl. iOS touch panning) without
+     creating a scroll container, so sticky/pinned sections are unaffected. */
+  html, body { overflow-x: clip; }
+  @supports not (overflow: clip) {
+    html, body { overflow-x: hidden; }
+  }
+  </style>
   <style>@font-face {
   font-family: Montserrat;
   font-weight: 400;
@@ -591,6 +603,12 @@
   }
   
   @media (max-width: 767.98px) {
+    /* The desktop inline menu is only visibility:hidden on mobile, so its 472px
+       box still occupied layout space and pushed the schedule button offscreen.
+       display:none removes it from layout (the drawer menu is a separate element). */
+    .pageheader .navigation--left {
+      display: none !important;
+    }
     .logo-area__middle {
       position: absolute !important;
       left: 50% !important;

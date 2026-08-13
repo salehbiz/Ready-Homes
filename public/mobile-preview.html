@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ready Homes — Mobile Preview</title>
+<style>
+  :root { color-scheme: light dark; }
+  body {
+    margin: 0; min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; gap: 14px; padding: 18px;
+    background: #1c1b1f; color: #eee;
+    font: 13px/1.4 -apple-system, "Segoe UI", sans-serif;
+  }
+  .bar { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; justify-content: center; }
+  button {
+    background: #333; color: #eee; border: 1px solid #555; border-radius: 8px;
+    padding: 6px 12px; cursor: pointer; font: inherit;
+  }
+  button.active { background: #eee; color: #111; }
+  .device {
+    border: 10px solid #000; border-radius: 34px; overflow: hidden;
+    box-shadow: 0 12px 40px rgba(0,0,0,.55); background: #fff; flex: none;
+  }
+  iframe { display: block; border: 0; width: 375px; height: 812px; }
+  .note { opacity: .55; max-width: 460px; text-align: center; }
+</style>
+</head>
+<body>
+  <div class="bar">
+    <button data-w="375" data-h="812" class="active">iPhone SE/13&nbsp;mini · 375</button>
+    <button data-w="390" data-h="844">iPhone 14/15 · 390</button>
+    <button data-w="430" data-h="932">iPhone Pro&nbsp;Max · 430</button>
+    <button data-w="360" data-h="800">Android · 360</button>
+    <button id="reload">⟳ Reload</button>
+  </div>
+  <div class="device"><iframe id="frame" src="/" title="Mobile preview"></iframe></div>
+  <p class="note">True-viewport preview: the site runs in a real <em>N</em>px-wide frame, so media queries,
+  fixed headers, drawers and scroll effects behave exactly as on a phone of that width —
+  unlike browser-pane device emulation.</p>
+<script>
+  const frame = document.getElementById('frame');
+  document.querySelectorAll('button[data-w]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('button[data-w]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      frame.style.width = btn.dataset.w + 'px';
+      frame.style.height = btn.dataset.h + 'px';
+      frame.src = frame.src; // reload so vh-based section sizing recalculates
+    });
+  });
+  document.getElementById('reload').addEventListener('click', () => { frame.src = frame.src; });
+</script>
+</body>
+</html>

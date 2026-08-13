@@ -10,7 +10,10 @@ import purgecss from '@fullhuman/postcss-purgecss';
 // index.html are not processed by PostCSS and are unaffected.
 const purge = purgecss({
   content: ['./index.html', './src/**/*.{ts,tsx}', './public/assets/js/*.js'],
-  defaultExtractor: (content) => content.match(/[A-Za-z0-9_-]+/g) || [],
+  // Tailwind-style extractor: also captures variant/arbitrary classes such as
+  // "max-md:flex" or "bg-[#141316]", which the old \w-only extractor split at
+  // ':' and '[' and therefore purged from production builds.
+  defaultExtractor: (content) => content.match(/[^<>"'`\s]*[^<>"'`\s:]/g) || [],
   safelist: {
     standard: ['html', 'body', /^(is-|has-|js-|cc-|no-)/, /^(active|open|hidden|loaded|loading|sticky)$/],
     deep: [
