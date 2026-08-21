@@ -6,8 +6,7 @@ import purgecss from '@fullhuman/postcss-purgecss';
 // without rebuilding.
 //
 // Content includes the theme JS so classes toggled at runtime (e.g. "is-grabbing",
-// "utility-bar-sticky-mobile-copy-reveal") count as used. Inline <style> blocks in
-// index.html are not processed by PostCSS and are unaffected.
+// "utility-bar-sticky-mobile-copy-reveal") count as used.
 const purge = purgecss({
   content: ['./index.html', './src/**/*.{ts,tsx}', './public/assets/js/*.js'],
   // Tailwind-style extractor: also captures variant/arbitrary classes such as
@@ -29,6 +28,22 @@ const purge = purgecss({
   },
 });
 
+// Vite hands every inline <style> block in index.html to PostCSS as its own
+// "index.html?html-proxy&inline-css&index=N.css" source, so purge saw them too and
+// dropped rules whose state selectors it could not prove were used — e.g. the
+// scrolling-image-list section's `[data-current-index="N"] [data-index="N"]{opacity:1}`
+// rules, which left every image at the theme's .25 base opacity and the paired text
+// permanently `visibility:hidden`. Those blocks are hand-written for this one page and
+// have nothing to purge, so restrict purging to the bundled theme CSS.
+const purgeThemeCssOnly = {
+  postcssPlugin: 'purgecss-theme-css-only',
+  OnceExit(root, helpers) {
+    const from = root.source?.input?.from || '';
+    if (from.includes('?html-proxy')) return undefined;
+    return purge.OnceExit(root, helpers);
+  },
+};
+
 export default {
-  plugins: process.env.NODE_ENV === 'production' ? [purge] : [],
+  plugins: process.env.NODE_ENV === 'production' ? [purgeThemeCssOnly] : [],
 };
